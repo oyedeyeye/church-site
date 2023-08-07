@@ -1,13 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from flask import Flask
-# from flask_restful import Api
-# from flask_cors import CORS
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-# api = Api(app)
-# CORS(app, origins="http:localhost:3000")
 
 
 @app.route("/")
@@ -16,7 +12,7 @@ def resources():
     return {
         'Title': "The Foundations of a CHristian Home",
         'Speaker': "Pastor S. P. Ayodeji",
-        'Transcript': "God give us CHristian homes, Homes where the Mother in Queenly quest, shows others thy way is best",
+        'Transcript': "God give us Christian homes, Homes where the Mother in Queenly quest, shows others thy way is best",
         'Audio': 'Available for Download',
         'Video': 'Available for Watching',
         'Date': 'Date_Created',
