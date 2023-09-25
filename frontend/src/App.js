@@ -12,6 +12,7 @@ import UnitDepartment from './Pages/UnitDepartment';
 import Leadership from './Pages/Leadership';
 import LeadershipAudioResource from './Pages/VideoAudioSwitch';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Login from './Admin/Login/Login';
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
           <Route path='/resources' element={<Resources/>}/>
           <Route path='/unit-department' element={<UnitDepartment/>}/>
           <Route path='/leadership' element={<Leadership/>}/> 
-          <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>   
+          <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>  
+          <Route exact path='/admin-login' element={<Login/>}/>
         </Routes>
       </Router>       
       
