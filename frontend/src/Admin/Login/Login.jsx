@@ -21,7 +21,7 @@ const Login = () => {
           <input type='password'placeholder='Enter Your Password'/>
           </div>
            <div>
-           <button>Login</button>
+           <button className='bg-blue text-white' >Login</button>
            </div>
             
 
