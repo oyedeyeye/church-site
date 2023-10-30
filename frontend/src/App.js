@@ -13,6 +13,9 @@ import Leadership from './Pages/Leadership';
 import LeadershipAudioResource from './Pages/VideoAudioSwitch';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Login from './Admin/Login/Login';
+import Dashboard from './Admin/ashboard/Dashboard';
+
+
 
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
           <Route path='/leadership' element={<Leadership/>}/> 
           <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>  
           <Route exact path='/admin-login' element={<Login/>}/>
+          <Route exact path='/dashboard' element={<Dashboard/>}/>
         </Routes>
       </Router>       
       
