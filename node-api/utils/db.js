@@ -6,83 +6,115 @@ const tableConfig = {
   tableEndpoint: process.env.END_POINT,
   azureAccount: process.env.ACCOUNT_NAME,
   azureAccessKey: process.env.ACCOUNT_KEY,
+  azureTable: process.env.AZURE_TABLE
 };
 
-// ==== Asynchronous CRUD operation ===== //
-const main = async () => {
-  const credential = new AzureNamedKeyCredential(tableConfig.azureAccount, tableConfig.azureAccessKey);
+// // ==== Asynchronous CRUD operation ===== //
+// const main = async () => {
+
+//   // list tables
+//   const serviceCLient = new TableServiceClient( tableConfig.tableEndpoint, credential);
+//   let tablesIter = serviceCLient.listTables();
+//   let i = 1;
+//   for await (const table of tablesIter) {
+//     console.log(`Table${i}: ${table.name}`);
+//     i += 1;
+//   }
+// };
+
+// main();
+
+class MainTable {
+
+  // Static Property
+  static credential = new AzureNamedKeyCredential(
+    tableConfig.azureAccount, 
+    tableConfig.azureAccessKey
+    );
 
   // Creating the Table client change sepcammsg to sepcamMessages in production
-  const tableClient = new TableClient(tableConfig.tableEndpoint, 'sepcamMessages', credential);
+  static tableClient = new TableClient(
+    tableConfig.tableEndpoint,
+    tableConfig.azureTable,
+    credential
+    );
 
-  // Create entity
-  try {
-    await tableClient.createEntity({
-      partitionKey: 'hometasks',
-      rowKey: '1',
-      description: 'Set your life in order',
-      dueDate: new Date()
-    });
-    await tableClient.createEntity({
-      partitionKey: 'hometasks',
-      rowKey: '2',
-      description: 'Set your life in order - Part 2',
-      dueDate: new Date()
-    });
-  } catch (error) {
-    console.log(error);
+  static async uploadMessage(data) {
+    // Create the entity in the table
+     // Create entity
+    try {
+      const result = await this.tableClient.createEntity(data);
+      return result;
+    } catch (error) {
+      console.error('Error creating Entity', error);
+      return `Error creating entity: ${error.message}`;
+    }
   }
 
-  // read multiple Entries
-  const entities = await tableClient.listEntities({
-    queryOptions: {filter: odata`PartitionKey eq 'hometasks'`}
-  });
-  for await (const entity of entities) {
-    console.log('query result', entity);
+  static async readMessage(params) {
+    // destructure partitionKey and rowKey from args
+    const { partitionKey, rowKey } = params;
+
+    // Read One
+    try {
+      const result = await this.tableClient.getEntity(partitionKey, rowKey);
+      return result;
+    } catch (error) {
+      console.error(error);
+      return `error retrieving record from table: ${error.message}`;
+    }
   }
 
-  // Read One
-  try {
-    const task1 = await tableClient.getEntity('hometasks', '1');
-    console.log('read result', task1);
-  } catch (error) {
-    console.log(error);
+  static async updateMessage(params) {
+    const { partitionKey, rowKey, data } = params;
+    
+    // Update a single Entity
+    try {
+      const updateTask = await this.tableClient.getEntity(partitionKey, rowKey);
+      delete updateTask['odata.metadata'];
+      updateTask.description = data;
+      await this.tableClient.updateEntity(updateTask, 'Replace')
+      .then((result) => console.log(result));
+    
+      //  read updated task
+      const updated = await this.tableClient.getEntity(partitionKey, rowKey);
+      console.log('updated result', updated);
+    } catch (error) {
+      console.error(error);
+      return `error updating record: ${error.message}`;
+    }
   }
 
-  // Update
-  try {
-    const task1 = await tableClient.getEntity('hometasks', '1');
-    delete task1['odata.metadata'];
-    task1.description = 'task 1 updated';
-    await tableClient.updateEntity(task1, 'Replace');
+  static async deleteMessage(params) {
+    const { partitionKey, rowKey } = params;
 
-    //  read updated task
-    const updatedTask1 = await tableClient.getEntity('hometasks', '1');
-    console.log('updated result', updatedTask1);
-  } catch (error) {
-    console.log(error);
+    // Delete operation
+    try {
+      const result = await this.tableClient.deleteEntity(partitionKey, rowKey);
+      return result;
+    } catch (error) {
+      console.error(error);
+      return `error deleting record from table: ${error.message}`;
+    }
   }
 
-  // Delete operation
-  try {
-    await tableClient.deleteEntity('hometasks', '1');
-  } catch (error) {
-    console.log(error);
+  static async readMultiple() {
+    // read multiple Entries
+    try {
+      // read params should be last 20 entries by date created
+      const entities = await this.tableClient.listEntities({
+        queryOptions: {filter: odata`PartitionKey eq 'hometasks'`}
+      });
+      for await (const entity of entities) {
+        console.log('query result', entity);
+      }
+    } catch (error) {
+      
+    }
   }
+}
 
-  // list tables
-  const serviceCLient = new TableServiceClient( tableConfig.tableEndpoint, credential);
-  let tablesIter = serviceCLient.listTables();
-  let i = 1;
-  for await (const table of tablesIter) {
-    console.log(`Table${i}: ${table.name}`);
-    i += 1;
-  }
-};
-
-main();
-
-module.exports = main;
+module.exports = MainTable;
 
 
 
