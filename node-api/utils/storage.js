@@ -8,12 +8,17 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 
 
 class StorageContainer {
+  // Audio container Client
   static audioClient = blobServiceClient.getContainerClient(
     process.env.AUDIO_CONTAINER_NAME
   );
+
+  // Image container Client
   static imageClient = blobServiceClient.getContainerClient(
     process.env.IMAGE_CONTAINER_NAME
   );
+
+  // PDF container Client
   static pdfClient = blobServiceClient.getContainerClient(
     process.env.PDF_CONTAINER_NAME
   );

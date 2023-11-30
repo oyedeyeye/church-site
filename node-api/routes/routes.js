@@ -16,32 +16,9 @@ const { setLogLevel } = require("@azure/logger");
 const createReverseTimeStamp = require('../utils/util');
 setLogLevel("info");
 
-/*
-// // CONNECTION TO AZURE BLOB using CONNECTION_STRING
-// const blobServiceClient = BlobServiceClient.fromConnectionString(
-//   process.env.CONNECTION_STRING
-// );
-
-// FRONTEND DATA NEEEED
-
-const frontEndData = {
-  theme: 'Christian Home Series',
-  title: 'Christian Home',
-  description: 'What is Christian Home? It has to do with the father, the mother, the children, and the way they all relate, and what gives birth to a Christian home is marriage. Marriage is a lifelong journey that requires adequate preparation.\n' +
-    "The foundation of every structure that will last is very important. The type of structure will determine the type of foundation. The problem in so many families today is foundational. A lot of people today just enter into a marriage they did not prepare for. They don't even know what it is they just enter it, and they are causing trouble. If you want to understand a thing you go to the foundation of that thing. How much preparation did you make before entering that marriage? if there is no preparation then you are prepared for a failed home.",
-  partitionKey: 'Radio',
-  youtubeLink: '',
-  preacher: 'Pastor S. P. Ayodeji',
-  preacherThumbnail: 'data_file/thumbnail/Ayodeji_S.P.jpg',
-  rowKey: '8ee04e34-f6ff-4861-bc65-5189923ba5ff',
-  messageThumbnail: [ 'Radio-1700000985684', 'sepcam-media-img' ],
-  pdfFile: [ 'Radio-1700000985684', 'sepcam-media-pdf' ],
-  audioFile: [ 'Radio-1700000985684', 'sepcam-media-001' ]
-};
-*/
 
 // Routes for files
-/** Upload files to Blob ========================== */
+/** Default home route ========================== */
 router.get('/', (request, response, next) => {
   response.json({
     message: 'Welcome to Sepcam Resources Page',
@@ -166,21 +143,16 @@ router.post('/admin/upload', async (request, response) => {
   }
 });
 
-/** READ and DOWNLOAD Blob files ========================== */
+/** READ Multiple files by page ========================== */
 router.get('/resources', async (request, response) => {
   try {
     // GET List of Uploaded Content from Table Storage
 
     // Send continuation token if available to the backend to fetch next page
     const continuationToken = request.query.continuationToken ? JSON.parse(decodeURIComponent(request.query.continuationToken)) : undefined;
-    mainTable.listRecords(continuationToken)
-      .then((result) => {
-        console.log(result);
-        response.status(200).json(result)
-      })
-      .catch((err) => {
-        console.error(err.message)
-      });
+    const result = await mainTable.listRecords(continuationToken);
+    console.log(result);
+    response.status(200).json(result);
 
     /** TO DO 
     // Rewrite file name to append theme and title as the file name
@@ -196,11 +168,68 @@ router.get('/resources', async (request, response) => {
         return response.status(201).json(result);
       });
     */
-  } catch (error) {
+  } catch (err) {
     response.status(500).json({
-      message: error.message,
+      error: err.message
     });
   }
 });
+
+/** DOWNLOAD single audio message ========================== */
+router.get('/download/:fileType/:fileName', async (request, response) => {
+  try {
+    // Download either audio or pdf file
+
+    const { fileType, fileName } = request.params;
+    let containerClient;
+
+    if (fileType === 'pdf') {
+      containerClient = storageContainer.pdfClient;
+    } else if (fileType === 'mp3') {
+      containerClient = storageContainer.audioClient;
+    } else {
+      return response.status(400).send('Invalid file type');
+    }
+
+    // Get the requested file
+    const blobClient = containerClient.getBlobClient(fileName);
+
+    const downloadBlockBlobResponse = await blobClient.download();
+    downloadBlockBlobResponse.readableStreamBody.pipe(response);
+
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Error downloading file');
+  }
+});
+
+/** STREAM Audio message ========================== */
+router.get('/resources/stream/:fileName', async (request, response) => {
+  try {
+    // Retrieves mp3 files from the blob and streams it for HTML Audio player
+    const { fileName } = request.params;
+    const blobClient = storageContainer.audioClient.getBlobClient(fileName);
+
+    const downloadBlockBlobResponse = await blobClient.download(0);
+    response.setHeader('Content-Type', 'audio/mpeg');
+    downloadBlockBlobResponse.readableStreamBody.pipe(response);
+    
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Error streaming audio');
+  }
+});
+
+
+/** DELETE single message Entry ========================== */
+router.get('/resources/:rowKey', async (request, response) => {
+  try {
+    // 
+    
+  } catch (error) {
+    
+  }
+});
+
 
 module.exports = router;
