@@ -60,3 +60,10 @@ The endpoint includes error handling for issues that might arise during streamin
 
 The HTML audio player uses the endpoint as its source.
 
+# Private Route 
+
+## Delete Route `/admin/:partitionKey/:rowKey/:fileName`
+
+The route parameters include `partitionKey`, `rowKey`, and `fileName`, which are used to identify the table record and the blobs to be deleted
+
+

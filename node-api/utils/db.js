@@ -25,6 +25,7 @@ class MainTable {
     this.credential
     );
 
+  // Create the record of the entity in the table
   static async createRecord(data) {
     // Create the entity in the table
     // Takes a json object
@@ -34,10 +35,11 @@ class MainTable {
       return result;
     } catch (error) {
       console.error('Error creating Entity', error);
-      return `Error creating entity: ${error.message}`;
+      throw new Error(`Error creating entity: ${error.message}`);
     }
   }
 
+  // Completed Read a single record from table
   static async readRecord(params) {
     // destructure partitionKey and rowKey from args
     const { partitionKey, rowKey } = params;
@@ -48,30 +50,23 @@ class MainTable {
       return result;
     } catch (error) {
       console.error(error);
-      return `error retrieving record from table: ${error.message}`;
+      throw new Error(`error retrieving record from table: ${error.message}`);
     }
   }
 
-  static async updateRecord(params) {
-    const { partitionKey, rowKey, data } = params;
-
-    // Update a single Entity
+  // Untested update record function
+  static async updateRecord(data, option) {
+    // update the record
     try {
-      const updateTask = await this.tableClient.getEntity(partitionKey, rowKey);
-      delete updateTask['odata.metadata'];
-      updateTask.description = data;
-      await this.tableClient.updateEntity(updateTask, 'Replace')
-      .then((result) => console.log(result));
-
-      //  read updated task
-      const updated = await this.tableClient.getEntity(partitionKey, rowKey);
-      console.log('updated result', updated);
+      const updateTask = await this.tableClient.updateEntity(data, option);
+      return updatedTask;
     } catch (error) {
       console.error(error);
-      return `error updating record: ${error.message}`;
+      throw new Error(`error updating record: ${error.message}`);
     }
   }
 
+  // Completed Delete single records from table
   static async deleteRecord(params) {
     const { partitionKey, rowKey } = params;
 
@@ -81,10 +76,11 @@ class MainTable {
       return result;
     } catch (error) {
       console.error(error);
-      return `error deleting record from table: ${error.message}`;
+      throw new Error(`error deleting record from table: ${error.message}`);
     }
   }
 
+  // Completed Read multiple records from table and paginate it
   static async listRecords(continuationToken) {
     // read multiple Entries
     try {

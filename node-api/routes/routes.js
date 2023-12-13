@@ -9,138 +9,20 @@ const mainTable = require('../utils/db');
 
 const router = express.Router();
 
-// const multer = require('multer');
-
 const { BlobServiceClient } = require('@azure/storage-blob');
 const { setLogLevel } = require("@azure/logger");
 const createReverseTimeStamp = require('../utils/util');
+const MainTable = require('../utils/db');
 setLogLevel("info");
 
 
-// Routes for files
+// Public Routes for files
 /** Default home route ========================== */
 router.get('/', (request, response, next) => {
   response.json({
     message: 'Welcome to Sepcam Resources Page',
   });
   next();
-});
-
-/** Upload Blob files ========================== */
-router.post('/admin/upload', async (request, response) => {
-  // Data object
-  try {
-    const data = {
-      "theme": request.body.theme,
-      "title": request.body.title,
-      "description": request.body.description,
-      "partitionKey": request.body.serviceTag,
-      "youtubeLink": request.body.youtubeLink,
-      "preacher": request.body.preacher,
-      "preacherThumbnail": request.body.preacherThumbnail
-    };
-
-    // create a new blob
-    const blobName = `${request.body.serviceTag}-${new Date().getTime()}`;
-
-    // rowKey Using UUID V4
-    if (request.body !== null) {
-      // implement the UUID for rowKey
-      // const rowKey = uuidv4();
-
-      const rowKey = createReverseTimeStamp();
-      data['rowKey'] = rowKey;
-    }
-
-    // Message thumbnail Blob ======================================================
-    if (request.body.messageThumbnail !== null) {
-      // implement uploAD BLOB for process.env.IMAGE_CONTAINER_NAME
-      const blockBlobClient = storageContainer.imageClient.getBlockBlobClient(blobName);
-
-      // upload to block blob
-      await blockBlobClient
-        .uploadFile(request.body.messageThumbnail, {
-          blockSize: 40 * 1024 * 1024,
-          concurrency: 20,
-          // onProgress: (ev) => console.log(ev),
-          // onSuccess: (res) => console.log(res),
-        })
-        .then((result) => {
-          data['messageThumbnail'] = blockBlobClient.name;
-        })
-        .catch((err) => {
-          response.status(500).json({
-            message: 'Message thumbnail upload failed',
-            data: err.message,
-          });
-        });
-    }
-
-    // PDF file Blob ======================================================
-    if (request.body.pdfFile !== null) {
-
-      const blockBlobClient = storageContainer.pdfClient.getBlockBlobClient(blobName);
-
-      // Upload to pdf block blob
-      await blockBlobClient
-        .uploadFile(request.body.pdfFile, {
-          blockSize: 40 * 1024 * 1024,
-          concurrency: 20,
-          // onProgress: (ev) => console.log(ev),
-          // onSuccess: (res) => console.log(res),
-        })
-        .then((result) => {
-          data['pdfFile'] = blockBlobClient.name;
-        })
-        .catch((err) => {
-          response.status(500).json({
-            message: 'PDF file upload failed',
-            data: err.message,
-          });
-        });
-      }
-
-    if (request.body.audioFile !== null) {
-      const blockBlobClient = storageContainer.audioClient.getBlockBlobClient(blobName);
-
-      // Upload to audio block blob
-      await blockBlobClient
-        .uploadFile(request.body.audioFile, {
-          blockSize: 40 * 1024 * 1024,
-          concurrency: 20,
-          // onProgress: (ev) => console.log(ev),
-          // onSuccess: (res) => console.log(res),
-        })
-        .then(() => {
-          data['audioFile'] = blockBlobClient.name;
-          // Store the message information in Table Storage
-        })
-        .catch((err) => {
-          response.status(500).json({
-            message: 'Audio file upload failed',
-            data: err.message,
-          });
-        });
-    }
-
-    console.log(data);
-
-    // Create Database entry for data object
-    await mainTable.createRecord(data)
-      .then((result) => response.status(201).json(result))
-      .catch((e) => {
-        response.status(500).json({
-          message: 'Error creating database entry',
-          data: e.message,
-        });
-      });
-
-
-  } catch (error) {
-    response.status(500).json({
-      message: error.message,
-    });
-  }
 });
 
 /** READ Multiple files by page ========================== */
@@ -220,14 +102,242 @@ router.get('/resources/stream/:fileName', async (request, response) => {
   }
 });
 
+// Private Routes for files
+
+/** Upload Blob files ========================== */
+router.post('/admin/upload', async (request, response) => {
+  // Data object
+  try {
+    const data = {
+      "theme": request.body.theme,
+      "title": request.body.title,
+      "description": request.body.description,
+      "partitionKey": request.body.serviceTag,
+      "youtubeLink": request.body.youtubeLink,
+      "preacher": request.body.preacher,
+      "preacherThumbnail": request.body.preacherThumbnail
+    };
+
+    // create a new blob
+    const blobName = `${request.body.serviceTag}-${new Date().getTime()}`;
+
+    // rowKey Using UUID V4
+    if (request.body !== null) {
+      // implement the UUID for rowKey
+      // const rowKey = uuidv4();
+
+      const rowKey = createReverseTimeStamp();
+      data['rowKey'] = rowKey;
+    }
+
+    // Message thumbnail Blob ======================================================
+    if (request.body.messageThumbnail !== null) {
+      // implement uploAD BLOB for process.env.IMAGE_CONTAINER_NAME
+
+      // upload to block blob
+      await storageContainer
+        .uploadBlobToContainer(
+          storageContainer.imageClient,
+          request.body.messageThumbnail,
+          blobName,
+          (name) => {
+            data['messageThumbnail'] = name;
+          },
+          (err) => {
+            response.status(500).json({
+              message: 'Message thumbnail upload failed!',
+              data: err.message,
+            });
+          }
+          );
+    }
+
+    // PDF file Blob ======================================================
+    if (request.body.pdfFile !== null) {
+
+      // Upload to pdf block blob
+      await storageContainer
+        .uploadBlobToContainer(
+          storageContainer.pdfClient,
+          request.body.pdfFile,
+          (name) => {
+            data['pdfFile'] = name;
+          },
+          (err) => {
+            response.status(500).json({
+              message: 'PDF file upload failed',
+              data: err.message,
+            });
+          }
+        )
+    }
+
+    if (request.body.audioFile !== null) {
+
+      // Upload to audio block blob
+      await storageContainer
+        .uploadBlobToContainer(
+          storageContainer.audioClient,
+          request.body.audioFile,
+          (name) => {
+            data['audioFile'] = name;
+          },
+          (err) => {
+            response.status(500).json({
+              message: 'Audio file upload failed',
+              data: err.message,
+            });
+          }
+        )
+    }
+
+    // console.log(data);
+
+    // Create Database entry for data object
+    await mainTable.createRecord(data)
+      .then((result) => response.status(201).json(result))
+      .catch((e) => {
+        response.status(500).json({
+          message: 'Error creating database entry',
+          data: e.message,
+        });
+      });
+
+  } catch (error) {
+    response.status(500).json({
+      message: error.message,
+    });
+  }
+});
 
 /** DELETE single message Entry ========================== */
-router.get('/resources/:rowKey', async (request, response) => {
+router.delete('/admin/:partitionKey/:rowKey/:filename', async (request, response) => {
   try {
-    // 
-    
+    // pass the partitionKey and the rowkey of the file
+    // to initiate the delete operation
+    const { partitionKey, rowKey, fileName } = request.params;
+
+
+    // delete the entity with the partitionKey and rowKey from the Azure table
+    await mainTable.deleteRecord({ partitionKey, rowKey });
+
+    // delete the files from the Blob containers
+    // TO DO
+    // Trim the file name to have it as the blobName
+    const audioClient = storageContainer.audioClient,
+          pdfClient = storageContainer.pdfClient,
+          imageClient = storageContainer.imageClient;
+
+    await Promise.all([
+      storageContainer.deleteBlob(audioClient, `${fileName}`),
+      storageContainer.deleteBlob(pdfClient, `${fileName}`),
+      storageContainer.deleteBlob(imageClient, `${fileName}`)
+    ]);
+
+    response.status(200).send('Record and associated files deleted successfully');
   } catch (error) {
-    
+    console.error(error.message);
+    response.status(500).send(`Error deleting data: ${error.message}`);
+  }
+});
+
+
+/** Update single message Entry ========================== */
+router.put('/admin/update-entity/:partitionKey/:rowKey', async (request, response) => {
+  try {
+    const { partitionKey, rowKey } = request.params;
+    const updateData = request.body;
+
+    // Fetch the existing entity
+    const entity = await mainTable.readRecord({ partitionKey, rowKey });
+
+    // Defining the blobName from the entity
+    let blobName;
+
+    if (entity.audioFile === entity.pdfFile || entity.audioFile === entity.messageThumbnail) {
+      blobName = entity.audioFile ? entity.audioFile : entity.pdfFile;
+    }
+
+    // check if blob names are updated and handled accordingly
+    // message thumbnail blob
+    if (entity.messageThumbnail !== updateData.messageThumbnail && updateData.messageThumbnail !== null) {
+      // Delete the old blob
+      await storageContainer.deleteBlob(storageContainer.imageClient, entity.messageThumbnail);
+
+      // Handle uploading of the updated file to blob
+      await storageContainer.uploadBlobToContainer(
+        storageContainer.imageClient, 
+        updateData.messageThumbnail,
+        blobName,
+        (name) => {
+          updateData['messageThumbnail'] = name;
+        },
+        (err) => {
+          response.status(500).json({
+            message: 'Message thumbnail update failed',
+            data: err.message,
+          });
+        }
+        );
+    }
+
+    // audio file blob
+    if (entity.audioFile !== updateData.audioFile && updateData.audioFile !== null) {
+      // Delete the old blob
+      await storageContainer.deleteBlob(storageContainer.audioClient, entity.audioFile);
+
+      // Handle uploading of the updated file to blob
+      await storageContainer.uploadBlobToContainer(
+        storageContainer.audioClient, 
+        updateData.audioFile,
+        blobName,
+        (name) => {
+          updateData['audioFile'] = name;
+        },
+        (err) => {
+          response.status(500).json({
+            message: 'Audio file upload failed',
+            data: err.message,
+          });
+        }
+        );
+    }
+
+    // pdf file blob
+    if (entity.pdfFile !== updateData.pdfFile && updateData.pdfFile !== null) {
+      // Delete the old blob
+      await storageContainer.deleteBlob(storageContainer.pdfClient, entity.pdfFile);
+
+      // Handle uploading of the updated file to blob
+      await storageContainer.uploadBlobToContainer(
+        storageContainer.pdfClient, 
+        updateData.pdfFile,
+        blobName,
+        (name) => {
+          updateData['pdfFile'] = name;
+        },
+        (err) => {
+          response.status(500).json({
+            message: 'PDF file upload failed',
+            data: err.message,
+          });
+        }
+        );
+    }
+
+    // update the entity with new data
+    Object.assign(entity, updateData);
+
+    // save the updated entity
+    await MainTable.updateRecord(entity, 'Merge');
+
+    response.status(200).send({
+      message: 'Data updated successfully',
+      entity
+    });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send(`Error Updating data: ${error.message}`);
   }
 });
 
