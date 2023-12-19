@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../component/Navbar/Navbar'
+import Footer from '../component/Footer/Footer'
 // import { Route,Router,Link } from 'react-router-dom'
 
 function Home() {
@@ -9,22 +10,27 @@ function Home() {
 <Navbar/>
 {/* Hero Section */}
 
-<div className="hero-image">
-    <div className="hero-text">
-        <p>welcome to</p>
-        <h1>THE SCEPTRE OF POWER CHRISTIAN MINISTRY</h1>
+<div class="hero-image relative">
+    <div class="hero-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+        <p class="text-white text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">welcome to</p>
+        <h1 class="text-white text-3xl lg:text-4xl xl:text-5xl font-semibold mt-4 lg:mt-6 w-full">THE SCEPTRE OF POWER CHRISTIAN MINISTRY</h1>
     </div>
 </div>
-<div className="container-fluid text-container">
-    <div className="container text-content">
-    <h1 style={{color:'#585c60'}}>WELCOME ADDRESS</h1>
-    <p>You are welcome to this website. Getting and growing people in relationship with Jesus is our mandate and we have been
-    committed to this assignment from the day of the commission. That you have logged on to this site is not an accident, it
-    is a positive proof that God has a great plan for your life. Moreover, you can find out information and build-up
-    materials in Sceptre of Power Christian Ministry and how you can be a part of this commission. Keep Coming Back. You are
-    more than a conqueror.
+
+
+
+<div class="container-fluid text-container">
+  <div class="container text-content">
+    <h1 class="text-black font-semibold">WELCOME ADDRESS</h1>
+    <p class="text-blue-900 lg:text-black text-lg lg:text-base mt-4 lg:mt-6 leading-relaxed lg:leading-loose">
+      You are welcome to this website. Getting and growing people in relationship
+      with Jesus is our mandate and we have been committed to this assignment from
+      the day of the commission. That you have logged on to this site is not an accident, 
+      it is a positive proof that God has a great plan for your life. Moreover, you can find 
+      out information and build-up materials in Sceptre of Power Christian Ministry and 
+      how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
     </p>
-</div>
+  </div>
 </div>
 <div className="container-fluid section">
     <div className="container">
@@ -77,7 +83,9 @@ function Home() {
    
 
 <div className="events">
-    <h1 style={{paddingTop:"1em"}}>NEWS & EVENTS</h1>
+<h1 className="pt-4 lg:pt-6 xl:pt-8 text-blue-900 font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+      NEWS & EVENTS
+    </h1>
     <div style={{padding:"3em"}} id="carouselExampleSlidesOnly" className="carousel slide newevents" data-bs-ride="carousel">
         <div className="carousel-inner">
             <div className="carousel-item active">
@@ -95,9 +103,9 @@ function Home() {
 
 <div className="container-fluid contact-info">
 <div className="contact-content">
-        <div className="contact-us">
-        <h2>CONTACT US</h2>
-        </div>
+      <div className="contact-us text-blue-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
+      <h2>CONTACT US</h2>
+    </div>
         <form className="contact-form">
             <div className="mb-3 mb3">        
             <input type="text" className="form-control" placeholder="Your Name*" required/>
@@ -113,32 +121,12 @@ function Home() {
                 <label for="floatingTextarea2">Your Message*</label>
             </div>
             <div className="contact-btn text-center">
-            <button type="submit" className="btn btn-primary btn-lg">SEND</button>
+            <button type="submit" style={{backgroundColor:"#002171", color:"#FFFFFF"}}>SEND</button>
             </div>
         </form> 
     </div>
 </div>
-<footer>
-    <div className="footer-text">
-        <p>
-            <img src="/logs/location-pin.png" alt="locationPng" width="30" height="30"/>
-            <span>Plot 31-32 Ifelodun Estate, Behind Wesco Estate,<br/>Off Akure-Ilesa Expressway, Akure, Ondo State</span>
-        </p>
-    </div>
-    <div className="footer-img">
-        <img src="/logs/Vector (1).png" alt="twitterPng"/>
-        <img src="/logs/Vector (2).png" alt="youtubePng"/>
-        <a href="https://www.facebook.com/sepcamedia"><img src="/logs/Vector (3).png" alt="Sepcam Facebook Page"/></a>
-        <a href="https://t.me/Sepcamedia"><img src="/logs/Vector (4).png" alt="Sepcam Telegram Channel"/></a>
-        <img src="/logs/Vector (5).png" alt="instagramPng"/>
-        <img src="/logs/Vector (6).png" alt="Email"/>
-    </div>
-    <div>				
-        <p id="footnote">
-            ©2022.SEPCAM All Rights Reserved
-        </p>
-    </div>
-</footer> 
+<Footer/>
     </div>
   )
 }

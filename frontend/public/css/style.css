@@ -34,32 +34,27 @@ body,html {
 .hero-text {
   text-align: center;
   position: absolute;
-  top: 58%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: white;
 }
 
-.hero-text p{
-  font-size: 1.5em;
-}
+
 .text-container {
   text-align: center;
   background-color: #edf5ff;  
-  padding:10em 0;
+  height: 80vh;
+  padding:4em ;
+  
 }
-.text-content {
-  width: 60%;
-}
-.ff{
+
+/* .ff{
   background-color: #edf5ff;
   color: black;
-}
+} */
 
 .text-content h1 {
   margin-bottom:40px;
-  font-size: 60px;  
-  color: #0D47A1;
+  font-size: 40px;  
+ 
 }
 .text-content p {
  font-size: 25px;
@@ -206,7 +201,7 @@ text-align: center;
 
 footer {
   background-color:#002171;
-  padding: 40px;
+  padding: 70px;
   position: relative;
 }
 .footer-text p {

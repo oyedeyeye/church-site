@@ -9,8 +9,10 @@ module.exports = {
       xl: '1440px',
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
+      sans: ['Graphik', 'sans-serif' ,"Josefin Sans"],
       serif: ['Merriweather', 'serif'],
+
+      
     },
     
     extend: {
@@ -22,6 +24,7 @@ module.exports = {
         },
         blue:"#002171",
         white:"#FFFFFF",
+        black:"#000000"
         
       },
     },
