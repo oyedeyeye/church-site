@@ -24,7 +24,8 @@ module.exports = {
         },
         blue:"#002171",
         white:"#FFFFFF",
-        black:"#000000"
+        black:"#000000",
+        btn:"#EDF5FF"
         
       },
     },

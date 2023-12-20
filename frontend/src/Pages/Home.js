@@ -37,54 +37,33 @@ function Home() {
 </div>
 <div className="container-fluid section">
     <div className="container">
-    <div className="row ">
-        <div className="col-md-6 section-text">
-<h1 style={{color:'#002171'}}>Join us to experience effectual worship and life-changing revelations from God's word.</h1>
-        </div>
-        <div className="col-md-6 section-btn" >
-        <a href="/churchOnline.html" style={{textDecoration: 'none'}}><button type="button" className="btn btn-primary btn-lg button">
-            <img src="/logs/radio.png" alt="radio-png"/>
-                <span className="align-middle"> WATCH LIVE</span>
-        </button></a>
-        <a href="/churchOnline.html" style={{textDecoration: 'none'}}><button type="button" className="btn btn-secondary btn-lg button ff">
-            <img src="/logs/Vector Listen.png" alt="Listen-png"/>
-                <span className="align-middle"> LISTEN LIVE</span>
-        </button></a>
-        </div>
-        </div>
-        {/* <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
-            <div className="col">
-                <div className="card h-100">
-                    <img src="/images/one (6).jpg" className="card-img-top" alt="..."/>
-                    <div className="card-body">
-                        <h5 className="card-title">WORSHIP SERVICE</h5>
-                        <p className="card-text"> Sundays | 8:30am</p>
-                    </div>
-                </div>
-            </div>
-        <div className="col">
-            <div className="card h-100">
-                <img src="/images/one (2).jpg" className="card-img-top" alt="..."/>
-                <div className="card-body">
-                    <h5 className="card-title">BIBLE STUDY</h5>
-                    <p className="card-text"> Wednesdays | 5:00pm</p>
-                </div>
-            </div>
-        </div>
-            <div className="col">
-                <div className="card h-100">
-                    <img src="/images/one (15).jpg" className="card-img-top" alt="..."/>
-                    <div className="card-body">
-                        <h5 className="card-title">MONTHLY VIGIL</h5>
-                        <p className="card-text"> Third Fridays | 10:00pm</p>
-                    </div>
-                </div>
-            </div>
-        </div> */}
+    
+<div className='flex items-center pt-10 justify-between'>
+    <span>
+    <h1 className='text-blue text-lg font-bold ml-4'>Join us to experience <br/>effectual worship and life-changing <br/> revelations from God's word.</h1>
 
-<div className='flex justify-between'>
+    </span>
+    <div className='mr-12'>  
+        <div className='flex items-center bg-blue text-white p-2 rounded-md 	'>
+            <a href='#' className='flex items-center hover:text-white' >
+                <img src="/logs/radio.png" alt="radio-png" className='h-6 mr-2' />
+                WATCH LIVE
+            </a>
+        </div>
+        <div className='flex items-center mt-3 bg-btn p-2 rounded-md font-bold'>
+            <a href='#' className='flex items-center hover:text-black'>
+                <img src="/logs/Vector Listen.png" alt="Listen-png" className='h-6 mr-2' />
+                LISTEN LIVE
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div className='flex justify-between pt-8'>
     {Data.map(item => (
-        <div key={item.id} className='bg-white rounded-lg shadow-md p-4 mb-4 mr-8'>
+        <div key={item.id} className='bg-white rounded-lg shadow-md p-4 mb-4 mr-8 ml-3'>
             <img src={item.image} alt={item.title} className='h-52 w-90 object-cover rounded-t-lg' />
             <div className='p-2'>
                 <h5 className='text-blue text-center text-lg font-bold'>{item.title}</h5>
