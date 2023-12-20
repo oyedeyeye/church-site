@@ -1,4 +1,4 @@
-const { TableServiceClient, TableClient, AzureNamedKeyCredential, odata } = require("@azure/data-tables");
+const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
 require('dotenv').config();
 
 // Configuration

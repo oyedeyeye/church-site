@@ -65,5 +65,3 @@ The HTML audio player uses the endpoint as its source.
 ## Delete Route `/admin/:partitionKey/:rowKey/:fileName`
 
 The route parameters include `partitionKey`, `rowKey`, and `fileName`, which are used to identify the table record and the blobs to be deleted
-
-
