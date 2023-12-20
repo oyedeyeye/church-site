@@ -1,7 +1,10 @@
 import React from 'react'
 import Navbar from '../component/Navbar/Navbar'
 import Footer from '../component/Footer/Footer'
+import { Data } from '../Data'
+
 // import { Route,Router,Link } from 'react-router-dom'
+
 
 function Home() {
   return (
@@ -49,7 +52,7 @@ function Home() {
         </button></a>
         </div>
         </div>
-        <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
+        {/* <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
             <div className="col">
                 <div className="card h-100">
                     <img src="/images/one (6).jpg" className="card-img-top" alt="..."/>
@@ -77,7 +80,21 @@ function Home() {
                     </div>
                 </div>
             </div>
+        </div> */}
+
+<div className='flex justify-between'>
+    {Data.map(item => (
+        <div key={item.id} className='bg-white rounded-lg shadow-md p-4 mb-4 mr-8'>
+            <img src={item.image} alt={item.title} className='h-52 w-90 object-cover rounded-t-lg' />
+            <div className='p-2'>
+                <h5 className='text-blue text-center text-lg font-bold'>{item.title}</h5>
+                <p className='text-center font-extralight'>{item.body}</p>
+            </div>
         </div>
+    ))}
+</div>
+
+        
     </div>
 </div>
    
