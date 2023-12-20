@@ -13,7 +13,12 @@ import Leadership from './Pages/Leadership';
 import LeadershipAudioResource from './Pages/VideoAudioSwitch';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Login from './Admin/Login/Login';
-import Dashboard from './Admin/ashboard/Dashboard';
+import  Dashboard from "./Admin/Dashboard/Dashboard"
+import Profile from './Admin/Profile/Profile';
+import PageNotFound from './Admin/PageNotFound/PageNotFound';
+
+
+
 
 
 
@@ -33,8 +38,10 @@ function App() {
           <Route path='/unit-department' element={<UnitDepartment/>}/>
           <Route path='/leadership' element={<Leadership/>}/> 
           <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>  
-          <Route exact path='/admin-login' element={<Login/>}/>
-          <Route exact path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/admin-login' element={<Login/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/page-not-found' element={<PageNotFound/>}/>
         </Routes>
       </Router>       
       

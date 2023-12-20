@@ -1,6 +1,7 @@
 import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
 import Navbar2 from '../component/Navbar2'
+import Footer from '../component/Footer/Footer'
 
 function OurCall() {
   return (
@@ -18,7 +19,7 @@ function OurCall() {
       <div className="row align-items-md-stretch">
         <div className="col-md-12">
           <div className="h-100 p-5 text-black best rounded-3" style={{fontWeight: 400, fontSize: 20}}>
-            <h2>OUR VISION</h2>
+            <h2 style={{fontSize:"30px", }}>OUR VISION</h2>
             <p>To deliver people from bondage of the devil, for them to fufill God's purpose and make the kingdom of God at the end of their sojourn here on earth.</p>
             <br/><br/>
             <h2>OUR MISSION</h2>
@@ -61,28 +62,9 @@ function OurCall() {
     </div>
   </main>
   
-    <footer>
-        <div className="footer-text">
-            <p>
-                <img src="/logs/location-pin.png" alt="locationPng" width="30" height="30"/>
-                <span>Plot 31-32 Ifelodun Estate, Behind Wesco Estate,<br/>Off Akure-Ilesa Expressway, Akure, Ondo State</span>
-            </p>
-        </div>
-        <div className="footer-img">
-          <img src="/logs/Vector (1).png" alt="twitterPng"/>
-          <img src="/logs/Vector (2).png" alt="youtubePng"/>
-          <a href="https://www.facebook.com/sepcamedia"><img src="/logs/Vector (3).png" alt="Sepcam Facebook Page"/></a>
-          <a href="https://t.me/Sepcamedia"><img src="/logs/Vector (4).png" alt="Sepcam Telegram Channel"/></a>
-          <img src="/logs/Vector (5).png" alt="instagramPng"/>
-          <img src="/logs/Vector (6).png" alt="Email"/>
-      </div>
-      <div>				
-          <p id="footnote">
-              ©2022.SEPCAM All Rights Reserved
-          </p>
-      </div>
-    </footer> 
-    </div>
+   <Footer/>
+   
+       </div>
     
   )
 }

@@ -1,6 +1,10 @@
 import React from 'react'
 import Navbar from '../component/Navbar/Navbar'
+import Footer from '../component/Footer/Footer'
+import { Data } from '../Data'
+
 // import { Route,Router,Link } from 'react-router-dom'
+
 
 function Home() {
   return (
@@ -9,75 +13,75 @@ function Home() {
 <Navbar/>
 {/* Hero Section */}
 
-<div className="hero-image">
-    <div className="hero-text">
-        <p>welcome to</p>
-        <h1>THE SCEPTRE OF POWER CHRISTIAN MINISTRY</h1>
+<div class="hero-image relative">
+    <div class="hero-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+        <p class="text-white text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">welcome to</p>
+        <h1 class="text-white text-3xl lg:text-4xl xl:text-5xl font-semibold mt-4 lg:mt-6 w-full">THE SCEPTRE OF POWER CHRISTIAN MINISTRY</h1>
     </div>
 </div>
-<div className="container-fluid text-container">
-    <div className="container text-content">
-    <h1 style={{color:'#585c60'}}>WELCOME ADDRESS</h1>
-    <p>You are welcome to this website. Getting and growing people in relationship with Jesus is our mandate and we have been
-    committed to this assignment from the day of the commission. That you have logged on to this site is not an accident, it
-    is a positive proof that God has a great plan for your life. Moreover, you can find out information and build-up
-    materials in Sceptre of Power Christian Ministry and how you can be a part of this commission. Keep Coming Back. You are
-    more than a conqueror.
+
+
+
+<div class="container-fluid text-container">
+  <div class="container text-content">
+    <h1 class="text-black font-semibold">WELCOME ADDRESS</h1>
+    <p class="text-blue-900 lg:text-black text-lg lg:text-base mt-4 lg:mt-6 leading-relaxed lg:leading-loose">
+      You are welcome to this website. Getting and growing people in relationship
+      with Jesus is our mandate and we have been committed to this assignment from
+      the day of the commission. That you have logged on to this site is not an accident, 
+      it is a positive proof that God has a great plan for your life. Moreover, you can find 
+      out information and build-up materials in Sceptre of Power Christian Ministry and 
+      how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
     </p>
-</div>
+  </div>
 </div>
 <div className="container-fluid section">
     <div className="container">
-    <div className="row ">
-        <div className="col-md-6 section-text">
-<h1 style={{color:'#002171'}}>Join us to experience effectual worship and life-changing revelations from God's word.</h1>
+    
+<div className='flex items-center pt-10 justify-between'>
+    <span>
+    <h1 className='text-blue text-lg font-bold ml-4'>Join us to experience <br/>effectual worship and life-changing <br/> revelations from God's word.</h1>
+
+    </span>
+    <div className='mr-12'>  
+        <div className='flex items-center bg-blue text-white p-2 rounded-md 	'>
+            <a href='#' className='flex items-center hover:text-white' >
+                <img src="/logs/radio.png" alt="radio-png" className='h-6 mr-2' />
+                WATCH LIVE
+            </a>
         </div>
-        <div className="col-md-6 section-btn" >
-        <a href="/churchOnline.html" style={{textDecoration: 'none'}}><button type="button" className="btn btn-primary btn-lg button">
-            <img src="/logs/radio.png" alt="radio-png"/>
-                <span className="align-middle"> WATCH LIVE</span>
-        </button></a>
-        <a href="/churchOnline.html" style={{textDecoration: 'none'}}><button type="button" className="btn btn-secondary btn-lg button ff">
-            <img src="/logs/Vector Listen.png" alt="Listen-png"/>
-                <span className="align-middle"> LISTEN LIVE</span>
-        </button></a>
+        <div className='flex items-center mt-3 bg-btn p-2 rounded-md font-bold'>
+            <a href='#' className='flex items-center hover:text-black'>
+                <img src="/logs/Vector Listen.png" alt="Listen-png" className='h-6 mr-2' />
+                LISTEN LIVE
+            </a>
         </div>
-        </div>
-        <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
-            <div className="col">
-                <div className="card h-100">
-                    <img src="/images/one (6).jpg" className="card-img-top" alt="..."/>
-                    <div className="card-body">
-                        <h5 className="card-title">WORSHIP SERVICE</h5>
-                        <p className="card-text"> Sundays | 8:30am</p>
-                    </div>
-                </div>
-            </div>
-        <div className="col">
-            <div className="card h-100">
-                <img src="/images/one (2).jpg" className="card-img-top" alt="..."/>
-                <div className="card-body">
-                    <h5 className="card-title">BIBLE STUDY</h5>
-                    <p className="card-text"> Wednesdays | 5:00pm</p>
-                </div>
-            </div>
-        </div>
-            <div className="col">
-                <div className="card h-100">
-                    <img src="/images/one (15).jpg" className="card-img-top" alt="..."/>
-                    <div className="card-body">
-                        <h5 className="card-title">MONTHLY VIGIL</h5>
-                        <p className="card-text"> Third Fridays | 10:00pm</p>
-                    </div>
-                </div>
+    </div>
+</div>
+
+
+
+<div className='flex justify-between pt-8'>
+    {Data.map(item => (
+        <div key={item.id} className='bg-white rounded-lg shadow-md p-4 mb-4 mr-8 ml-3'>
+            <img src={item.image} alt={item.title} className='h-52 w-90 object-cover rounded-t-lg' />
+            <div className='p-2'>
+                <h5 className='text-blue text-center text-lg font-bold'>{item.title}</h5>
+                <p className='text-center font-extralight'>{item.body}</p>
             </div>
         </div>
+    ))}
+</div>
+
+        
     </div>
 </div>
    
 
 <div className="events">
-    <h1 style={{paddingTop:"1em"}}>NEWS & EVENTS</h1>
+<h1 className="pt-4 lg:pt-6 xl:pt-8 text-blue-900 font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+      NEWS & EVENTS
+    </h1>
     <div style={{padding:"3em"}} id="carouselExampleSlidesOnly" className="carousel slide newevents" data-bs-ride="carousel">
         <div className="carousel-inner">
             <div className="carousel-item active">
@@ -95,9 +99,9 @@ function Home() {
 
 <div className="container-fluid contact-info">
 <div className="contact-content">
-        <div className="contact-us">
-        <h2>CONTACT US</h2>
-        </div>
+      <div className="contact-us text-blue-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
+      <h2>CONTACT US</h2>
+    </div>
         <form className="contact-form">
             <div className="mb-3 mb3">        
             <input type="text" className="form-control" placeholder="Your Name*" required/>
@@ -113,32 +117,12 @@ function Home() {
                 <label for="floatingTextarea2">Your Message*</label>
             </div>
             <div className="contact-btn text-center">
-            <button type="submit" className="btn btn-primary btn-lg">SEND</button>
+            <button type="submit" style={{backgroundColor:"#002171", color:"#FFFFFF"}}>SEND</button>
             </div>
         </form> 
     </div>
 </div>
-<footer>
-    <div className="footer-text">
-        <p>
-            <img src="/logs/location-pin.png" alt="locationPng" width="30" height="30"/>
-            <span>Plot 31-32 Ifelodun Estate, Behind Wesco Estate,<br/>Off Akure-Ilesa Expressway, Akure, Ondo State</span>
-        </p>
-    </div>
-    <div className="footer-img">
-        <img src="/logs/Vector (1).png" alt="twitterPng"/>
-        <img src="/logs/Vector (2).png" alt="youtubePng"/>
-        <a href="https://www.facebook.com/sepcamedia"><img src="/logs/Vector (3).png" alt="Sepcam Facebook Page"/></a>
-        <a href="https://t.me/Sepcamedia"><img src="/logs/Vector (4).png" alt="Sepcam Telegram Channel"/></a>
-        <img src="/logs/Vector (5).png" alt="instagramPng"/>
-        <img src="/logs/Vector (6).png" alt="Email"/>
-    </div>
-    <div>				
-        <p id="footnote">
-            ©2022.SEPCAM All Rights Reserved
-        </p>
-    </div>
-</footer> 
+<Footer/>
     </div>
   )
 }
