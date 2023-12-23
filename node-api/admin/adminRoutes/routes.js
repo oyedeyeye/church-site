@@ -18,19 +18,26 @@ setLogLevel("info");
 
 
 // Private Routes for files
+/** Default home route ========================== */
+router.get('/', (request, response, next) => {
+  response.json({
+    message: 'PLease Login',
+  });
+  next();
+});
 
 /** Upload Blob files ========================== */
-router.post('/upload', userAuth.authenticateRequest, async (request, response) => await uploadMessage(request, response));
+router.post('/upload', /* userAuth.authenticateRequest, */ async (request, response) => await uploadMessage(request, response));
 
 /** DELETE single message Entry ========================== */
-router.delete('/:partitionKey/:rowKey/:filename', userAuth.authenticateRequest, async (request, response) => await deleteMessage(request, response));
+router.delete('/:partitionKey/:rowKey/:filename', /* userAuth.authenticateRequest, */ async (request, response) => await deleteMessage(request, response));
 
 
 /** Update single message Entry ========================== */
-router.put('/update-entity/:partitionKey/:rowKey', userAuth.authenticateRequest, async (request, response) => await updateMessage(request, response));
+router.put('/update-entity/:partitionKey/:rowKey', /* userAuth.authenticateRequest, */ async (request, response) => await updateMessage(request, response));
 
 /** Read multiple message Entry ========================== */
-router.get('/dashboard', userAuth.authenticateRequest, async (request, response) => await resources(request, response));
+router.get('/dashboard', /* userAuth.authenticateRequest, */ async (request, response) => await resources(request, response));
 
 
 
