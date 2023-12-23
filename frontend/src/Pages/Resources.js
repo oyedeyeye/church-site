@@ -1,12 +1,15 @@
 import React from 'react'
 // import Navbar from '../component/Navbar/Navbar2'
-import Navbar2 from '../component/Navbar2'
+// import Navbar2 from '../component/Navbar2'
 import Footer from '../component/Footer/Footer'
+import { Message, Page } from '../Data'
+
+
 
 function Resources() {
   return (
     <div>
-       <Navbar2/>  
+       {/* <Navbar2/>   */}
    
     
     <nav className="word-re-aca-au">
@@ -16,24 +19,32 @@ function Resources() {
   <main>
   <div className="container py-4">
     <h3 style={{textAlign: 'left'}}><b>Message</b></h3>
-      {/* <div className="card mb-3" style={{Width: '1240px'}}> */}
-        <div className="row g-0">
-          <div className="col-md-7">           
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
+ <div>
+  {Page.map(item => (
+    <div key={item.id} className="  my-4 bg-white  shadow-md overflow-hidden">
+      <div className="flex">
+        {/* Preacher's Card */}
+        <div className="bg-gray-200 p-4">
+          <img src={item.preacher} alt='' className="w-30 h-30  shadow-md"/>
+          <h3 className="ml-3 mt-4 text-base font-medium">{item.theme}</h3>
+        </div>
+        
+        {/* Content Card */}
+        <div className="p-4 flex flex-col justify-between">
+          <div>
+            <h5>{item.title}</h5>
+            <p>{item.description}</p>
           </div>
-          <div className="col-md-5">        
-            <div className="card-body setTextLeft">
-            <p className="card-text"><a href='' style={{textDecoration: 'none'}}><small className="text-muted"><img src="/logs/volume_up.png" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/>  Message</small></a></p>
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>            
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-              <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-            </div>          
+          <div className="self-end">
+          <small className="text-gray-600">{item.timestamp}</small> 
+            <img src={item.profile} alt='' className="w-10 h-10 rounded-full"/>
           </div>
         </div>
+      </div>
+    </div>
+  ))}
+</div>
+
       {/* </div> */}<br></br>
       <nav class="navbar navbar-light bg-transparent">
         <div class="container-fluid">
@@ -46,214 +57,29 @@ function Resources() {
         </div>
       </nav>
       
-      {/* <h3 style={{textAlign: 'left'}}>Recent</h3> */}
-      <br></br>
-      <div className="row row-cols-1 row-cols-md-4 g-4">
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/video-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  {Message.map(item => (
+    <div key={item.id} className="rounded-lg shadow-md overflow-hidden">
+      <div className="grid p-4 bg-gray-100">
+        <img src={item.preacher} alt='' className="w-30 h-30 "/>
+        
+        <h3 className="ml-3 mt-4 text-lg font-medium">{item.theme}</h3>  
+      </div>
+
+      <div className="p-4">
+        <h5 className="font-bold">{item.title}</h5>
+        <p>{item.description}</p>
+        
+        <div className="mt-4 flex justify-between items-center">
+          <small className="text-gray-600">{item.timestamp}</small>  
+          <img src={item.profile} alt='' className="w-10 h-10 rounded-full"/>
         </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/volume-up-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/video-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/volume-up-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/video-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/volume-up-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/video-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/volume-up-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/video-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/volume-up-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/video-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card h-100">
-            <div className="col-auto">
-                <button type="submit" className="btn beget"><img src='/logs/volume-up-filled.png'/> Message</button>
-            </div>            
-            <img src="/log2/man sepcam image.png" className="img-fluid rounded-start" alt="Precher"/>
-            <div className="card-body setTextLeft">
-              <h6 className="card-title setTextLeft">Becoming like Jesus</h6>
-              <p><b>Bringing yourself down to earth to following Jesus</b></p>
-              <small>Feb 20, 2023</small>
-              <p className="card-text setTextLeft">Lotem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt praesentium cum architecto cupidi.</p>
-            </div>          
-            <div className="card-footer bg-transparent setTextLeft" style={{border:'none'}}>
-              <a href='' style={{textDecoration: 'none', color:'black'}}><img src="/images/team-1.jpg" alt="mdo" width="30px" height="30px" style={{borderRadius: '50%'}}/> Name</a>
-            </div>
-          </div>
-        </div>       
+      </div>
     </div>
+  ))}  
+</div>
+
+
   </div>   
   </main>   
    <Footer/>
@@ -262,3 +88,5 @@ function Resources() {
 }
 
 export default Resources
+
+

@@ -1,16 +1,15 @@
 import React from 'react'
-import Navbar from '../component/Navbar/Navbar'
+import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 import { Data } from '../Data'
 
 // import { Route,Router,Link } from 'react-router-dom'
 
-
 function Home() {
   return (
     <div>
         
-<Navbar/>
+<Naavbar/>
 {/* Hero Section */}
 
 <div class="hero-image relative">
