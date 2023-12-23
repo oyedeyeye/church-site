@@ -1,13 +1,15 @@
 import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
-import Navbar2 from '../component/Navbar2'
+// import Navbar2 from '../component/Navbar2'
 import Footer from '../component/Footer/Footer'
+import Naavbar from '../component/Navbar/Naavbar'
 
 function OurHistory() {
   return (
     <div className='best'>
     
-    <Navbar2/>
+    {/* <Navbar2/> */}
+    <Naavbar/>
 
 
 <nav className="word-history">

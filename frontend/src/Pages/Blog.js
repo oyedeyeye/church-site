@@ -1,12 +1,13 @@
 import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
-import Navbar2 from '../component/Navbar2'
+// import Navbar2 from '../component/Navbar2'
+import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 
 function Blog() {
   return (
     <div>
-           <Navbar2/>
+           {/* <Navbar2/> */}
 
 <nav className="word-coc-blog">
     <h1><b>BLOG</b></h1>

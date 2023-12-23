@@ -1,12 +1,12 @@
 import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
-import Navbar2 from '../component/Navbar2'
+// import Navbar2 from '../component/Navbar2'
 import Footer from '../component/Footer/Footer';
 
 function LeadershipAudioResource() {
   return (
     <div>
-           <Navbar2/>
+           {/* <Navbar2/> */}
 
 <nav className="word-coc-blog">
     <audio className='audiop' controls style={{width: '90%', backgroundColor: '#474544'}}></audio>

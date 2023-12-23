@@ -1,13 +1,14 @@
 import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
-import Navbar2 from '../component/Navbar2'
+// import Navbar2 from '../component/Navbar2'
 import Footer from '../component/Footer/Footer'
+import Naavbar from '../component/Navbar/Naavbar'
 
 function Academy() {
   return (
     <div>
-        
-        <Navbar2/>
+        <Naavbar/>
+        {/* <Navbar2/> */}
     
 {/* banner  */}
 <nav className="word-re-aca-au">

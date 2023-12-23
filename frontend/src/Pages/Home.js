@@ -1,39 +1,33 @@
 import React from 'react'
-import Navbar from '../component/Navbar/Navbar'
+import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 import { Data } from '../Data'
 
 // import { Route,Router,Link } from 'react-router-dom'
 
-
 function Home() {
   return (
     <div>
         
-<Navbar/>
+<Naavbar/>
 {/* Hero Section */}
 
-<div class="hero-image relative">
-    <div class="hero-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <p class="text-white text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">welcome to</p>
-        <h1 class="text-white text-3xl lg:text-4xl xl:text-5xl font-semibold mt-4 lg:mt-6 w-full">THE SCEPTRE OF POWER CHRISTIAN MINISTRY</h1>
-    </div>
+<div className="hero-image relative h-screen flex items-center justify-center">
+        <div className="hero-text text-center">
+          <p className="text-white text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">Welcome to</p>
+          <h1 className="text-white text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4">THE SCEPTURE</h1>
+          <h1 className="text-white text-3xl lg:text-4xl xl:text-5xl font-semibold">OF POWER CHRISTIAN MINISTRY</h1>
+        </div>
 </div>
 
 
-
 <div class="container-fluid text-container">
-  <div class="container text-content">
-    <h1 class="text-black font-semibold">WELCOME ADDRESS</h1>
-    <p class="text-blue-900 lg:text-black text-lg lg:text-base mt-4 lg:mt-6 leading-relaxed lg:leading-loose">
-      You are welcome to this website. Getting and growing people in relationship
-      with Jesus is our mandate and we have been committed to this assignment from
-      the day of the commission. That you have logged on to this site is not an accident, 
-      it is a positive proof that God has a great plan for your life. Moreover, you can find 
-      out information and build-up materials in Sceptre of Power Christian Ministry and 
-      how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
-    </p>
-  </div>
+<div className="container mx-auto mt-8 mb-12 px-4 lg:px-0 max-w-3xl">
+        <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 lg:mb-6">WELCOME ADDRESS</h1>
+        <p className="text-blue-900 lg:text-base mb-4 lg:mb-6 leading-relaxed lg:leading-loose">
+          You are welcome to this website. Getting and growing people in relationship with Jesus is our mandate and we have been committed to this assignment from the day of the commission. That you have logged on to this site is not an accident, it is a positive proof that God has a great plan for your life. Moreover, you can find out information and build-up materials in Sceptre of Power Christian Ministry and how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
+        </p>
+      </div>
 </div>
 <div className="container-fluid section">
     <div className="container">
