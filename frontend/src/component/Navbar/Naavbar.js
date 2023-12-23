@@ -18,7 +18,23 @@ function classNames(...classes) {
 
 export default function Naavbar() {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <div>
+    <nav className="navbar navbar-light header">
+<div className="container">
+<header className="d-flex flex-wrap">
+    <a href="/" className="d-flex align-items-center  text-dark text-decoration-none">
+        <img src="/log2/SEPCAM Logo (1).png" alt="SEPCAM LOGO"/>            
+      <span className="fs-4 bob">THE SCEPTRE OF POWER CHRISTIAN MINISTRY</span>
+    </a>
+</header>
+<form class="d-flex">
+    <span class="input-group-text bg-transparent brt"><img src='/logs/magnifyingglass.png'/></span>
+    <input class="form-control me-2 rbt" type="search" placeholder="Search" aria-label="Search"/>            
+  </form>
+</div>
+</nav>
+    <div className="nav-content">
+    <Disclosure as="nav" className="bg-blue">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -80,5 +96,7 @@ export default function Naavbar() {
         </>
       )}
     </Disclosure>
+    </div>
+    </div>
   )
 }

@@ -16,6 +16,8 @@ import Login from './Admin/Login/Login';
 import  Dashboard from "./Admin/Dashboard/Dashboard"
 import Profile from './Admin/Profile/Profile';
 import PageNotFound from './Admin/PageNotFound/PageNotFound';
+import Resourcesaudio from './Pages/Resourcesaudio';
+import Resourcesvideo from './Pages/Resourcesvideo';
 
 
 
@@ -42,6 +44,8 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/page-not-found' element={<PageNotFound/>}/>
+          <Route path='/resources_audio' element={<Resourcesaudio/>}/>
+          <Route path='/resources_video' element={<Resourcesvideo/>}/>
         </Routes>
       </Router>       
       

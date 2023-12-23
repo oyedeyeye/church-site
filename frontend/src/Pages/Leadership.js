@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 // import Navbar from '../component/Navbar/Navbar'
 // import Navbar2 from '../component/Navbar2'
+import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 
 
@@ -21,8 +22,10 @@ function Leadership() {
   return ( 
   
     <div classNameName='best'>
+      <Naavbar/>
       
       {/* <Navbar2/> */}
+      <Naavbar/>
     
     
     <nav className="word-lead-unit">

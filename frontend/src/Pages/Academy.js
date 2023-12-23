@@ -2,11 +2,12 @@ import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
 // import Navbar2 from '../component/Navbar2'
 import Footer from '../component/Footer/Footer'
+import Naavbar from '../component/Navbar/Naavbar'
 
 function Academy() {
   return (
     <div>
-        
+        <Naavbar/>
         {/* <Navbar2/> */}
     
 {/* banner  */}

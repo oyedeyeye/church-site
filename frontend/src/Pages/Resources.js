@@ -1,25 +1,37 @@
-import React from 'react'
-// import Navbar from '../component/Navbar/Navbar2'
-// import Navbar2 from '../component/Navbar2'
-import Footer from '../component/Footer/Footer'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Naavbar from '../component/Navbar/Naavbar'
 import { Message, Page } from '../Data'
 
+function Messages() {
+  const [messages, setMessages] = useState([]);
 
+  async function fetchMessages() {
+    try {
+      const response = await axios.get('https://sepcamwebapp.azurewebsites.net/resources');
+      if (response.data && Array.isArray(response.data.entites)) {
+        setMessages(response.data.entites);
+      } else {
+        console.log("Invalid data format received");
+      }
+    } catch (error) {
+      console.log("Error fetching messages:", error);  
+    }
+  }
 
-function Resources() {
+  useEffect(() => {
+    fetchMessages();
+  }, []); // Empty dependency array to trigger fetching only once on mount
+
   return (
     <div>
-       {/* <Navbar2/>   */}
-   
-    
-    <nav className="word-re-aca-au">
+      <Naavbar/>
+      <nav className="word-re-aca-au">
       <h1><b>RESOURCES</b></h1>
-    </nav>  
-  
-  <main>
-  <div className="container py-4">
+    </nav>
+    <div className="container py-4">
     <h3 style={{textAlign: 'left'}}><b>Message</b></h3>
- <div>
+    <div>
   {Page.map(item => (
     <div key={item.id} className="  my-4 bg-white  shadow-md overflow-hidden">
       <div className="flex">
@@ -45,8 +57,9 @@ function Resources() {
   ))}
 </div>
 
-      {/* </div> */}<br></br>
-      <nav class="navbar navbar-light bg-transparent">
+{/* </div> */}<br></br>
+
+<nav class="navbar navbar-light bg-transparent">
         <div class="container-fluid">
           <a class="navbar-brand"><h3>Recent</h3></a>
           <form class="d-flex">
@@ -56,37 +69,31 @@ function Resources() {
           </form>
         </div>
       </nav>
-      
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  {Message.map(item => (
-    <div key={item.id} className="rounded-lg shadow-md overflow-hidden">
-      <div className="grid p-4 bg-gray-100">
-        <img src={item.preacher} alt='' className="w-30 h-30 "/>
-        
-        <h3 className="ml-3 mt-4 text-lg font-medium">{item.theme}</h3>  
-      </div>
 
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {messages.map(message => (
+        <div key={message.rowKey}  className="rounded-lg shadow-md overflow-hidden">
+        <div className="grid p-4 bg-gray-100">
+        <img src="/log2/man sepcam image.png" alt='' className="w-30 h-30 "/>
+        
+        <h3 className="ml-3 mt-4 text-lg font-medium">{message.theme}</h3>  
+      </div>
       <div className="p-4">
-        <h5 className="font-bold">{item.title}</h5>
-        <p>{item.description}</p>
+        <h5 className="font-bold">{message.title}</h5>
+        <p>{message.description}</p>
         
         <div className="mt-4 flex justify-between items-center">
-          <small className="text-gray-600">{item.timestamp}</small>  
-          <img src={item.profile} alt='' className="w-10 h-10 rounded-full"/>
+          <small className="text-gray-600">Feb 20, 2023</small>  
+          <img src="/images/team-1.jpg" alt='' className="w-10 h-10 rounded-full"/>
         </div>
-      </div>
-    </div>
-  ))}  
-</div>
+      </div>        </div>
+      ))}
 
-
-  </div>   
-  </main>   
-   <Footer/>
     </div>
-  )
+    </div>
+    </div>
+  );
 }
 
-export default Resources
-
-
+export default Messages;
