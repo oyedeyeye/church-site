@@ -24,6 +24,10 @@ router.get('/', (request, response, next) => {
   });
   next();
 });
+// Recent message API needed to return single most recent message preached
+  /**
+   * Returns a single message
+   */
 
 /** READ Multiple files by page ========================== */
 router.get('/resources', async (request, response) => await resources(request, response));
