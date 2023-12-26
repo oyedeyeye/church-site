@@ -1,3 +1,7 @@
+# Accessing Message APIs from Frontend
+
+This guide explains how to access specific routes from your frontend application
+
 ## End Point  `/resources`
 
 Here's how you can set up the request in Postman:
@@ -36,6 +40,48 @@ Make sure to replace `http://localhost:3000/resources` with your actual endpoint
 ### Note:
 
 If you haven't yet made the first request or if you're setting up Postman from scratch, you would first make a request without the `continuationToken` parameter to get the first page and the initial continuation token. Then, use this token as described above for subsequent requests.
+
+
+
+## Get the Most Recent Message
+
+This endpoint returns the single most recent message that was preached.
+
+- **Endpoint**: `GET /recent/`
+- **Description**: Fetches the latest message from the messages repository.
+- **Usage**:
+  
+  Send a `GET` request to the endpoint to receive the most recent message. No additional parameters or request body is required.
+
+  Example using JavaScript's Fetch API:
+  ```javascript
+  fetch('http://yourserver.com/recent/')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  ```
+
+##  Get a Specific Message by Partition and Row Keys
+
+This endpoint allows you to retrieve a specific message using its partition key and row key.
+
+- **Endpoint**: `GET /resources/:partitionKey/:rowKey`
+- **Description**: Fetches a specific message based on its unique identifiers (partition key and row key).
+- **Usage**:
+  
+  Replace `:partitionKey` and `:rowKey` in the URL with the actual keys of the message you want to retrieve.
+
+  Example using JavaScript's Fetch API:
+  ```javascript
+  const partitionKey = 'somePartitionKey';
+  const rowKey = 'someRowKey';
+
+  fetch(`http://yourserver.com/resources/${partitionKey}/${rowKey}`)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  ```
+
 
 ## Download End Point  `/download/:fileType/:fileName`
 

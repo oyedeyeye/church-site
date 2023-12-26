@@ -114,6 +114,35 @@ class MainTable {
       throw new Error(`error listing page record from table: ${error.message}`);
     }
   }
+
+  static async mostRecent(request, response) {
+    try {
+      // Using Timestamp field to get the most recent entry
+    const queryOptions = { queryOptions: { filter: 'Timestamp ne null', top: 1 } };
+    const entities = this.tableClient.listEntities(queryOptions);
+
+    let mostRecentEntity = null;
+    for await (const entity of entities) {
+      if (!mostRecentEntity || entity.Timestamp > mostRecentEntity.Timestamp) {
+        mostRecentEntity = entity;
+      }
+    }
+
+    // return response
+    if (mostRecentEntity) {
+      response.json(mostRecentEntity);
+    } else {
+      response.status(404).send({
+        message: 'No entries found'
+      });
+    }
+    } catch (error) {
+      console.error('Error fetching the most recent entity: ', error);
+      response.status(500).send({
+        message: 'Error fetching data'
+      });
+    }
+  }
 }
 
 

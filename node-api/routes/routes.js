@@ -13,6 +13,7 @@ const createReverseTimeStamp = require('../utils/util');
 const resources = require('./controllers/resources');
 const download = require('./controllers/download');
 const stream = require('./controllers/stream');
+const readSingle = require('./controllers/readMsg');
 setLogLevel("info");
 
 
@@ -24,10 +25,15 @@ router.get('/', (request, response, next) => {
   });
   next();
 });
+
 // Recent message API needed to return single most recent message preached
-  /**
+// Return Single most RECENT MESSAGe
+router.get('/recent/', async (request, response) => await mainTable.mostRecent(request, response));
+
+/**
    * Returns a single message
    */
+router.get('/resources/:partitionKey/:rowKey', async (request, response) => readSingle(request, response));
 
 /** READ Multiple files by page ========================== */
 router.get('/resources', async (request, response) => await resources(request, response));
