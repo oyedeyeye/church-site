@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Home from './Pages/Home';
 import Academy from './Pages/Academy';
@@ -12,6 +12,17 @@ import UnitDepartment from './Pages/UnitDepartment';
 import Leadership from './Pages/Leadership';
 import LeadershipAudioResource from './Pages/VideoAudioSwitch';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Login from './Admin/Login/Login';
+import  Dashboard from "./Admin/Dashboard/Dashboard"
+import Profile from './Admin/Profile/Profile';
+import PageNotFound from './Admin/PageNotFound/PageNotFound';
+import Resourcesaudio from './Pages/Resourcesaudio';
+import Resourcesvideo from './Pages/Resourcesvideo';
+
+
+
+
+
 
 function App() {
   return (
@@ -28,7 +39,13 @@ function App() {
           <Route path='/resources' element={<Resources/>}/>
           <Route path='/unit-department' element={<UnitDepartment/>}/>
           <Route path='/leadership' element={<Leadership/>}/> 
-          <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>   
+          <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>  
+          <Route path='/admin-login' element={<Login/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/page-not-found' element={<PageNotFound/>}/>
+          <Route path='/resources_audio' element={<Resourcesaudio/>}/>
+          <Route path='/resources_video' element={<Resourcesvideo/>}/>
         </Routes>
       </Router>       
       
