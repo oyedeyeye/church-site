@@ -43,7 +43,7 @@ function Contact() {
                     <textarea className="form-control h-50 bg-light" id="exampleFormControlTextarea1" rows="6" placeholder="Your Message"></textarea>
                     <label for="FormControlTextarea1" className="form-label" placeholder="Your Message">Your Message<span style={{color: 'red'}}>*</span></label>
                 </div><br/>
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Send</button>
+                <button className="w-100 btn btn-lg bg-blue text-white" type="submit" >Send</button>
                 <hr className="my-0"/>
                 </form>
             </div>

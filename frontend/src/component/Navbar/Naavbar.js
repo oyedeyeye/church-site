@@ -19,19 +19,30 @@ function classNames(...classes) {
 export default function Naavbar() {
   return (
     <div>
-    <nav className="navbar navbar-light header">
-<div className="container">
-<header className="d-flex flex-wrap">
-    <a href="/" className="d-flex align-items-center  text-dark text-decoration-none">
-        <img src="/log2/SEPCAM Logo (1).png" alt="SEPCAM LOGO"/>            
-      <span className="fs-4 bob">THE SCEPTRE OF POWER CHRISTIAN MINISTRY</span>
+<nav className="navbar bg-light">
+  <div className="container flex flex-wrap items-center justify-between">
+
+    <a href="/" className="navbar-brand flex items-center">
+      <img src="/log2/SEPCAM Logo (1).png" alt="SEPCAM LOGO" className="h-9 mr-3 sm:h-12" />
+
+
+      <span className="text-xl sm:text-2xl font-semibold" style={{color: '#002171'}}> 
+
+      THE SCEPTRE OF POWER CHRISTIAN MINISTRY
+      </span>
     </a>
-</header>
-<form class="d-flex">
-    <span class="input-group-text bg-transparent brt"><img src='/logs/magnifyingglass.png'/></span>
-    <input class="form-control me-2 rbt" type="search" placeholder="Search" aria-label="Search"/>            
-  </form>
-</div>
+
+    <button className="navbar-toggler flex sm:hidden border-0 px-3 py-2">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+
+    <div className="flex flex-grow items-center justify-end">
+      <form className="hidden sm:flex mr-6 lg:mr-0">        
+        <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+      </form>
+    </div>
+
+  </div>  
 </nav>
     <div className="nav-content">
     <Disclosure as="nav" className="bg-blue">
