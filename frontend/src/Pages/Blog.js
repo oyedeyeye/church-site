@@ -7,6 +7,7 @@ import Footer from '../component/Footer/Footer'
 function Blog() {
   return (
     <div>
+      <Naavbar/>
            {/* <Navbar2/> */}
 
 <nav className="word-coc-blog">
