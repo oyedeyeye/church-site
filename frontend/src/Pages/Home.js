@@ -90,31 +90,36 @@ function Home() {
         </div>
     </div>
 </div>
+<div className="flex flex-col items-center">
 
-<div className="container-fluid contact-info">
-<div className="contact-content">
-      <div className="contact-us text-blue-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
-      <h2>CONTACT US</h2>
+  <h2 className="text-3xl font-bold text-blue-500 mb-10">CONTACT US</h2>
+
+  <div className="flex justify-center w-full">
+
+    <div className="bg-gray-100 p-4 rounded w-full max-w-md">
+    
+      <input type="text" placeholder="Name" className="border p-3 rounded w-full mb-6" />   
+
+      <input type="text" placeholder="Phone" className="border p-3 rounded w-full mb-6" />
+   
+      <input type="email" placeholder="Email" className="border p-3 rounded w-full" />
+
     </div>
-        <form className="contact-form">
-            <div className="mb-3 mb3">        
-            <input type="text" className="form-control" placeholder="Your Name*" required/>
-            </div>
-            <div className="mb-3 mb3">
-                <input type="text" className="form-control" placeholder="Your Phone No*" required/>
-            </div>
-            <div className="mb-3 mb3">
-                <input type="email" className="form-control" placeholder="Your Email*" required/>
-            </div>
-            <div className="form-floating formfloating">
-                <textarea className="form-control " placeholder="Leave a comment here" style={{height: 150}}></textarea>
-                <label for="floatingTextarea2">Your Message*</label>
-            </div>
-            <div className="contact-btn text-center">
-            <button type="submit" style={{backgroundColor:"#002171", color:"#FFFFFF"}}>SEND</button>
-            </div>
-        </form> 
+
+    <div className="bg-gray-100 p-4 rounded w-full max-w-md ">  
+
+       <textarea className="w-full border p-3 rounded h-64 mb-4"></textarea>
+       
     </div>
+
+  </div>
+
+  <div className=" p-4 w-full mt-6 rounded text-center">
+    <button className="bg-blue text-white px-40 py-3 rounded">
+      Send
+    </button>
+  </div>
+
 </div>
 <Footer/>
     </div>

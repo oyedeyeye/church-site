@@ -24,7 +24,7 @@ function Academy() {
   <br/>
  <br/>
  <br/>
- <h3 style={{color:'#21005d'}}><b>COMING SOON</b></h3>
+ <h3 style={{color:'#21005d'}}><b className='flex justify-center text-lg'>  COMING SOON</b></h3>
  <br/>
  <br/>
  <br/>
