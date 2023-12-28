@@ -1,5 +1,7 @@
 const gt = process.env;
 
+const captionDefault = `A Christian Home centers on the relationship between family members, particularly the foundational role of marriage. It emphasizes that marriage and family life require thorough preparation, as the strength of a family's foundation significantly impacts its longevity and health.`
+
 async function filterResources(result) {
   try {
     const modifiedEntities = await result.entites.map(({
@@ -19,7 +21,7 @@ async function filterResources(result) {
         date,
         theme,
         title,
-        caption: caption ? caption : 'default',
+        caption: caption ? caption : captionDefault,
         preacher,
         preacherThumbnail }));
 
