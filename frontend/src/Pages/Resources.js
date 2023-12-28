@@ -8,9 +8,10 @@ function Messages() {
 
   async function fetchMessages() {
     try {
+      // corrected the Azure's misspelt entities from the backend
       const response = await axios.get('https://sepcamwebapp.azurewebsites.net/resources');
-      if (response.data && Array.isArray(response.data.entites)) {
-        setMessages(response.data.entites);
+      if (response.data && Array.isArray(response.data.entities)) {
+        setMessages(response.data.entities);
       } else {
         console.log("Invalid data format received");
       }
