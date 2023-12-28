@@ -1,4 +1,5 @@
 const mainTable = require("../../utils/db");
+const filterResources = require("../../utils/filterResources");
 
 const resources = async (request, response) => {
   try {
@@ -8,7 +9,11 @@ const resources = async (request, response) => {
     const continuationToken = request.query.continuationToken ? JSON.parse(decodeURIComponent(request.query.continuationToken)) : undefined;
     const result = await mainTable.listRecords(continuationToken);
     console.log(result);
-    response.status(200).json(result);
+
+  const modifiedResult = await filterResources(result)
+
+
+    response.status(200).json(modifiedResult);
   } catch (err) {
     response.status(500).json({
       error: err.message

@@ -6,13 +6,14 @@ const uploadMessage = async (request, response) => {
   // Data object
   try {
     const data = {
-      "theme": request.body.theme,
-      "title": request.body.title,
-      "description": request.body.description,
-      "partitionKey": request.body.serviceTag,
-      "youtubeLink": request.body.youtubeLink,
-      "preacher": request.body.preacher,
-      "preacherThumbnail": request.body.preacherThumbnail
+      'theme': request.body.theme,
+      'title': request.body.title,
+      'caption': request.body.caption,
+      'description': request.body.description,
+      'partitionKey': request.body.serviceTag,
+      'youtubeLink': request.body.youtubeLink,
+      'preacher': request.body.preacher,
+      'preacherThumbnail': request.body.preacherThumbnail
     };
 
     // create a new blob
