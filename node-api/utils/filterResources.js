@@ -2,7 +2,7 @@ const gt = process.env;
 
 async function filterResources(result) {
   try {
-    const modifiedEntities = result.entites.map(({
+    const modifiedEntities = await result.entites.map(({
       partitionKey,
       rowKey,
       messageThumbnail,
@@ -15,11 +15,11 @@ async function filterResources(result) {
     }) => ({ 
         partitionKey,
         rowKey,
-        messageThumbnail, //: () => `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.IMAGE_CONTAINER_NAME}/${messageThumbnail}.jpg`,
+        messageThumbnail: `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.IMAGE_CONTAINER_NAME}/${messageThumbnail}.jpg`,
         date,
         theme,
         title,
-        caption: 'default',
+        caption: caption ? caption : 'default',
         preacher,
         preacherThumbnail }));
 
