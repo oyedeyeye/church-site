@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 import Naavbar from '../component/Navbar/Naavbar'
 import { Message, Page } from '../Data'
+import Footer from '../component/Footer/Footer';
 
 function Messages() {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
+  const [continuationToken, setContinuationToken] = useState('');
 
   async function fetchMessages() {
     try {
-      // corrected the Azure's misspelt entities from the backend
-      const response = await axios.get('https://sepcamwebapp.azurewebsites.net/resources');
+      const response = await axios.get(`https://sepcamwebapp.azurewebsites.net/resources${continuationToken ? `?continuationToken=${continuationToken}` : ''}`);
       if (response.data && Array.isArray(response.data.entities)) {
-        setMessages(response.data.entities);
+        setMessages((prevMessages) => [...prevMessages, ...response.data.entities]);
+        setContinuationToken(response.data.continuationToken || '');
       } else {
         console.log("Invalid data format received");
       }
@@ -22,8 +27,29 @@ function Messages() {
 
   useEffect(() => {
     fetchMessages();
-  }, []); // Empty dependency array to trigger fetching only once on mount
+  }, [continuationToken]); // Fetch when continuationToken changes
 
+  const handleSermonClick = (partitionKey, rowKey) => {
+    navigate(`/resources_video/${partitionKey}/${rowKey}`);
+  };
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+  const getMostRecentSermon = () => {
+    const sortedMessages = messages.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    return sortedMessages.length > 0 ? [sortedMessages[0]] : [];
+  };
+
+  const mostRecentSermon = getMostRecentSermon();
+
+  
   return (
     <div>
       <Naavbar/>
@@ -33,30 +59,35 @@ function Messages() {
     <div className="container py-4">
     <h3 style={{textAlign: 'left'}}><b>Message</b></h3>
     <div>
-  {Page.map(item => (
-    <div key={item.id} className="  my-4 bg-white  shadow-md overflow-hidden">
+  {mostRecentSermon.map(message => (
+ <div key={`${message.partitionKey}-${message.rowKey}`} onClick={() => handleSermonClick(message.partitionKey, message.rowKey)} className="rounded-lg shadow-md overflow-hidden">
       <div className="flex">
         {/* Preacher's Card */}
         <div className="bg-gray-200 p-4">
-          <img src={item.preacher} alt='' className="w-30 h-30  shadow-md"/>
-          <h3 className="ml-3 mt-4 text-base font-medium">{item.theme}</h3>
+          <img src='/log2/man sepcam image.png' alt='' className="w-30 h-30  shadow-md"/>
+          <h3 className="ml-3 mt-4 text-base font-medium">{message.theme}</h3>
         </div>
         
         {/* Content Card */}
         <div className="p-4 flex flex-col justify-between">
           <div>
-            <h5>{item.title}</h5>
-            <p>{item.description}</p>
+            <h5>{message.title}</h5>
+            <p>{message.caption}</p>
+            <p>{message.preacher}</p>
           </div>
           <div className="self-end">
-          <small className="text-gray-600">{item.timestamp}</small> 
-            <img src={item.profile} alt='' className="w-10 h-10 rounded-full"/>
+          <small className="text-gray-600">
+                  {/* Use the formatDate function to format the date */}
+                  {formatDate(message.date)}
+                </small>
+            <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full"/>
           </div>
         </div>
       </div>
     </div>
   ))}
 </div>
+
 
 {/* </div> */}<br></br>
 
@@ -74,25 +105,31 @@ function Messages() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {messages.map(message => (
-        <div key={message.rowKey}  className="rounded-lg shadow-md overflow-hidden">
+                 <div key={`${message.partitionKey}-${message.rowKey}`} onClick={() => handleSermonClick(message.partitionKey, message.rowKey)} className="rounded-lg shadow-md overflow-hidden">
+
         <div className="grid p-4 bg-gray-100">
-        <img src="/log2/man sepcam image.png" alt='' className="w-30 h-30 "/>
+        <img src='/log2/man sepcam image.png' alt='' className="w-30 h-30 "/>
         
         <h3 className="ml-3 mt-4 text-lg font-medium">{message.theme}</h3>  
       </div>
       <div className="p-4">
         <h5 className="font-bold">{message.title}</h5>
-        <p>{message.description}</p>
+        <p>{message.caption}</p>
+        <p>{message.preacher}</p>
         
         <div className="mt-4 flex justify-between items-center">
-          <small className="text-gray-600">Feb 20, 2023</small>  
-          <img src="/images/team-1.jpg" alt='' className="w-10 h-10 rounded-full"/>
+        <small className="text-gray-600">
+                  {/* Use the formatDate function to format the date */}
+                  {formatDate(message.date)}
+                </small> 
+          <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full"/>
         </div>
       </div>        </div>
       ))}
 
     </div>
     </div>
+    <Footer/>
     </div>
   );
 }

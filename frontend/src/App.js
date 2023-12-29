@@ -45,7 +45,9 @@ function App() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/page-not-found' element={<PageNotFound/>}/>
           <Route path='/resources_audio' element={<Resourcesaudio/>}/>
-          <Route path='/resources_video' element={<Resourcesvideo/>}/>
+          <Route path='/resources_video/:partitionKey/:rowKey' element={<Resourcesvideo/>}/>
+
+
         </Routes>
       </Router>       
       
