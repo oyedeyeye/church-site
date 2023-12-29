@@ -4,17 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Naavbar from '../component/Navbar/Naavbar'
 import { Message, Page } from '../Data'
+import Footer from '../component/Footer/Footer';
 
 function Messages() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
+  const [continuationToken, setContinuationToken] = useState('');
 
   async function fetchMessages() {
     try {
-      // corrected the Azure's misspelt entities from the backend
-      const response = await axios.get('https://sepcamwebapp.azurewebsites.net/resources');
+      const response = await axios.get(`https://sepcamwebapp.azurewebsites.net/resources${continuationToken ? `?continuationToken=${continuationToken}` : ''}`);
       if (response.data && Array.isArray(response.data.entities)) {
-        setMessages(response.data.entities);
+        setMessages((prevMessages) => [...prevMessages, ...response.data.entities]);
+        setContinuationToken(response.data.continuationToken || '');
       } else {
         console.log("Invalid data format received");
       }
@@ -25,7 +27,7 @@ function Messages() {
 
   useEffect(() => {
     fetchMessages();
-  }, []); // Empty dependency array to trigger fetching only once on mount
+  }, [continuationToken]); // Fetch when continuationToken changes
 
   const handleSermonClick = (partitionKey, rowKey) => {
     navigate(`/resources_video/${partitionKey}/${rowKey}`);
@@ -62,7 +64,7 @@ function Messages() {
       <div className="flex">
         {/* Preacher's Card */}
         <div className="bg-gray-200 p-4">
-          <img src={message.preacher} alt='' className="w-30 h-30  shadow-md"/>
+          <img src='/log2/man sepcam image.png' alt='' className="w-30 h-30  shadow-md"/>
           <h3 className="ml-3 mt-4 text-base font-medium">{message.theme}</h3>
         </div>
         
@@ -70,14 +72,15 @@ function Messages() {
         <div className="p-4 flex flex-col justify-between">
           <div>
             <h5>{message.title}</h5>
-            <p>{message.description}</p>
+            <p>{message.caption}</p>
+            <p>{message.preacher}</p>
           </div>
           <div className="self-end">
           <small className="text-gray-600">
                   {/* Use the formatDate function to format the date */}
                   {formatDate(message.date)}
                 </small>
-            <img src={message.profile} alt='' className="w-10 h-10 rounded-full"/>
+            <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full"/>
           </div>
         </div>
       </div>
@@ -105,7 +108,7 @@ function Messages() {
                  <div key={`${message.partitionKey}-${message.rowKey}`} onClick={() => handleSermonClick(message.partitionKey, message.rowKey)} className="rounded-lg shadow-md overflow-hidden">
 
         <div className="grid p-4 bg-gray-100">
-        <img src={message.messageThumbnail} alt='' className="w-30 h-30 "/>
+        <img src='/log2/man sepcam image.png' alt='' className="w-30 h-30 "/>
         
         <h3 className="ml-3 mt-4 text-lg font-medium">{message.theme}</h3>  
       </div>
@@ -119,13 +122,14 @@ function Messages() {
                   {/* Use the formatDate function to format the date */}
                   {formatDate(message.date)}
                 </small> 
-          <img src={message.preacherThumbnail} alt='' className="w-10 h-10 rounded-full"/>
+          <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full"/>
         </div>
       </div>        </div>
       ))}
 
     </div>
     </div>
+    <Footer/>
     </div>
   );
 }
