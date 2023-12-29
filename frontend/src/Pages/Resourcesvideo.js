@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; 
+import axios from 'axios';
 import Naavbar from '../component/Navbar/Naavbar';
 import Footer from '../component/Footer/Footer';
 
 const ResourcesVideo = () => {
+    const { partitionKey, rowKey } = useParams(); // Get partitionKey and rowKey from params
+  const [sermonDetails, setSermonDetails] = useState(null);
+
+  useEffect(() => {
+    async function fetchSermonDetails() {
+      try {
+        const response = await axios.get(`https://sepcamwebapp.azurewebsites.net/resources/${partitionKey}/${rowKey}`);
+        setSermonDetails(response.data);
+      } catch (error) {
+        console.log("Error fetching sermon details:", error);  
+      }
+    }
+
+    fetchSermonDetails();
+}, [partitionKey, rowKey]);
   return (
     <div>
       <Naavbar />
