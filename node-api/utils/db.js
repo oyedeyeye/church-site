@@ -40,10 +40,7 @@ class MainTable {
   }
 
   // Completed Read a single record from table
-  static async readRecord(params) {
-    // destructure partitionKey and rowKey from args
-    const { partitionKey, rowKey } = params;
-
+  static async readRecord(partitionKey, rowKey) {
     // Read One
     try {
       const result = await this.tableClient.getEntity(partitionKey, rowKey);
@@ -115,32 +112,26 @@ class MainTable {
     }
   }
 
-  static async mostRecent(request, response) {
+  static async mostRecent() {
     try {
       // Using Timestamp field to get the most recent entry
-    const queryOptions = { queryOptions: { filter: 'Timestamp ne null', top: 1 } };
-    const entities = this.tableClient.listEntities(queryOptions);
+      const queryOptions = { queryOptions: { filter: 'Timestamp ne null', top: 1 } };
+      const entities = await this.tableClient.listEntities(queryOptions);
 
-    let mostRecentEntity = null;
-    for await (const entity of entities) {
-      if (!mostRecentEntity || entity.Timestamp > mostRecentEntity.Timestamp) {
-        mostRecentEntity = entity;
+      let mostRecentEntity = null;
+      for await (const entity of entities) {
+        if (!mostRecentEntity || entity.Timestamp > mostRecentEntity.Timestamp) {
+          mostRecentEntity = entity;
+        }
       }
-    }
 
-    // return response
-    if (mostRecentEntity) {
-      response.json(mostRecentEntity);
-    } else {
-      response.status(404).send({
-        message: 'No entries found'
-      });
-    }
+      // return response
+      if (mostRecentEntity) {
+        return mostRecentEntity;
+      }
     } catch (error) {
       console.error('Error fetching the most recent entity: ', error);
-      response.status(500).send({
-        message: 'Error fetching data'
-      });
+      throw new Error(`Error fetching data: ${error.message}`);
     }
   }
 }

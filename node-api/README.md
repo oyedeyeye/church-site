@@ -45,6 +45,10 @@ If you haven't yet made the first request or if you're setting up Postman from s
 
 ## Get the Most Recent Message
 
+### Not working
+Based on Azure Table documentation, this section is not going to work.
+Please ignore
+
 This endpoint returns the single most recent message that was preached.
 
 - **Endpoint**: `GET /recent/`
@@ -61,26 +65,61 @@ This endpoint returns the single most recent message that was preached.
     .catch(error => console.error('Error:', error));
   ```
 
-##  Get a Specific Message by Partition and Row Keys
 
-This endpoint allows you to retrieve a specific message using its partition key and row key.
+## Endpoint: Retrieve a Single Message
+API endpoint designed to retrieve a single message from the system using specific identifiers.
 
-- **Endpoint**: `GET /resources/:partitionKey/:rowKey`
-- **Description**: Fetches a specific message based on its unique identifiers (partition key and row key).
-- **Usage**:
-  
-  Replace `:partitionKey` and `:rowKey` in the URL with the actual keys of the message you want to retrieve.
+### Request
 
-  Example using JavaScript's Fetch API:
-  ```javascript
-  const partitionKey = 'somePartitionKey';
-  const rowKey = 'someRowKey';
+- **URL**: `/resource`
+- **Method**: `GET`
+- **Query Parameters**:
+  - `partitionKey`: A unique key that partitions the data (required).
+  - `rowKey`: A unique key within the partition that identifies the row (required).
 
-  fetch(`http://yourserver.com/resources/${partitionKey}/${rowKey}`)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  ```
+### Response
+
+- **Success (200 OK)**: Returns the details of the requested message.
+- **Error (400 Bad Request)**: Occurs if either `partitionKey` or `rowKey` is missing or invalid.
+- **Error (500 Internal Server Error)**: Indicates a server-side error while processing the request.
+
+### Usage Example
+
+To fetch a specific message, make a `GET` request to the `/resource` endpoint with the required query parameters. For instance:
+
+```
+GET http://[YourDomain]/resource?partitionKey=[partitionKey]&rowKey=[rowKey]
+```
+
+Replace `[YourDomain]`, `[partitionKey]`, and `[rowKey]` with the appropriate values for your environment and data.
+
+### Response Format
+
+The successful response will be a JSON object containing the details of the message. An example response could look like this:
+
+```json
+{
+  "partitionKey": "examplePartitionKey",
+  "rowKey": "exampleRowKey",
+  "message": "Details of the message..."
+  // Other message details...
+}
+```
+
+### Error Handling
+
+In the case of an error, the response will include an error message explaining the issue. For example:
+
+```json
+{
+  "message": "Missing required query parameters"
+}
+```
+
+### Note
+
+Ensure that your client application correctly encodes query parameters and handles possible HTTP response codes.
+
 
 
 ## Download End Point  `/download/:fileType/:fileName`
@@ -93,6 +132,9 @@ When the user clicks on a download button, you should construct a request URL th
 
 ## Stream Endpoint `/stream/:fileName`
 The `/stream/:fileName` route dynamically streams MP3 files based on the `fileName` parameter.
+
+### Usage 
+Stream Audio: Access with path parameters, e.g., `/resources/stream/fileName.mp3`
 
 ### Setting Content-Type
 
