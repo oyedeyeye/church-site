@@ -42,7 +42,7 @@ router.get('/resource', async (request, response) => await readMsg(request, resp
 router.get('/resources', async (request, response) => await resources(request, response));
 
 /** STREAM Audio message ========================== */
-router.get('/resources/stream/:fileName', async (request, response) => await stream(request, response));
+router.get('/resource/stream/:fileName', async (request, response) => await stream(request, response));
 
 
 module.exports = router;

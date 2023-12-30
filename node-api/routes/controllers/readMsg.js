@@ -11,6 +11,7 @@ const readMsg = async (request, response) => {
     }
 
     const result = await mainTable.readRecord(partitionKey, rowKey);
+    // console.log(result);
     const modifiedResult = await filteredResource(result);
     response.status(200).json(modifiedResult);
   } catch (error) {
