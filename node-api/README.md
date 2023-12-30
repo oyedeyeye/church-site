@@ -42,57 +42,70 @@ Make sure to replace `http://localhost:3000/resources` with your actual endpoint
 If you haven't yet made the first request or if you're setting up Postman from scratch, you would first make a request without the `continuationToken` parameter to get the first page and the initial continuation token. Then, use this token as described above for subsequent requests.
 
 
+## Endpoint: Retrieve a Single Message
+API endpoint designed to retrieve a single message from the system using specific identifiers.
 
-## Get the Most Recent Message
+### Request
 
-This endpoint returns the single most recent message that was preached.
+- **URL**: `/resource`
+- **Method**: `GET`
+- **Query Parameters**:
+  - `partitionKey`: A unique key that partitions the data (required).
+  - `rowKey`: A unique key within the partition that identifies the row (required).
 
-- **Endpoint**: `GET /recent/`
-- **Description**: Fetches the latest message from the messages repository.
-- **Usage**:
-  
-  Send a `GET` request to the endpoint to receive the most recent message. No additional parameters or request body is required.
+### Response
 
-  Example using JavaScript's Fetch API:
-  ```javascript
-  fetch('http://yourserver.com/recent/')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  ```
+- **Success (200 OK)**: Returns the details of the requested message.
+- **Error (400 Bad Request)**: Occurs if either `partitionKey` or `rowKey` is missing or invalid.
+- **Error (500 Internal Server Error)**: Indicates a server-side error while processing the request.
 
-##  Get a Specific Message by Partition and Row Keys
+### Usage Example
 
-This endpoint allows you to retrieve a specific message using its partition key and row key.
+To fetch a specific message, make a `GET` request to the `/resource` endpoint with the required query parameters. For instance:
 
-- **Endpoint**: `GET /resources/:partitionKey/:rowKey`
-- **Description**: Fetches a specific message based on its unique identifiers (partition key and row key).
-- **Usage**:
-  
-  Replace `:partitionKey` and `:rowKey` in the URL with the actual keys of the message you want to retrieve.
+```
+GET http://[YourDomain]/resource?partitionKey=[partitionKey]&rowKey=[rowKey]
+```
 
-  Example using JavaScript's Fetch API:
-  ```javascript
-  const partitionKey = 'somePartitionKey';
-  const rowKey = 'someRowKey';
+Replace `[YourDomain]`, `[partitionKey]`, and `[rowKey]` with the appropriate values for your environment and data.
 
-  fetch(`http://yourserver.com/resources/${partitionKey}/${rowKey}`)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  ```
+### Response Format
 
+The successful response will be a JSON object containing the details of the message. An example response could look like this:
 
-## Download End Point  `/download/:fileType/:fileName`
+```json
+{
+  "partitionKey": "examplePartitionKey",
+  "rowKey": "exampleRowKey",
+  "message": "Details of the message...",
+  "pdfFileLink": "https://accountName.blob.core.windows.net/pdfContainerName/fileName",
+      "audioFileLink": "https://accountName.blob.core.windows.net/audioContainerName/fileName"
+  // Other message details...
+}
+```
+#### Note
+When the user clicks on a download button, you should send a `GET` request to the fileLinK URL
 
-### Constructing the Request on the Frontend
-When the user clicks on a download button, you should construct a request URL that includes both the file type and the file name. For example:
+### Error Handling
 
- - For downloading a PDF: `/download/pdf/filename.pdf`
- - For downloading an MP3: `/download/mp3/filename.mp3`
+In the case of an error, the response will include an error message explaining the issue. For example:
+
+```json
+{
+  "message": "Missing required query parameters"
+}
+```
+
+### Note
+
+Ensure that your client application correctly encodes query parameters and handles possible HTTP response codes.
+
 
 ## Stream Endpoint `/stream/:fileName`
 The `/stream/:fileName` route dynamically streams MP3 files based on the `fileName` parameter.
+
+### Usage 
+Stream Audio: Access with path parameters, e.g., `/resources/stream/fileName.mp3`
 
 ### Setting Content-Type
 

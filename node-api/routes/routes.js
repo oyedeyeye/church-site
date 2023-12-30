@@ -14,7 +14,8 @@ const resources = require('./controllers/resources');
 const download = require('./controllers/download');
 const stream = require('./controllers/stream');
 const readSingle = require('./controllers/readMsg');
-setLogLevel("info");
+const recentMsg = require('./controllers/recentMsg');
+// setLogLevel("info");
 
 
 // Public Routes for files
@@ -27,19 +28,18 @@ router.get('/', (request, response, next) => {
 });
 
 // Recent message API needed to return single most recent message preached
-// Return Single most RECENT MESSAGe
-router.get('/recent/', async (request, response) => await mainTable.mostRecent(request, response));
+// Return Single most RECENT MESSAGe 
+// this route will not work based on AZURE Table's documentation
+
+router.get('/recent/', async (request, response) => await recentMsg(request, response));
 
 /**
-   * Returns a single message
+   * Returns a single message and downlad links for youtube, download link for audio and pdf,
    */
-router.get('/resources/:partitionKey/:rowKey', async (request, response) => readSingle(request, response));
+router.get('/resource', async (request, response) => await readSingle(request, response));
 
 /** READ Multiple files by page ========================== */
 router.get('/resources', async (request, response) => await resources(request, response));
-
-/** DOWNLOAD single audio message ========================== */
-router.get('/download/:fileType/:fileName', async (request, response) => await download(request, response));
 
 /** STREAM Audio message ========================== */
 router.get('/resources/stream/:fileName', async (request, response) => await stream(request, response));

@@ -1,11 +1,22 @@
 const storageContainer = require("../../utils/storage");
+const gt = process.env;
 
 
-const download = async (request, response) => {
+const pdfdownload = async (request, response) => {
   try {
     // Download either audio or pdf file
+    // https://sepcamwebadmin001.blob.core.windows.net/sepcam-media-pdf/Radio-1699910862211
 
-    const { fileType, fileName } = request.params;
+    const { fileName } = request.query;
+
+    if (!filename) {
+      return response.status(400).send({ message: 'Missing required parameters' });
+    }
+
+    const result = yuu;
+
+
+
     let containerClient;
 
     if (fileType === 'pdf') {
@@ -28,4 +39,4 @@ const download = async (request, response) => {
   }
 }
 
-module.exports = download;
+module.exports = pdfdownload;
