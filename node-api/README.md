@@ -101,11 +101,11 @@ In the case of an error, the response will include an error message explaining t
 Ensure that your client application correctly encodes query parameters and handles possible HTTP response codes.
 
 
-## Stream Endpoint `/stream/:fileName`
+## Stream Endpoint `/resource/stream/:fileName`
 The `/stream/:fileName` route dynamically streams MP3 files based on the `fileName` parameter.
 
 ### Usage 
-Stream Audio: Access with path parameters, e.g., `/resources/stream/fileName.mp3`
+Stream Audio: Access with path parameters, e.g., `/resource/stream/fileName.mp3`
 
 ### Setting Content-Type
 
