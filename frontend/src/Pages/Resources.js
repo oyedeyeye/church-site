@@ -30,7 +30,7 @@ function Messages() {
   }, [continuationToken]); // Fetch when continuationToken changes
 
   const handleSermonClick = (partitionKey, rowKey) => {
-    navigate(`/resources_video/${partitionKey}/${rowKey}`);
+    navigate(`/resources_video?partitionKey=${partitionKey}&rowKey=${rowKey}`);
   };
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-US', {
@@ -122,7 +122,7 @@ function Messages() {
                   {/* Use the formatDate function to format the date */}
                   {formatDate(message.date)}
                 </small> 
-          <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full"/>
+          <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full "/>
         </div>
       </div>        </div>
       ))}
