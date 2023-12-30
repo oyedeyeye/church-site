@@ -32,9 +32,7 @@ async function filteredResource(result) {
         audioFileLink: `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.AUDIO_CONTAINER_NAME}/${audioFile}`
       };
 
-      console.log(modifiedEntities);
-
-      return { modifiedEntities }
+      return modifiedEntities;
   } catch (error) {
     throw new Error(error.message);
   }
