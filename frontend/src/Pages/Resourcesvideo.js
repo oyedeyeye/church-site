@@ -10,6 +10,8 @@ const ResourcesVideo = () => {
     const partitionKey = queryParams.get('partitionKey');
     const rowKey = queryParams.get('rowKey');
     const [sermonDetails, setSermonDetails] = useState(null);
+    const [audioUrl, setAudioUrl] = useState('');
+    const [audioPlayer, setAudioPlayer] = useState(null);
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-US', {
           year: 'numeric',
@@ -23,19 +25,50 @@ const ResourcesVideo = () => {
       try {
         const response = await axios.get(`https://sepcamwebapp.azurewebsites.net/resource?partitionKey=${partitionKey}&rowKey=${rowKey}`);
         setSermonDetails(response.data.result);
+
+        const audioFileUrl = response.data.result.audioFile;
+
+        if (audioFileUrl) {
+          setAudioUrl(audioFileUrl);
+        }
       } catch (error) {
         console.log("Error fetching sermon details:", error);  
       }
     }
+    
     if (partitionKey && rowKey) {
         fetchSermonDetails();
       }
     }, [partitionKey, rowKey]);
+    const handlePlay = () => {
+        if (audioPlayer) {
+          audioPlayer.play();
+        }
+      };
+    
+      
     return (
     <div>
       <Naavbar />
       <nav className="word-coc-blog">
-            <h1><b>Video Download</b></h1>
+      <div className="audio-player flex items-center justify-center">
+  {audioUrl && (
+    <audio
+      className="w-full max-w-md"
+      src={audioUrl}
+      controls
+      ref={(audio) => setAudioPlayer(audio)}
+    />
+  )}
+</div>
+        <div className="flex justify-end mb-4">
+          {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Download</button> */}
+        </div>
+        <div className="flex justify-center">
+          <button className="bg-black-500  text-white text-lg	  rounded">Video</button>
+          <button className="bg-blue-500  text-white text-lg	  rounded">Audio</button>
+        </div>
+
         </nav>  
       <div className="flex justify-center">
       {sermonDetails && (

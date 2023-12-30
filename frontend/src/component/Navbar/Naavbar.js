@@ -102,6 +102,14 @@ export default function Naavbar() {
                   </a>
                 ))}
               </div>
+              <form className="mt-auto">
+      <input
+        className="form-control w-52 rounded-md px-3 py-2 text-sm"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </form>
             </div>
           </Disclosure.Panel>
         </>
