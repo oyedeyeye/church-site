@@ -42,30 +42,6 @@ Make sure to replace `http://localhost:3000/resources` with your actual endpoint
 If you haven't yet made the first request or if you're setting up Postman from scratch, you would first make a request without the `continuationToken` parameter to get the first page and the initial continuation token. Then, use this token as described above for subsequent requests.
 
 
-
-## Get the Most Recent Message
-
-### Not working
-Based on Azure Table documentation, this section is not going to work.
-Please ignore
-
-This endpoint returns the single most recent message that was preached.
-
-- **Endpoint**: `GET /recent/`
-- **Description**: Fetches the latest message from the messages repository.
-- **Usage**:
-  
-  Send a `GET` request to the endpoint to receive the most recent message. No additional parameters or request body is required.
-
-  Example using JavaScript's Fetch API:
-  ```javascript
-  fetch('http://yourserver.com/recent/')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  ```
-
-
 ## Endpoint: Retrieve a Single Message
 API endpoint designed to retrieve a single message from the system using specific identifiers.
 
@@ -101,10 +77,14 @@ The successful response will be a JSON object containing the details of the mess
 {
   "partitionKey": "examplePartitionKey",
   "rowKey": "exampleRowKey",
-  "message": "Details of the message..."
+  "message": "Details of the message...",
+  "pdfFileLink": "https://accountName.blob.core.windows.net/pdfContainerName/fileName",
+      "audioFileLink": "https://accountName.blob.core.windows.net/audioContainerName/fileName"
   // Other message details...
 }
 ```
+#### Note
+When the user clicks on a download button, you should send a `GET` request to the fileLinK URL
 
 ### Error Handling
 
@@ -120,15 +100,6 @@ In the case of an error, the response will include an error message explaining t
 
 Ensure that your client application correctly encodes query parameters and handles possible HTTP response codes.
 
-
-
-## Download End Point  `/download/:fileType/:fileName`
-
-### Constructing the Request on the Frontend
-When the user clicks on a download button, you should construct a request URL that includes both the file type and the file name. For example:
-
- - For downloading a PDF: `/download/pdf/filename.pdf`
- - For downloading an MP3: `/download/mp3/filename.mp3`
 
 ## Stream Endpoint `/stream/:fileName`
 The `/stream/:fileName` route dynamically streams MP3 files based on the `fileName` parameter.
