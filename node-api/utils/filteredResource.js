@@ -29,8 +29,8 @@ async function filteredResource(result) {
         preacher,
         preacherThumbnail: preacherThumbnail || "",
         fileName: pdfFile || audioFile,
-        pdfFileLink:`https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.PDF_CONTAINER_NAME}/${pdfFile}`,
-        audioFileLink: `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.AUDIO_CONTAINER_NAME}/${audioFile}`
+        pdfFileLink: pdfFile ? `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.PDF_CONTAINER_NAME}/${pdfFile}` : "",
+        audioFileLink: audioFile ? `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.AUDIO_CONTAINER_NAME}/${audioFile}` : ""
       };
 
       return modifiedEntities;
