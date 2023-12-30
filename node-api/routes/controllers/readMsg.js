@@ -1,4 +1,5 @@
 const mainTable = require("../../utils/db");
+const filteredResource = require("../../utils/filteredResource");
 
 const readSingle = async (request, response) => {
    // retrieves the message entity object from the table
@@ -11,8 +12,10 @@ const readSingle = async (request, response) => {
     }
 
     const result = await mainTable.readRecord(partitionKey, rowKey);
+    // console.log(result);
+    const modifiedResult = await filteredResource(result);
     response.status(200).send({
-      result
+      modifiedResult
     });
   } catch (error) {
     response.status(500).send({

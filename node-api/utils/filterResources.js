@@ -17,7 +17,7 @@ async function filterResources(result) {
     }) => ({ 
         partitionKey,
         rowKey,
-        messageThumbnail: `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.IMAGE_CONTAINER_NAME}/${messageThumbnail}.jpg`,
+        messageThumbnail: `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.IMAGE_CONTAINER_NAME}/${messageThumbnail}`,
         date,
         theme,
         title,
