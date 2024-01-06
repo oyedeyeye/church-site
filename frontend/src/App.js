@@ -32,13 +32,13 @@ function App() {
           <Route exact path='/' element={<Home/>}/>
           <Route path='/academy' element={<Academy/>}/>
           <Route path='/contact' element={<Contact/>}/>
-          <Route path='/our-call' element={<OurCall/>}/>
+          <Route path='/about/our-call' element={<OurCall/>}/>
           <Route path='/church-online'element={<Churchonline/>}/>
           <Route path='/blog' element={<Blog/>}/>
-          <Route path='/our-history' element={<OurHistory/>}/>
+          <Route path='/about/our-history' element={<OurHistory/>}/>
           <Route path='/resources' element={<Resources/>}/>
-          <Route path='/unit-department' element={<UnitDepartment/>}/>
-          <Route path='/leadership' element={<Leadership/>}/> 
+          <Route path='/about/unit-department' element={<UnitDepartment/>}/>
+          <Route path='/about/leadership' element={<Leadership/>}/> 
           <Route path='/LeadershipAudioResource' element={<LeadershipAudioResource/>}/>  
           <Route path='/admin-login' element={<Login/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>

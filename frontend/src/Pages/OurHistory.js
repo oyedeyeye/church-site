@@ -11,11 +11,11 @@ function OurHistory() {
     {/* <Navbar2/> */}
     <Naavbar/>
 
-
-<nav className="word-history">
-    <h1><b>OUR HISTORY</b></h1>
-  </nav>  
-
+    <div className="bg-blue-900  border-b-8 border-white" style={{backgroundColor:"#02336C"}}>
+        <nav className="flex justify-center items-center py-28">
+          <h1 className="text-white text-3xl font-bold">OUR HISTORY</h1>
+        </nav>
+      </div>
 <main>
     <div className="container py-4">
         <div className="row align-items-md-stretch">
