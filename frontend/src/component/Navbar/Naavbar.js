@@ -32,15 +32,14 @@ export default function Naavbar() {
   return (
     <div>
 <nav className="navbar bg-light">
-  <div className="container flex flex-wrap items-center justify-between">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between">
 
     <a href="/" className="navbar-brand flex items-center">
       <img src="/log2/SEPCAM Logo (1).png" alt="SEPCAM LOGO" className="h-9 mr-3 sm:h-12" />
 
-
-      <span className="text-xl sm:text-2xl font-semibold" style={{color: '#002171'}}> 
-
-      THE SCEPTRE OF POWER CHRISTIAN MINISTRY
+      {/* Adjust font size and spacing */}
+      <span className="text-sm sm:text-base lg:text-lg font-semibold sm:ml-1" style={{ color: '#002171' }}>
+        THE SCEPTRE OF<br className="sm:hidden" /> POWER CHRISTIAN MINISTRY
       </span>
     </a>
 
@@ -48,14 +47,16 @@ export default function Naavbar() {
       <span className="navbar-toggler-icon"></span>
     </button>
 
-    <div className="flex flex-grow items-center justify-end">
-      <form className="hidden sm:flex mr-6 lg:mr-0">        
-        <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+    <div className="flex flex-grow items-center justify-end sm:justify-center sm:flex">
+      <form className="hidden sm:flex mr-6 lg:mr-0">
+        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
       </form>
     </div>
 
-  </div>  
+  </div>
 </nav>
+
+
     <div className="nav-content">
     <Disclosure as="nav" className="bg-blue">
       {({ open }) => (
@@ -133,6 +134,7 @@ export default function Naavbar() {
                       )}
                     </div>
                   ))}
+                  
                 </div>
               </div>
               </div>
@@ -143,17 +145,34 @@ export default function Naavbar() {
             <div className="space-y-1 px-2 pb-3 pt-2">
               <div className="flex flex-col space-y-1">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-base font-medium block'
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </a>
+                  <Fragment key={item.name}>
+          {item.subLinks && item.name === 'ABOUT' ? (
+            // Display sub-links for 'ABOUT'
+            item.subLinks.map((subItem) => (
+              <a
+                key={subItem.name}
+                href={subItem.href}
+                className={classNames(
+                  'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium block'
+                )}
+              >
+                {subItem.name}
+              </a>
+            ))
+          ) : (
+            // Display regular navigation items
+            <a
+              href={item.href}
+              className={classNames(
+                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                'rounded-md px-3 py-2 text-base font-medium'
+              )}
+              aria-current={item.current ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          )}
+        </Fragment>
                 ))}
               </div>
               <form className="mt-auto">

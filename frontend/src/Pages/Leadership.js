@@ -25,7 +25,6 @@ function Leadership() {
       <Naavbar/>
       
       {/* <Navbar2/> */}
-      <Naavbar/>
       <div className="bg-blue-900  border-b-8 border-white" style={{backgroundColor:"#02336C"}}>
         <nav className="flex justify-center items-center py-28">
           <h1 className="text-white text-3xl font-bold">LEADERSHIP</h1>
