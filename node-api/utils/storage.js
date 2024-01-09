@@ -40,13 +40,14 @@ class StorageContainer {
       const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
       try {
-        await blockBlobClient.uploadFile(filePath /*, {
+        await blockBlobClient.uploadFile(filePath, {
           blockSize: 50 * 1024 * 1024, // 50 MB file
           concurrency: 20,
-        } */);
-        onSuccess(blockBlobClient.name);
+        });
+        // console.log(blockBlobClient.name);
+        // onSuccess(blockBlobClient.name);
       } catch (error) {
-        onError(error);
+        throw new Error(`Error uploading ${filePath}: ${error.message}`);
       }
     }
   }
