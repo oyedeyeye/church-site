@@ -49,19 +49,26 @@ const ResourcesVideo = () => {
         }
       };
       const handleDownloadAudio = () => {
+
+        // Add logging to inspect values  
+        console.log(sermonDetails.title);
+        console.log(audioUrl);
+      
         if (audioUrl && sermonDetails && sermonDetails.title) {
-          const sanitizedTitle = sermonDetails.title.replace(/[^\w\s]/gi, ''); // Sanitize the title for a file name
+          
+          // Sanitize and format file name
+          const title = sermonDetails.title.replace(/[^\w\s]/gi, '');
+          const fileName = `${title.replaceAll(' ', '_')}`.slice(0, 100); // Limit to 100 chars
+      
           const link = document.createElement('a');
           link.href = audioUrl;
       
-          // Set the download attribute with the desired file name and .mp3 extension
-          link.download = `${sanitizedTitle.replaceAll(' ', '_')}.mp3`;
+          // Explicitly add .mp3 extension 
+          link.download = `${fileName}.mp3`;
       
-          // Click the link programmatically
           link.click();
         }
       };
-      
       
       
       
