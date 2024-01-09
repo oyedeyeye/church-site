@@ -2,15 +2,19 @@ import React from 'react'
 // import Navbar from '../component/Navbar/Navbar'
 // import Navbar2 from '../component/Navbar2'
 import Footer from '../component/Footer/Footer'
+import Naavbar from '../component/Navbar/Naavbar'
 
 function UnitDepartment() {
   return (
     <div classNameName='best'>
         {/* <Navbar2/> */}
+        <Naavbar/>
 
-<nav className="word-lead-unit">
-  <h1><b>UNIT/DEPARTMENT</b></h1>
-</nav>  
+        <div className="bg-blue-900  border-b-8 border-white" style={{backgroundColor:"#02336C"}}>
+        <nav className="flex justify-center items-center py-28">
+          <h1 className="text-white text-3xl font-bold">UNIT/DEPARTMENT</h1>
+        </nav>
+      </div>
 
 <main>
   <div className="container py-4">
