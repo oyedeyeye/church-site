@@ -8,7 +8,8 @@ const resources = async (request, response) => {
     // Send continuation token if available to the backend to fetch next page
     const continuationToken = request.query.continuationToken ? JSON.parse(decodeURIComponent(request.query.continuationToken)) : undefined;
     const result = await mainTable.listRecords(continuationToken);
-    // filter the response 
+    // filter the response
+    console.log(result);
     const modifiedResult = await filterResources(result);
     response.status(200).json(modifiedResult);
   } catch (err) {
