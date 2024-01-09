@@ -29,6 +29,11 @@ function classNames(...classes) {
 
 export default function Naavbar() {
   const [activeButton, setActiveButton] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
   return (
     <div>
 <nav className="navbar bg-light">
@@ -185,6 +190,10 @@ export default function Naavbar() {
     </form>
             </div>
           </Disclosure.Panel>
+
+
+
+          
         </>
       )}
     </Disclosure>
