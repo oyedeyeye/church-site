@@ -133,7 +133,7 @@ const ResourcesVideo = () => {
           <small className="text-sm">{formatDate(sermonDetails.date)}</small>
           <h1 className="text-3xl font-bold mb-2">{sermonDetails.theme}</h1>
           <h5 className="text-lg mb-4">{sermonDetails.title}</h5>
-          <p className="text-base mb-4">{sermonDetails.description}</p>
+          <p className="text-xl	mb-4 tracking-widest	">{sermonDetails.description}</p>
          <div className="d-flex justify-content-between align-items-center">
               <p>{sermonDetails.preacher}</p>
               <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full" />
