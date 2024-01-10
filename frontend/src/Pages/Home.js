@@ -2,6 +2,7 @@ import React from 'react'
 import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 import { Data } from '../Data'
+import Hero from "../images/crossImage.png"
 
 // import { Route,Router,Link } from 'react-router-dom'
 
@@ -15,7 +16,7 @@ function Home() {
 <div className="relative h-screen">
         <div className="absolute inset-0">
           <img
-            src="/images/crossimage.png"
+            src={Hero}
             alt="Hero Background"
             className="w-full h-full object-cover filter brightness-50"
           />
