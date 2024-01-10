@@ -1,5 +1,9 @@
 const mainTable = require("../../../utils/db");
 const storageContainer = require("../../../utils/storage");
+const getFileExtension = require("../../utils/fileExt");
+const createReverseTimeStamp = require('../../utils/util');
+const { setLogLevel } = require("@azure/logger");
+setLogLevel("info");
 
 
 const uploadMessage = async (request, response) => {
@@ -16,8 +20,9 @@ const uploadMessage = async (request, response) => {
       'preacherThumbnail': request.body.preacherThumbnail
     };
 
-    // create a new blob
-    const blobName = `${request.body.serviceTag}-${new Date().getTime()}`;
+    // Generate timestamp for blob name
+    // const blobName = `${request.body.serviceTag}-${new Date().getTime()}`;
+    const timestamp = new Date().getTime();
 
     // rowKey Using UUID V4
     if (request.body !== null) {
@@ -30,63 +35,65 @@ const uploadMessage = async (request, response) => {
 
     // Message thumbnail Blob ======================================================
     if (request.body.messageThumbnail !== null) {
-      // implement uploAD BLOB for process.env.IMAGE_CONTAINER_NAME
+      // create blob name for message thumnail
+      const fileExt = getFileExtension(request.body.messageThumbnail);
+      const thumbnailBlobName = `${request.body.serviceTag}-${timestamp}.${fileExt}`;
 
-      // upload to block blob
+      // Call the function to get the ContainerClient that Uploads to Image blob
       await storageContainer
         .uploadBlobToContainer(
-          storageContainer.imageClient,
+          storageContainer.imageClient(),
           request.body.messageThumbnail,
-          blobName,
-          (name) => {
-            data['messageThumbnail'] = name;
-          },
-          (err) => {
+          thumbnailBlobName)
+          .then(() => {data['messageThumbnail'] = thumbnailBlobName})
+          .catch((err) => {
             response.status(500).json({
               message: 'Message thumbnail upload failed!',
               data: err.message,
             });
-          }
-          );
+          });
     }
 
-    // PDF file Blob ======================================================
+    // for PDF file Blob ======================================================
     if (request.body.pdfFile !== null) {
+      // create blob name for pdf
+      const fileExt = getFileExtension(request.body.pdfFile);
+      const pdfBlobName = `${request.body.serviceTag}-${timestamp}.${fileExt}`;
 
-      // Upload to pdf block blob
+
+      // Call the function to get the ContainerClient that Uploads to pdf block blob
       await storageContainer
         .uploadBlobToContainer(
-          storageContainer.pdfClient,
+          storageContainer.pdfClient(),
           request.body.pdfFile,
-          (name) => {
-            data['pdfFile'] = name;
-          },
-          (err) => {
+          pdfBlobName)
+          .then(() => data['pdfFile'] = pdfBlobName)
+          .catch((err) => {
             response.status(500).json({
               message: 'PDF file upload failed',
               data: err.message,
             });
-          }
-        )
+          });
     }
 
     if (request.body.audioFile !== null) {
+      // create blob name for audio file
+      const fileExt = getFileExtension(request.body.audioFile);
+      const audioBlobName = `${request.body.serviceTag}-${timestamp}.${fileExt}`;
 
-      // Upload to audio block blob
+      // Call the function to get the ContainerClient that Uploads to audio block blob
       await storageContainer
         .uploadBlobToContainer(
-          storageContainer.audioClient,
+          storageContainer.audioClient(),
           request.body.audioFile,
-          (name) => {
-            data['audioFile'] = name;
-          },
-          (err) => {
+          audioBlobName)
+          .then(() => data['audioFile'] = audioBlobName)
+          .catch((err) => {
             response.status(500).json({
               message: 'Audio file upload failed',
               data: err.message,
             });
-          }
-        )
+          })
     }
 
     // console.log(data);

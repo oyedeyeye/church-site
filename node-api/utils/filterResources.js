@@ -25,8 +25,6 @@ async function filterResources(result) {
         preacher,
         preacherThumbnail }));
 
-      console.log(modifiedEntities);
-
       return {
         entities: modifiedEntities,
         nextContinuationToken: result.nextContinuationToken
