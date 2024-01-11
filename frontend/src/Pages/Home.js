@@ -3,6 +3,7 @@ import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 import { Data } from '../Data'
 import Hero from "../images/crossImage.png"
+import sepcam from "../images/sepcam Image.png"
 
 // import { Route,Router,Link } from 'react-router-dom'
 
@@ -92,20 +93,20 @@ function Home() {
     <div style={{padding:"3em"}} id="carouselExampleSlidesOnly" className="carousel slide newevents" data-bs-ride="carousel">
         <div className="carousel-inner">
             <div className="carousel-item active">
-                <img src="/images/sepcam image.png" className="d-block w-100" alt="..."/>
+                <img src={sepcam} className="d-block w-100" alt="..."/>
             </div>
             <div className="carousel-item">
-                <img src="/images/sepcam image.png" className="d-block w-100" alt="..."/>
+                <img src={sepcam} className="d-block w-100" alt="..."/>
             </div>
             <div className="carousel-item">
-                <img src="/images/sepcam image.png" className="d-block w-100" alt="..."/>
+                <img src={sepcam} className="d-block w-100" alt="..."/>
             </div>
         </div>
     </div>
 </div>
 <div className="flex flex-col items-center">
 
-  <h2 className="text-3xl font-bold text-blue-500 mb-10">CONTACT US</h2>
+  <h2 className="text-3xl font-bold text-blue-500 mb-10 mt-10">CONTACT US</h2>
 
   <div className="flex justify-center w-full">
 
