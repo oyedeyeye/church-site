@@ -26,7 +26,7 @@ function Home() {
         <div className="flex items-center justify-center relative z-20 h-full">
           <div className="text-center text-white">
             <p className="text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">Welcome to</p>
-            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4">THE SCEPTURE</h1>
+            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4">THE SCEPTRE</h1>
             <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold">OF POWER CHRISTIAN MINISTRY</h1>
           </div>
         </div>
