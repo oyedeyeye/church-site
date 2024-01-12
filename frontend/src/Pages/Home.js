@@ -3,6 +3,7 @@ import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 import { Data } from '../Data'
 import Hero from "../images/crossImage.png"
+import sepcam from "../images/sepcam Image.png"
 
 // import { Route,Router,Link } from 'react-router-dom'
 
@@ -34,23 +35,24 @@ function Home() {
 
 
 
-<div class="container-fluid text-container">
-<div className="container mx-auto mt-8 mb-12 px-4 lg:px-0 max-w-3xl">
-        <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 lg:mb-6">WELCOME ADDRESS</h1>
-        <p className="text-blue-900 lg:text-base mb-4 lg:mb-6 leading-relaxed lg:leading-loose">
-          You are welcome to this website. Getting and growing people in relationship with Jesus is our mandate and we have been committed to this assignment from the day of the commission. That you have logged on to this site is not an accident, it is a positive proof that God has a great plan for your life. Moreover, you can find out information and build-up materials in Sceptre of Power Christian Ministry and how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
-        </p>
-      </div>
+      <div class="container-fluid bg-[#edf5ff] text-container min-h-screen">
+  <div class="container mx-auto mt-8 mb-12 px-4 lg:px-0 max-w-3xl">
+    <h1 class="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 lg:mb-6">WELCOME ADDRESS</h1>
+    <p class="text-blue-900 lg:text-base mb-4 lg:mb-6 leading-relaxed lg:leading-loose">
+      You are welcome to this website. Getting and growing people in relationship with Jesus is our mandate and we have been committed to this assignment from the day of the commission. That you have logged on to this site is not an accident, it is a positive proof that God has a great plan for your life. Moreover, you can find out information and build-up materials in Sceptre of Power Christian Ministry and how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
+    </p>
+  </div>
 </div>
+
 <div className="container-fluid section">
     <div className="container">
     
-<div className='flex items-center pt-10 justify-between'>
+    <div className='flex flex-col items-center sm:flex-row sm:items-center justify-between pt-10'>
     <span>
     <h1 className='text-blue text-lg font-bold ml-4'>Join us to experience <br/>effectual worship and life-changing <br/> revelations from God's word.</h1>
 
     </span>
-    <div className='mr-12'>  
+    <div className='mt-4 sm:mt-0 sm:mr-12'>  
         <div className='flex items-center bg-blue text-white p-2 rounded-md 	'>
             <a href='#' className='flex items-center hover:text-white' >
                 <img src="/logs/radio.png" alt="radio-png" className='h-6 mr-2' />
@@ -68,7 +70,7 @@ function Home() {
 
 
 
-<div className='flex justify-between pt-8'>
+<div className='flex flex-col sm:flex-row justify-between pt-8'>
     {Data.map(item => (
         <div key={item.id} className='bg-white rounded-lg shadow-md p-4 mb-4 mr-8 ml-3'>
             <img src={item.image} alt={item.title} className='h-52 w-90 object-cover rounded-t-lg' />
@@ -92,20 +94,20 @@ function Home() {
     <div style={{padding:"3em"}} id="carouselExampleSlidesOnly" className="carousel slide newevents" data-bs-ride="carousel">
         <div className="carousel-inner">
             <div className="carousel-item active">
-                <img src="/images/sepcam image.png" className="d-block w-100" alt="..."/>
+                <img src={sepcam} className="d-block w-100" alt="..."/>
             </div>
             <div className="carousel-item">
-                <img src="/images/sepcam image.png" className="d-block w-100" alt="..."/>
+                <img src={sepcam} className="d-block w-100" alt="..."/>
             </div>
             <div className="carousel-item">
-                <img src="/images/sepcam image.png" className="d-block w-100" alt="..."/>
+                <img src={sepcam} className="d-block w-100" alt="..."/>
             </div>
         </div>
     </div>
 </div>
 <div className="flex flex-col items-center">
 
-  <h2 className="text-3xl font-bold text-blue-500 mb-10">CONTACT US</h2>
+  <h2 className="text-3xl font-bold text-blue-500 mb-10 mt-10">CONTACT US</h2>
 
   <div className="flex justify-center w-full">
 

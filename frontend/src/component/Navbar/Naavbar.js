@@ -37,7 +37,7 @@ export default function Naavbar() {
   return (
     <div>
 <nav className="navbar bg-light">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between">
+  <div className="container mx-10 px-4  flex flex-wrap items-center justify-between">
 
     <a href="/" className="navbar-brand flex items-center">
       <img src="/log2/SEPCAM Logo (1).png" alt="SEPCAM LOGO" className="h-9 mr-3 sm:h-12" />
