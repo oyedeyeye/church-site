@@ -9,6 +9,7 @@ import Footer from '../component/Footer/Footer';
 function Messages() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [continuationToken, setContinuationToken] = useState('');
 
   async function fetchMessages() {
@@ -17,6 +18,7 @@ function Messages() {
       if (response.data && Array.isArray(response.data.entities)) {
         setMessages((prevMessages) => [...prevMessages, ...response.data.entities]);
         setContinuationToken(response.data.continuationToken || '');
+        setIsLoading(false);
       } else {
         console.log("Invalid data format received");
       }
@@ -48,6 +50,7 @@ function Messages() {
   };
 
   const mostRecentSermon = getMostRecentSermon();
+  
 
   
   return (
@@ -59,7 +62,14 @@ function Messages() {
     <div className="container py-4">
     <h3 style={{textAlign: 'left'}}><b>Message</b></h3>
     <div>
-  {mostRecentSermon.map(message => (
+    {isLoading ? (
+            <div className="animate-pulse">
+              <div className="h-64 bg-gray-200 rounded-lg"> </div>
+              {/* <div className="h-64 bg-gray-200 rounded-lg"> </div> 
+              <div className="h-64 bg-gray-200 rounded-lg"> </div> */}
+            </div>
+          ) : (
+  mostRecentSermon.map(message => (
  <div key={`${message.partitionKey}-${message.rowKey}`} onClick={() => handleSermonClick(message.partitionKey, message.rowKey)} className="rounded-lg shadow-md overflow-hidden">
       <div className="flex">
         {/* Preacher's Card */}
@@ -85,7 +95,8 @@ function Messages() {
         </div>
       </div>
     </div>
-  ))}
+  ))
+  )}
 </div>
 
 
@@ -104,11 +115,19 @@ function Messages() {
 
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {messages.map(message => (
+      {isLoading ? (
+            <div className="animate-pulse">
+              <div className="h-96 bg-gray-200 rounded-lg"> </div>
+              {/* <div className="h-64 bg-gray-200 rounded-lg"> </div> 
+              <div className="h-64 bg-gray-200 rounded-lg"> </div> */}
+            </div>
+          ) : (
+
+      messages.map(message => (
                  <div key={`${message.partitionKey}-${message.rowKey}`} onClick={() => handleSermonClick(message.partitionKey, message.rowKey)} className="rounded-lg shadow-md overflow-hidden">
 
         <div className="grid p-4 bg-gray-100">
-        <img src='/log2/man sepcam image.png' alt='' className="w-30 h-30 "/>
+        <img src='/log2/man sepcam image.png' alt='' className="w-100 h-30 "/>
         
         <h3 className="ml-3 mt-4 text-lg font-medium">{message.theme}</h3>  
       </div>
@@ -125,9 +144,11 @@ function Messages() {
           <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full "/>
         </div>
       </div>        </div>
-      ))}
+      ))
+          )}
 
     </div>
+
     </div>
     <Footer/>
     </div>
