@@ -114,40 +114,39 @@ function Messages() {
       </nav>
 
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {isLoading ? (
-            <div className="animate-pulse">
-              <div className="h-96 bg-gray-200 rounded-lg"> </div>
-              {/* <div className="h-64 bg-gray-200 rounded-lg"> </div> 
-              <div className="h-64 bg-gray-200 rounded-lg"> </div> */}
-            </div>
-          ) : (
-
-      messages.map(message => (
-                 <div key={`${message.partitionKey}-${message.rowKey}`} onClick={() => handleSermonClick(message.partitionKey, message.rowKey)} className="rounded-lg shadow-md overflow-hidden">
-
-        <div className="grid p-4 bg-gray-100">
-        <img src='/log2/man sepcam image.png' alt='' className="w-100 h-30 "/>
-        
-        <h3 className="ml-3 mt-4 text-lg font-medium">{message.theme}</h3>  
-      </div>
-      <div className="p-4">
-        <h5 className="font-bold">{message.title}</h5>
-        <p>{message.caption}</p>
-        <p>{message.preacher}</p>
-        
-        <div className="mt-4 flex justify-between items-center">
-        <small className="text-gray-600">
-                  {/* Use the formatDate function to format the date */}
-                  {formatDate(message.date)}
-                </small> 
-          <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full "/>
-        </div>
-      </div>        </div>
-      ))
-          )}
-
+      <div className="grid grid-cols-4 md:grid-cols-1 gap-4">
+  {isLoading ? (
+    <div className="animate-pulse">
+      <div className="h-96 bg-gray-200 rounded-lg"> </div>
+      {/* Add more placeholders if needed */}
     </div>
+  ) : (
+    messages.map(message => (
+      <div
+        key={`${message.partitionKey}-${message.rowKey}`}
+        onClick={() => handleSermonClick(message.partitionKey, message.rowKey)}
+        className="rounded-lg shadow-md overflow-hidden border" // Adjust styling classes as per your requirement
+      >
+        <div className="grid p-4 bg-gray-100">
+          <img src='/log2/man sepcam image.png' alt='' className="w-40 h-30 "/>
+          <h3 className="ml-3 mt-4 text-lg font-medium">{message.theme}</h3>  
+        </div>
+        <div className="p-4">
+          <h5 className="font-bold">{message.title}</h5>
+          <p>{message.caption}</p>
+          <p>{message.preacher}</p>
+          <div className="mt-4 flex justify-between items-center">
+            <small className="text-gray-600">
+              {/* Use the formatDate function to format the date */}
+              {formatDate(message.date)}
+            </small> 
+            <img src='/images/team-1.jpg' alt='' className="w-10 h-10 rounded-full "/>
+          </div>
+        </div>
+      </div>
+    ))
+  )}
+</div>
 
     </div>
     <Footer/>
