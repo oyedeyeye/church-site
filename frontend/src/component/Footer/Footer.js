@@ -21,7 +21,7 @@ const Footer = () => {
 
 			
         <p className='mr-20 ' >
-            ©2022.SEPCAM All Rights Reserved
+            ©2024.SEPCAM All Rights Reserved
         </p>
     </div>
 
