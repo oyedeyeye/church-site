@@ -23,7 +23,7 @@ function UnitDepartment() {
               <div className="h-100 p-5 text-black best rounded-3">
                   <h2 style={{fontWeight: 700, fontSize: '30px', lineHeight: '32px', color: '#002171'}}>LIST OF UNITS & DEPARTMENT</h2><br></br>
                   <p>
-                  <ul style={{ fontWeight: 400, fontSize: '24px', lineHeight: '36px', paddingLeft: '20px' }}>
+                  <ul style={{ fontWeight: 400, fontSize: '24px', lineHeight: '36px', paddingLeft: '20px', listStyleType: 'square' }}>
                     <li style={{ marginBottom: '10px' }}>Children</li>
                     <li style={{ marginBottom: '10px' }}>Choir</li>
                     <li style={{ marginBottom: '10px' }}>Decorating</li>
