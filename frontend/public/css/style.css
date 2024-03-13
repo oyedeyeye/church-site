@@ -169,7 +169,7 @@ input{
   padding: 3.5em;	
 }
 
-.container h2{
+/* .container h2{
   text-align: left;
   font-weight: 700;
   font-size: 30px;
@@ -182,7 +182,7 @@ input{
   line-height: 30px;
   letter-spacing: .15px;
   text-align: justify;
-}
+} */
 
 
 h2{

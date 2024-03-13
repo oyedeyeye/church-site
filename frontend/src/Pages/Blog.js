@@ -14,13 +14,14 @@ function Blog() {
     <h1><b>BLOG</b></h1>
   </nav>  
 
-<main>
+  <main>
+  <br/>
+  <br/>
   <br/>
   <br/>
  <br/>
  <br/>
- <br/>
- <br/>
+ <h3 style={{color:'#21005d'}}><b className='flex justify-center text-lg'>  COMING SOON</b></h3>
  <br/>
  <br/>
  <br/>

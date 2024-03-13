@@ -23,41 +23,19 @@ function UnitDepartment() {
               <div className="h-100 p-5 text-black best rounded-3">
                   <h2 style={{fontWeight: 700, fontSize: '30px', lineHeight: '32px', color: '#002171'}}>LIST OF UNITS & DEPARTMENT</h2><br></br>
                   <p>
-                    <ol style={{fontWeight: 400, fontSize: '30px', lineHeight: '36px'}}>
-                      <li>
-                        Children
-                      </li>
-                      <li>
-                        Choir
-                      </li>
-                      <li>
-                        Decorating
-                      </li>
-                      <li>
-                        Drama
-                      </li>
-                      <li>
-                        Evangelism 
-                      </li>
-                      <li>
-                        Library
-                      </li>
-                      <li>
-                        Prayer 
-                      </li>
-                      <li>
-                        Sanitation 
-                      </li>
-                      <li>
-                       Technical/Media 
-                      </li>
-                      <li>
-                        Ushering 
-                      </li>
-                      <li>
-                        Welfare
-                      </li>
-                    </ol>
+                  <ul style={{ fontWeight: 400, fontSize: '24px', lineHeight: '36px', paddingLeft: '20px', listStyleType: 'square' }}>
+                    <li style={{ marginBottom: '10px' }}>Children</li>
+                    <li style={{ marginBottom: '10px' }}>Choir</li>
+                    <li style={{ marginBottom: '10px' }}>Decorating</li>
+                    <li style={{ marginBottom: '10px' }}>Drama</li>
+                    <li style={{ marginBottom: '10px' }}>Evangelism</li>
+                    <li style={{ marginBottom: '10px' }}>Library</li>
+                    <li style={{ marginBottom: '10px' }}>Prayer</li>
+                    <li style={{ marginBottom: '10px' }}>Sanitation</li>
+                    <li style={{ marginBottom: '10px' }}>Technical/Media</li>
+                    <li style={{ marginBottom: '10px' }}>Ushering</li>
+                    <li style={{ marginBottom: '10px' }}>Welfare</li>
+                  </ul>
                   </p>                        
                   <br></br>      
               </div>

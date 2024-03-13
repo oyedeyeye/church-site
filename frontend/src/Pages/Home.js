@@ -37,7 +37,7 @@ function Home() {
 
       <div class="container-fluid bg-[#edf5ff] text-container min-h-screen">
   <div class="container mx-auto mt-8 mb-12 px-4 lg:px-0 max-w-3xl">
-    <h1 class="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 lg:mb-6">WELCOME ADDRESS</h1>
+    <h1 class="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-2 lg:mb-6">WELCOME ADDRESS</h1>
     <p class="text-blue-900 lg:text-base mb-4 lg:mb-6 leading-relaxed lg:leading-loose">
       You are welcome to this website. Getting and growing people in relationship with Jesus is our mandate and we have been committed to this assignment from the day of the commission. That you have logged on to this site is not an accident, it is a positive proof that God has a great plan for your life. Moreover, you can find out information and build-up materials in Sceptre of Power Christian Ministry and how you can be a part of this commission. Keep Coming Back. You are more than a conqueror.
     </p>
