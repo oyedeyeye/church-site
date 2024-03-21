@@ -22,13 +22,13 @@ function Home() {
         </div>
         <div className="flex flex-col items-center justify-center relative z-20 h-full text-white">
           <p className="text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">Welcome to</p>
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4 mb-4">THE SCEPTRE</h1>
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8">OF POWER CHRISTIAN MINISTRY</h1>
+          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4 mb-2 lg:mb-4 text-center md:text-left">THE SCEPTRE</h1>
+          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8 text-center md:text-left">OF POWER CHRISTIAN MINISTRY</h1>
         </div>
       </div>
 
       {/* Welcome Address Section */}
-      <div className="container-fluid bg-blue-100 text-blue-900 py-12">
+      <div className="container-fluid bg-[#edf5ff] text-blue-900 py-8 md:py-12">
         <div className="container mx-auto px-4 lg:px-0 max-w-3xl">
           <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 lg:mb-6">WELCOME ADDRESS</h1>
           <p className="text-lg lg:text-base leading-relaxed lg:leading-loose">
@@ -38,9 +38,9 @@ function Home() {
       </div>
 
       {/* Section with Data */}
-      <div className="container py-12 lg:py-16">
+      <div className="container py-8 lg:py-12">
         <div className="flex flex-col items-center sm:flex-row sm:items-start justify-between">
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-left mb-8">
             <h2 className="text-xl lg:text-2xl font-bold text-blue-900 mb-4">Join us to experience effectual worship and life-changing revelations from God's word.</h2>
             <div className="flex flex-col sm:flex-row items-center">
               <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-4">WATCH LIVE</a>
@@ -60,7 +60,7 @@ function Home() {
       </div>
 
       {/* Events Section */}
-      <div className="container-fluid bg-blue-100 text-blue-900 py-12">
+      <div className="container-fluid bg-[#edf5ff] text-blue-900 py-8 md:py-12">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8 text-center">NEWS & EVENTS</h2>
         <div className="container mx-auto px-4 lg:px-0 max-w-3xl">
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
@@ -75,7 +75,7 @@ function Home() {
       </div>
 
       {/* Contact Section */}
-      <div className="container py-12 lg:py-16">
+      <div className="container py-8 lg:py-12">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold text-blue-900 mb-8 text-center">CONTACT US</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gray-100 p-6 rounded-lg">
