@@ -1,3 +1,6 @@
+const { setLogLevel } = require("@azure/logger");
+setLogLevel("info");
+
 const gt = process.env;
 
 
@@ -28,7 +31,7 @@ async function filteredResource(result) {
         description,
         preacher,
         preacherThumbnail: preacherThumbnail || "",
-        fileName: pdfFile.split('.')[0] || audioFile.split('.')[0],
+        fileName: pdfFile ? pdfFile.split('.')[0] : audioFile.split('.')[0],
         pdfFileLink: pdfFile ? `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.PDF_CONTAINER_NAME}/${pdfFile}` : "",
         audioFileLink: audioFile ? `https://${gt.ACCOUNT_NAME}.blob.core.windows.net/${gt.AUDIO_CONTAINER_NAME}/${audioFile}` : ""
       };
