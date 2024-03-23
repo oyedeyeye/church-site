@@ -146,67 +146,64 @@ function Messages() {
         </form>
       </div>
     </nav>
-
     <div className="container py-4">
-        <h1 className="text-center text-3xl font-bold mb-6">RESOURCES</h1>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {isLoading ? (
-            Array.from({ length: 16 }).map((_, index) => (
-              <div key={`placeholder-${index}`} className="animate-pulse rounded-lg shadow-md overflow-hidden border">
-                <div className="grid p-4 bg-gray-100">
-                  <div className="w-40 h-30 bg-gray-200"></div>
-                </div>
-                <div className="p-4" style={{ minHeight: "150px" }}>
-                  <div className="w-3/4 h-6 bg-gray-200 mb-4"></div>
-                  <div className="w-full h-4 bg-gray-200 mb-2"></div>
-                  <div className="w-2/3 h-4 bg-gray-200 mb-2"></div>
-                  <div className="w-1/3 h-4 bg-gray-200 mb-4"></div>
-                  <div className="w-full h-4 bg-gray-200"></div>
-                </div>
-              </div>
-            ))
-          ) : (
-            messages.map((message, index) => (
-              <div
-                key={`${message.partitionKey}-${message.rowKey}`}
-                onClick={() =>
-                  handleSermonClick(message.partitionKey, message.rowKey)
-                }
-                className="rounded-lg shadow-md overflow-hidden border"
-                style={{ flexBasis: "calc(100% / 4 - 1rem)" }} // Adjust spacing as per your requirement
-              >
-                <div className="p-4">
-                  <div className="mb-4">
-                    <img
-                      src="/log2/man sepcam image.png"
-                      alt=""
-                      className="w-full h-40 object-cover rounded-lg mb-2"
-                    />
-                    <h3 className="text-xl font-semibold">{message.theme}</h3>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h5 className="font-bold">{message.title}</h5>
-                      <p>{message.caption}</p>
-                      <p>{message.preacher}</p>
-                    </div>
-                    <div>
-                      <img
-                        src="/images/team-1.jpg"
-                        alt=""
-                        className="w-10 h-10 rounded-full"
-                      />
-                      <small className="block mt-2 text-gray-600">
-                        {formatDate(message.date)}
-                      </small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
+  <h1 className="text-center text-3xl font-bold mb-6">RESOURCES</h1>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {isLoading ? (
+      Array.from({ length: 16 }).map((_, index) => (
+        <div
+          key={`placeholder-${index}`}
+          className="animate-pulse rounded-lg shadow-md p-4 bg-gray-100"
+        >
+          <div className="w-full h-40 bg-gray-200 rounded-lg mb-4"></div>
+          <div className="w-3/4 h-6 bg-gray-200 mb-4"></div>
+          <div className="w-full h-4 bg-gray-200 mb-2"></div>
+          <div className="w-2/3 h-4 bg-gray-200 mb-2"></div>
+          <div className="w-1/3 h-4 bg-gray-200 mb-4"></div>
+          <div className="w-full h-4 bg-gray-200"></div>
         </div>
-      </div>
+      ))
+    ) : (
+      messages.map((message, index) => (
+        <div
+          key={`${message.partitionKey}-${message.rowKey}`}
+          onClick={() =>
+            handleSermonClick(message.partitionKey, message.rowKey)
+          }
+          className="rounded-lg shadow-md overflow-hidden cursor-pointer"
+        >
+          <div className="p-4">
+            <div className="mb-4">
+              <img
+                src="/log2/man sepcam image.png"
+                alt=""
+                className="w-full h-40 object-cover rounded-lg mb-2"
+              />
+              <h3 className="text-xl font-semibold">{message.theme}</h3>
+            </div>
+            <div className="flex justify-between items-center">
+              <div>
+                <h5 className="font-bold">{message.title}</h5>
+                <p>{message.caption}</p>
+                <p>{message.preacher}</p>
+              </div>
+              <div>
+                <img
+                  src="/images/team-1.jpg"
+                  alt=""
+                  className="w-10 h-10 rounded-full"
+                />
+                <small className="block mt-2 text-gray-600">
+                  {formatDate(message.date)}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</div>
       </div>
       <Footer />
     </div>

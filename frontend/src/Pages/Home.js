@@ -74,21 +74,44 @@ function Home() {
         </div>
       </div>
 
-      {/* Contact Section */}
-      <div className="container py-8 lg:py-12">
-        <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold text-blue-900 mb-8 text-center">CONTACT US</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 rounded-lg border border-gray-300">
-            <input type="text" placeholder="Name" className="input-field mb-4 w-full p-3 border border-gray-300 rounded" />
-            <input type="text" placeholder="Phone" className="input-field mb-4 w-full p-3 border border-gray-300 rounded" />
-            <input type="email" placeholder="Email" className="input-field mb-4 w-full p-3 border border-gray-300 rounded" />
-          </div>
-          <div className="p-6 rounded-lg border border-gray-300">
-            <textarea placeholder="Message" className="input-field mb-4 w-full p-3 border border-gray-300 rounded h-40"></textarea>
-            <button className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full w-full">Send</button>
-          </div>
-        </div>
+     {/* Contact Section */}
+<div className="container py-8 lg:py-12">
+  <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold text-blue-900 mb-8 text-center">
+    CONTACT US
+  </h2>
+
+  <div className="flex justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl">
+      <div className="p-6 rounded-lg border border-gray-300">
+        <input
+          type="text"
+          placeholder="Name"
+          className="input-field mb-4 w-full p-3 border border-gray-300 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Phone"
+          className="input-field mb-4 w-full p-3 border border-gray-300 rounded"
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          className="input-field mb-4 w-full p-3 border border-gray-300 rounded"
+        />
       </div>
+
+      <div className="p-6 rounded-lg border border-gray-300">
+        <textarea
+          placeholder="Message"
+          className="input-field mb-4 w-full p-3 border border-gray-300 rounded h-40"
+        ></textarea>
+        <button className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full w-full">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
       <Footer />
     </div>
   );

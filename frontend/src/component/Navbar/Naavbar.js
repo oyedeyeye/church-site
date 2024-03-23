@@ -36,28 +36,36 @@ export default function Naavbar() {
   };
   return (
     <div>
-<nav class="navbar bg-light">
-  <div class="container mx-auto px-2 sm:px-4 lg:px-8 flex flex-wrap items-center justify-between">
-    <a href="/" class="navbar-brand flex items-center">
-      <img src="/log2/SEPCAM Logo (1).png" alt="SEPCAM LOGO" class="h-9 mr-3 sm:h-12" />
-      <span class="text-base sm:text-lg lg:text-xl font-semibold text-blue-900">
-        THE SCEPTRE OF
-        <br class="sm:hidden" /> POWER CHRISTIAN MINISTRY
-      </span>
-    </a>
+      <nav class="navbar bg-light">
+        <div class="container mx-auto px-2 sm:px-4 lg:px-8 flex flex-wrap items-center justify-between">
+          <a href="/" class="navbar-brand flex items-center">
+            <img
+              src="/log2/SEPCAM Logo (1).png"
+              alt="SEPCAM LOGO"
+              class="h-9 mr-3 sm:h-12"
+            />
+            <span class="text-base sm:text-lg lg:text-xl font-semibold text-blue-900">
+              THE SCEPTRE OF
+              <br class="sm:hidden" /> POWER CHRISTIAN MINISTRY
+            </span>
+          </a>
 
-    <button class="navbar-toggler flex sm:hidden border-0 px-3 py-2">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+          <button class="navbar-toggler flex sm:hidden border-0 px-3 py-2">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-    <div class="flex-grow"></div>
+          <div class="flex-grow"></div>
 
-    <form class="hidden sm:flex" action="#" method="GET">
-      <input class="form-control w-full max-w-xs" type="search" placeholder="Search" aria-label="Search" />
-    </form>
-  </div>
-</nav>
-
+          <form class="hidden sm:flex" action="#" method="GET">
+            <input
+              class="form-control w-full max-w-xs"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
+        </div>
+      </nav>
 
       <div className="nav-content">
         <Disclosure as="nav" className="bg-blue">
@@ -153,51 +161,77 @@ export default function Naavbar() {
               </div>
 
               <Disclosure.Panel className="sm:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2">
-                  <div className="flex flex-col space-y-1">
-                    {navigation.map((item) => (
-                      <Fragment key={item.name}>
-                        {item.subLinks && item.name === "ABOUT" ? (
-                          // Display sub-links for 'ABOUT'
-                          item.subLinks.map((subItem) => (
-                            <a
-                              key={subItem.name}
-                              href={subItem.href}
-                              className={classNames(
-                                "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium block"
-                              )}
-                            >
-                              {subItem.name}
-                            </a>
-                          ))
-                        ) : (
-                          // Display regular navigation items
-                          <a
-                            href={item.href}
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "rounded-md px-3 py-2 text-base font-medium"
-                            )}
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            {item.name}
-                          </a>
-                        )}
-                      </Fragment>
-                    ))}
-                  </div>
-                  <form className="mt-auto">
-                    <input
-                      className="form-control w-52 rounded-md px-3 py-2 text-sm"
-                      type="search"
-                      placeholder="Search"
-                      aria-label="Search"
-                    />
-                  </form>
-                </div>
-              </Disclosure.Panel>
+  <div className="space-y-1 px-2 pb-3 pt-2">
+    <div className="flex flex-col space-y-1">
+      {navigation.map((item) => (
+        <Fragment key={item.name}>
+          {item.subLinks && item.name === "ABOUT" ? (
+            // Display nested disclosure for 'ABOUT'
+            <Disclosure defaultOpen={false}>
+              {({ open }) => (
+                <>
+                  <Disclosure.Button
+                    className={classNames(
+                      "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium w-full flex justify-between items-center"
+                    )}
+                  >
+                    <span>{item.name}</span>
+                    <span className="ml-2">
+                      {open ? "▼" : "▶"}
+                    </span>
+                  </Disclosure.Button>
+                  <Transition
+                    show={open}
+                    enter="transition-opacity duration-75"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="transition-opacity duration-75"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Disclosure.Panel className="pl-4">
+                      {item.subLinks.map((subItem) => (
+                        <a
+                          key={subItem.name}
+                          href={subItem.href}
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          {subItem.name}
+                        </a>
+                      ))}
+                    </Disclosure.Panel>
+                  </Transition>
+                </>
+              )}
+            </Disclosure>
+          ) : (
+            // Display regular navigation items
+            <a
+              href={item.href}
+              className={classNames(
+                item.current
+                  ? "bg-gray-900 text-white"
+                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                "rounded-md px-3 py-2 text-base font-medium"
+              )}
+              aria-current={item.current ? "page" : undefined}
+            >
+              {item.name}
+            </a>
+          )}
+        </Fragment>
+      ))}
+    </div>
+    <form className="mt-auto">
+      <input
+        className="form-control w-52 rounded-md px-3 py-2 text-sm"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </form>
+  </div>
+</Disclosure.Panel>
             </>
           )}
         </Disclosure>
