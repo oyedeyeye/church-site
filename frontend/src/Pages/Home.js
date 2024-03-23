@@ -37,27 +37,30 @@ function Home() {
         </div>
       </div>
 
-      {/* Section with Data */}
       <div className="container py-8 lg:py-12">
-        <div className="flex flex-col items-center sm:flex-row sm:items-start justify-between">
-          <div className="text-center sm:text-left mb-8">
-            <h2 className="text-xl lg:text-2xl font-bold text-blue-900 mb-4">Join us to experience effectual worship and life-changing revelations from God's word.</h2>
-            <div className="flex flex-col sm:flex-row items-center">
-              <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-4">WATCH LIVE</a>
-              <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full">LISTEN LIVE</a>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-8">
-            {Data.map(item => (
-              <div key={item.id} className="bg-white shadow-md p-6 rounded-lg">
-                <img src={item.image} alt={item.title} className="w-full h-48 object-cover mb-4 rounded-lg" />
-                <h3 className="text-lg font-semibold text-blue-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-700">{item.body}</p>
-              </div>
-            ))}
-          </div>
+  <div className="flex flex-col items-center sm:flex-row sm:items-start justify-center">
+    <div className="text-center sm:text-left mb-8">
+      <h2 className="text-xl lg:text-2xl font-bold text-blue-900 mb-4">Join us to experience effectual worship and life-changing revelations from God's word.</h2>
+      <div className="flex justify-center">
+  <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">WATCH LIVE</a>
+  <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">LISTEN LIVE</a>
+</div>
+
+    </div>
+  </div>
+
+  <div className="flex justify-center">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-8">
+      {Data.map(item => (
+        <div key={item.id} className="bg-white shadow-md p-6 rounded-lg">
+          <img src={item.image} alt={item.title} className="w-full h-48 object-cover mb-4 rounded-lg" />
+          <h3 className="text-lg font-semibold text-blue-900 mb-2">{item.title}</h3>
+          <p className="text-sm text-gray-700">{item.body}</p>
         </div>
-      </div>
+      ))}
+    </div>
+  </div>
+</div>
 
       {/* Events Section */}
       <div className="container-fluid bg-[#edf5ff] text-blue-900 py-8 md:py-12">
