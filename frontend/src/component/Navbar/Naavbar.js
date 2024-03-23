@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -6,7 +6,7 @@ const navigation = [
   { name: "HOME", href: "/", current: true },
   {
     name: "ABOUT",
-    href: "#",
+    href: "/about",
     current: false,
     // Sub-links for the dropdown
     subLinks: [
@@ -30,10 +30,27 @@ function classNames(...classes) {
 export default function Naavbar() {
   const [activeButton, setActiveButton] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const panelRef = useRef(null);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  // Helper function to handle click outside the panel
+  const handleClickOutside = (event) => {
+    if (panelRef.current && !panelRef.current.contains(event.target)) {
+      setActiveButton("");
+    }
+  };
+
+  // Add event listener for click outside the panel
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
       <nav class="navbar bg-light">
@@ -108,6 +125,9 @@ export default function Naavbar() {
                                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                         "rounded-md px-3 py-2 text-sm font-medium"
                                       )}
+                                      aria-current={
+                                        item.current ? "page" : undefined
+                                      }
                                     >
                                       {item.name}
                                       <span className="ml-1">
@@ -123,7 +143,11 @@ export default function Naavbar() {
                                       leaveFrom="opacity-100"
                                       leaveTo="opacity-0"
                                     >
-                                      <Disclosure.Panel className="absolute z-10 mt-2 py-2 w-48 bg-white rounded-md shadow-lg">
+                                      <Disclosure.Panel
+                                        static
+                                        ref={panelRef}
+                                        className="absolute z-10 mt-2 py-2 w-48 bg-white rounded-md shadow-lg"
+                                      >
                                         {item.subLinks.map((subItem) => (
                                           <a
                                             key={subItem.name}
@@ -141,6 +165,7 @@ export default function Naavbar() {
                             ) : (
                               <a
                                 href={item.href}
+                                onClick={() => setActiveButton(item.name)}
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
@@ -161,77 +186,77 @@ export default function Naavbar() {
               </div>
 
               <Disclosure.Panel className="sm:hidden">
-  <div className="space-y-1 px-2 pb-3 pt-2">
-    <div className="flex flex-col space-y-1">
-      {navigation.map((item) => (
-        <Fragment key={item.name}>
-          {item.subLinks && item.name === "ABOUT" ? (
-            // Display nested disclosure for 'ABOUT'
-            <Disclosure defaultOpen={false}>
-              {({ open }) => (
-                <>
-                  <Disclosure.Button
-                    className={classNames(
-                      "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium w-full flex justify-between items-center"
-                    )}
-                  >
-                    <span>{item.name}</span>
-                    <span className="ml-2">
-                      {open ? "▼" : "▶"}
-                    </span>
-                  </Disclosure.Button>
-                  <Transition
-                    show={open}
-                    enter="transition-opacity duration-75"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-75"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <Disclosure.Panel className="pl-4">
-                      {item.subLinks.map((subItem) => (
-                        <a
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                        >
-                          {subItem.name}
-                        </a>
-                      ))}
-                    </Disclosure.Panel>
-                  </Transition>
-                </>
-              )}
-            </Disclosure>
-          ) : (
-            // Display regular navigation items
-            <a
-              href={item.href}
-              className={classNames(
-                item.current
-                  ? "bg-gray-900 text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "rounded-md px-3 py-2 text-base font-medium"
-              )}
-              aria-current={item.current ? "page" : undefined}
-            >
-              {item.name}
-            </a>
-          )}
-        </Fragment>
-      ))}
-    </div>
-    <form className="mt-auto">
-      <input
-        className="form-control w-52 rounded-md px-3 py-2 text-sm"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-    </form>
-  </div>
-</Disclosure.Panel>
+                <div className="space-y-1 px-2 pb-3 pt-2">
+                  <div className="flex flex-col space-y-1">
+                    {navigation.map((item) => (
+                      <Fragment key={item.name}>
+                        {item.subLinks && item.name === "ABOUT" ? (
+                          // Display nested disclosure for 'ABOUT'
+                          <Disclosure defaultOpen={false}>
+                            {({ open }) => (
+                              <>
+                                <Disclosure.Button
+                                  className={classNames(
+                                    "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium w-full flex justify-between items-center"
+                                  )}
+                                >
+                                  <span>{item.name}</span>
+                                  <span className="ml-2">
+                                    {open ? "▼" : "▶"}
+                                  </span>
+                                </Disclosure.Button>
+                                <Transition
+                                  show={open}
+                                  enter="transition-opacity duration-75"
+                                  enterFrom="opacity-0"
+                                  enterTo="opacity-100"
+                                  leave="transition-opacity duration-75"
+                                  leaveFrom="opacity-100"
+                                  leaveTo="opacity-0"
+                                >
+                                  <Disclosure.Panel className="pl-4">
+                                    {item.subLinks.map((subItem) => (
+                                      <a
+                                        key={subItem.name}
+                                        href={subItem.href}
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                                      >
+                                        {subItem.name}
+                                      </a>
+                                    ))}
+                                  </Disclosure.Panel>
+                                </Transition>
+                              </>
+                            )}
+                          </Disclosure>
+                        ) : (
+                          // Display regular navigation items
+                          <a
+                            href={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              "rounded-md px-3 py-2 text-base font-medium"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </a>
+                        )}
+                      </Fragment>
+                    ))}
+                  </div>
+                  <form className="mt-auto">
+                    <input
+                      className="form-control w-52 rounded-md px-3 py-2 text-sm"
+                      type="search"
+                      placeholder="Search"
+                      aria-label="Search"
+                    />
+                  </form>
+                </div>
+              </Disclosure.Panel>
             </>
           )}
         </Disclosure>
