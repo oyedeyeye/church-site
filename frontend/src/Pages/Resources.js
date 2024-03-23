@@ -172,33 +172,33 @@ function Messages() {
           }
           className="rounded-lg shadow-md overflow-hidden cursor-pointer"
         >
-          <div className="p-4">
-            <div className="mb-4">
-              <img
-                src="/log2/man sepcam image.png"
-                alt=""
-                className="w-full h-40 object-cover rounded-lg mb-2"
-              />
-              <h3 className="text-xl font-semibold">{message.theme}</h3>
-            </div>
-            <div className="flex justify-between items-center">
-              <div>
-                <h5 className="font-bold">{message.title}</h5>
-                <p>{message.caption}</p>
-                <p>{message.preacher}</p>
-              </div>
-              <div>
-                <img
-                  src="/images/team-1.jpg"
-                  alt=""
-                  className="w-10 h-10 rounded-full"
-                />
-                <small className="block mt-2 text-gray-600">
-                  {formatDate(message.date)}
-                </small>
-              </div>
-            </div>
-          </div>
+    <div className="p-4">
+  <div className="mb-4">
+    <img
+      src="/log2/man sepcam image.png"
+      alt=""
+      className="w-full h-64 object-cover rounded-lg mb-2" // Increased height to h-64
+    />
+    <h3 className="text-xl font-semibold">{message.theme}</h3>
+  </div>
+  <div className="flex justify-between items-center">
+    <div>
+      <h5 className="font-bold">{message.title}</h5>
+      <p>{message.caption}</p>
+      <p>{message.preacher}</p>
+    </div>
+    <div>
+      <img
+        src="/images/team-1.jpg"
+        alt=""
+        className="w-10 h-10 rounded-full"
+      />
+      <small className="block mt-2 text-gray-600">
+        {formatDate(message.date)}
+      </small>
+    </div>
+  </div>
+</div>
         </div>
       ))
     )}
