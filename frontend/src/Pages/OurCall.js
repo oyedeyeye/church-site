@@ -53,7 +53,7 @@ function OurCall() {
                       fontWeight: 400,
                       fontSize: "24px",
                       lineHeight: "36px",
-                      paddingLeft: "20px",
+                      paddingLeft: "64px",
                       listStyleType: "square",
                     }}
                   >
