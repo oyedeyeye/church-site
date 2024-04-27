@@ -114,8 +114,8 @@ function Messages() {
                   {formatDate(mostRecentSermon[0].date)}
                 </small>
                 <img
-                  src="/images/team-1.jpg"
-                  alt=""
+                  src="/images/1.jpeg"
+                  alt="Preacher"
                   className="w-10 h-10 rounded-full"
                 />
               </div>
@@ -176,7 +176,7 @@ function Messages() {
   <div className="mb-4">
     <img
       src="/log2/man sepcam image.png"
-      alt=""
+      alt="Preacher"
       className="w-full h-64 object-cover rounded-lg mb-2" // Increased height to h-64
     />
     <h3 className="text-xl font-semibold">{message.theme}</h3>
@@ -189,7 +189,7 @@ function Messages() {
     </div>
     <div>
       <img
-        src="/images/team-1.jpg"
+        src="/images/1.jpeg"
         alt=""
         className="w-10 h-10 rounded-full"
       />
