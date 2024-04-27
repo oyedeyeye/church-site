@@ -15,7 +15,7 @@ function Churchonline() {
         <div className="container">
           <div className="row">
             <div className="col-md-7">
-              <div className="card shadow-lg" style={{ borderRadius: '20px', marginBottom: '20px' }}>
+              <div className="card shadow-lg" style={{ borderRadius: '2px', marginBottom: '20px' }}>
                 <div className="card-body">
                   <iframe
                     width="100%"
@@ -30,7 +30,7 @@ function Churchonline() {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card shadow" style={{ border: '1px solid #ddd', marginBottom: '20px' }}>
+              <div className="" style={{  border:"4px solid #EFEFEF", marginBottom: '80px' }}>
                 <div className="card-body">
                   <h6 className="card-title text-lg">Are you here for the first time?</h6>
                   <p><b className='text-lg'>We are glad to welcome you to our platform, get in touch with us and fill out the form below.</b></p>
