@@ -1,6 +1,6 @@
 import { Fragment, useState, useRef, useEffect } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Disclosure, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "HOME", href: "/", current: true },
@@ -8,7 +8,6 @@ const navigation = [
     name: "ABOUT",
     href: "/about",
     current: false,
-    // Sub-links for the dropdown
     subLinks: [
       { name: "Our Call", href: "/about/our-call" },
       { name: "Our History", href: "/about/our-history" },
@@ -29,21 +28,18 @@ function classNames(...classes) {
 
 export default function Naavbar() {
   const [activeButton, setActiveButton] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const panelRef = useRef(null);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+  const handleNavbarItemClick = (itemName) => {
+    setActiveButton(itemName === activeButton ? "" : itemName);
   };
 
-  // Helper function to handle click outside the panel
   const handleClickOutside = (event) => {
     if (panelRef.current && !panelRef.current.contains(event.target)) {
       setActiveButton("");
     }
   };
 
-  // Add event listener for click outside the panel
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -53,29 +49,32 @@ export default function Naavbar() {
 
   return (
     <div>
-      <nav class="navbar bg-light">
-        <div class="container mx-auto px-2 sm:px-4 lg:px-8 flex flex-wrap items-center justify-between">
-          <a href="/" class="navbar-brand flex items-center">
+      <nav className="navbar bg-light">
+        <div className="container mx-auto px-2 sm:px-4 lg:px-8 flex flex-wrap items-center justify-between">
+          <a href="/" className="navbar-brand flex items-center">
             <img
               src="/log2/SEPCAM Logo (1).png"
               alt="SEPCAM LOGO"
-              class="h-9 mr-3 sm:h-12"
+              className="h-9 mr-3 sm:h-12"
             />
-            <span class="text-base sm:text-lg lg:text-xl font-semibold text-blue-900">
+            <span className="text-base sm:text-lg lg:text-xl font-semibold text-blue-900">
               THE SCEPTRE OF
-              <br class="sm:hidden" /> POWER CHRISTIAN MINISTRY
+              <br className="sm:hidden" /> POWER CHRISTIAN MINISTRY
             </span>
           </a>
 
-          <button class="navbar-toggler flex sm:hidden border-0 px-3 py-2">
-            <span class="navbar-toggler-icon"></span>
+          <button
+            onClick={() => setActiveButton(!activeButton)}
+            className="navbar-toggler flex sm:hidden border-0 px-3 py-2"
+          >
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div class="flex-grow"></div>
+          <div className="flex-grow"></div>
 
-          <form class="hidden sm:flex" action="#" method="GET">
+          <form className="hidden sm:flex" action="#" method="GET">
             <input
-              class="form-control w-full max-w-xs"
+              className="form-control w-full max-w-xs"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -91,20 +90,13 @@ export default function Naavbar() {
               <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    {/* Mobile menu button*/}
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon
-                          className="block h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon
-                          className="block h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
                     </Disclosure.Button>
                   </div>
@@ -125,14 +117,10 @@ export default function Naavbar() {
                                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                         "rounded-md px-3 py-2 text-sm font-medium"
                                       )}
-                                      aria-current={
-                                        item.current ? "page" : undefined
-                                      }
+                                      aria-current={item.current ? "page" : undefined}
                                     >
                                       {item.name}
-                                      <span className="ml-1">
-                                        {open ? "▲" : "▼"}
-                                      </span>
+                                      <span className="ml-1">{open ? "▲" : "▼"}</span>
                                     </Disclosure.Button>
                                     <Transition
                                       show={open}
@@ -153,6 +141,7 @@ export default function Naavbar() {
                                             key={subItem.name}
                                             href={subItem.href}
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                                            onClick={() => setActiveButton("")}
                                           >
                                             {subItem.name}
                                           </a>
@@ -165,7 +154,7 @@ export default function Naavbar() {
                             ) : (
                               <a
                                 href={item.href}
-                                onClick={() => setActiveButton(item.name)}
+                                onClick={() => handleNavbarItemClick(item.name)}
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
@@ -191,7 +180,6 @@ export default function Naavbar() {
                     {navigation.map((item) => (
                       <Fragment key={item.name}>
                         {item.subLinks && item.name === "ABOUT" ? (
-                          // Display nested disclosure for 'ABOUT'
                           <Disclosure defaultOpen={false}>
                             {({ open }) => (
                               <>
@@ -201,9 +189,7 @@ export default function Naavbar() {
                                   )}
                                 >
                                   <span>{item.name}</span>
-                                  <span className="ml-2">
-                                    {open ? "▼" : "▶"}
-                                  </span>
+                                  <span className="ml-2">{open ? "▼" : "▶"}</span>
                                 </Disclosure.Button>
                                 <Transition
                                   show={open}
@@ -220,6 +206,7 @@ export default function Naavbar() {
                                         key={subItem.name}
                                         href={subItem.href}
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                                        onClick={() => setActiveButton("")}
                                       >
                                         {subItem.name}
                                       </a>
@@ -230,7 +217,6 @@ export default function Naavbar() {
                             )}
                           </Disclosure>
                         ) : (
-                          // Display regular navigation items
                           <a
                             href={item.href}
                             className={classNames(
