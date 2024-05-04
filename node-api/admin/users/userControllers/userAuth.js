@@ -5,6 +5,8 @@ const { response } = require('express');
 const jwt = require('jsonwebtoken');
 
 
+const blacklistedTokens = new Set(); // Initialize a new set to store blacklisted tokens
+
 class UserAuth {
   constructor() {
     const account = process.env.ACCOUNT_NAME;
@@ -74,7 +76,7 @@ class UserAuth {
       // Get token from request
       const token = request.headers.authorization?.split(' ')[1];
 
-      if (!token) {
+      if (!token || blacklistedTokens.has(token)) {
         // Redirect to login if authentication fails
         return response.redirect('/user/login');
       }
@@ -90,4 +92,4 @@ class UserAuth {
 };
 
 
-module.exports = UserAuth;
+module.exports = {UserAuth, blacklistedTokens};
