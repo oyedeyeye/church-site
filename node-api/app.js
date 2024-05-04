@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 // import the route
 const publicRoutes = require('./routes/routes');
 const authRoutes = require('./admin/adminRoutes/routes');
+const userRoutes = require('./admin/users/routes')
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Registering the routes
 app.use('/', publicRoutes);
 app.use('/admin', authRoutes)
+app.use('/user', userRoutes)
 
 
 module.exports = app;
