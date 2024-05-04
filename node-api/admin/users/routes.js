@@ -39,8 +39,7 @@ router.post('/login', async (request, response) => {
     response.status(401).send({
       message: error.message
     });
-  }
-});
+  });
 
 
 module.exports = router;

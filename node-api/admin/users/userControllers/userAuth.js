@@ -46,7 +46,7 @@ class UserAuth {
 
     try {
       const userEntity = await this.tableClient.getEntity('Users', username);
-      const isValid = await bcrypt.compare(password, userEntity.password)
+      const isValid = await bcrypt.compare(password, userEntity.password);
       
       if (!isValid) {
         throw new Error('Invalid credentials');
@@ -64,7 +64,7 @@ class UserAuth {
       return token;
 
     } catch (error) {
-      throw new Error('Login failed')
+      throw new Error('Login failed');
     }
   }
 
@@ -72,22 +72,19 @@ class UserAuth {
     // Implement logic to authenticate requests using the token
     try {
       // Get token from request
-      const token = request.headers.authorization?.split(' ')[1]
+      const token = request.headers.authorization?.split(' ')[1];
 
       if (!token) {
-        return response.status(401).send({
-          message: 'Access Denied: Please login'
-        });
+        // Redirect to login if authentication fails
+        return response.redirect('/user/login');
       }
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       request.user = decoded; // Add user info to the request object
       next();
     } catch (error) {
-      response.status(401).send({
-        message: 'Access Denied: Please login'
-      });
-      // throw new Error('Authentication failed');
+      // Redirect to login if authentication fails
+      return response.redirect('/user/login');
     }
   }
 };
