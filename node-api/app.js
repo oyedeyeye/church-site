@@ -3,8 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 // import the route
-const publicRoutes = require('./routes/routes');
-const authRoutes = require('./admin/adminRoutes/routes');
+const publicRouter = require('./routes/routes');
+const adminRouter = require('./admin/adminRoutes/routes');
+const userRouter = require('./admin/users/routes');
 
 const app = express();
 
@@ -16,8 +17,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Registering the routes
-app.use('/', publicRoutes);
-app.use('/admin', authRoutes)
+app.use('/', publicRouter);
+app.use('/admin', adminRouter)
+app.use('/user', userRouter)
 
 
 module.exports = app;
