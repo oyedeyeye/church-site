@@ -84,10 +84,11 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center justify-between mt-4">
               <h2 className="text-xl font-semibold text-blue-600">Channel Content</h2>
-              <button className="flex items-center text-blue-600">
-                <span>Upload File</span>
-                <MdFileUpload className="w-5 h-5 ml-2" />
-              </button>
+              <a href="/upload" className="flex items-center text-blue-600">
+  <span>Upload File</span>
+  <MdFileUpload className="w-5 h-5 ml-2" />
+</a>
+
             </div>
             <div className="flex items-center justify-between mt-4">
               <hr className="border-gray-300 w-full" />
