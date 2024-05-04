@@ -1,4 +1,4 @@
 data_file/audio/*
 .azure/
 .env
-node_modules/
+node_modules/*

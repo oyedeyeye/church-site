@@ -15,6 +15,7 @@ const download = require('./controllers/download');
 const stream = require('./controllers/stream');
 const readMsg = require('./controllers/readMsg');
 const recentMsg = require('./controllers/recentMsg');
+const contactForm = require('./controllers/contactForm');
 // setLogLevel("info");
 
 
@@ -43,6 +44,10 @@ router.get('/resources', async (request, response) => await resources(request, r
 
 /** STREAM Audio message ========================== */
 router.get('/resource/stream/:fileName', async (request, response) => await stream(request, response));
+
+/** Contact Form ========================== */
+router.post('/contact-us', async (request, response) => await contactForm(request, response));
+
 
 
 module.exports = router;
