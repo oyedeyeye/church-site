@@ -23,17 +23,23 @@ class UserAuth {
     // Store user data in Azure Table Storage
     try {
       const { firstName, lastName, username, email, password, role } = userData;
-      const hashedPassword = await bcrypt.hash(password, 10);
 
+      if(!firstName || !lastName || !username || !email || !password || !role) {
+        throw new Error('Missing important user data fields');
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
       const entity =  {
         partitionKey: 'Users',
-        rowkey: username,
+        rowKey: username,
         password: hashedPassword,
+        email,
         firstName,
         lastName,
         role
       };
 
+      console.log(entity);
       await this.tableClient.createEntity(entity);
     } catch (error) {
       console.error(error);
@@ -43,13 +49,20 @@ class UserAuth {
 
   async loginUser(credentials) {
     // Implement user login logic
-    // Verify credentials and return authentication token
-    const { username, password } = credentials;
+    
+    
 
     try {
+      // Verify credentials and return authentication token
+      const { username, password } = credentials;
+
+      if (!username || !password) {
+        throw new Error('Missing important field! Please input your login credentials')
+      }
+
       const userEntity = await this.tableClient.getEntity('Users', username);
       const isValid = await bcrypt.compare(password, userEntity.password);
-      
+
       if (!isValid) {
         throw new Error('Invalid credentials');
       }

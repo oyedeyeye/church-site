@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const emailValidator = require('email-validator');
-const spamFilter = require('spam-filter');
+// const spamFilter = require('spam-filter');
 const gt = process.env;
 
 const contactForm = async (request, response) => {
