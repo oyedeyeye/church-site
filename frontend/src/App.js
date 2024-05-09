@@ -17,6 +17,8 @@ import Profile from './Admin/Profile/Profile';
 import PageNotFound from './Admin/PageNotFound/PageNotFound';
 import Resourcesaudio from './Pages/Resourcesaudio';
 import Resourcesvideo from './Pages/Resourcesvideo';
+import Details from './Admin/Details/Details';
+import SignUp from './Admin/SignUp/SignUp';
 
 function App() {
   return (
@@ -35,10 +37,12 @@ function App() {
           <Route path='/about/leadership' element={<Leadership />} />
           <Route path='/leadership-audio-resource' element={<LeadershipAudioResource />} />
           <Route path='/admin-login' element={<Login />} />
+          <Route path='/admin-signup' element={<SignUp/>} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/resources_audio' element={<Resourcesaudio />} />
           <Route path='/resources_video' element={<Resourcesvideo />} />
+          <Route path='/upload' element={<Details/>} />
           <Route path='/page-not-found' element={<PageNotFound />} />
           {/* Redirect any unknown paths to PageNotFound */}
           <Route path='*' element={<Navigate to="/page-not-found" />} />
