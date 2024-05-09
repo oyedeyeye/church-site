@@ -3,6 +3,7 @@ import { Dialog, Menu, Transition } from '@headlessui/react'
 import { CalendarIcon, Cog6ToothIcon, FolderIcon, HomeIcon } from '@heroicons/react/24/outline'
 import { MdFileUpload } from "react-icons/md";
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { useNavigate } from 'react-router-dom';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -13,7 +14,7 @@ const navigation = [
 
 const userNavigation = [
   { name: 'Settings', href: '#' }, // Updated label to "Settings"
-  { name: 'Log out', href: '#' },
+  { name: 'Log out', href: 'https://sepcamwebapp.azurewebsites.net/user/logout' }, // Logout API endpoint
 ]
 
 function classNames(...classes) {
@@ -21,7 +22,20 @@ function classNames(...classes) {
 }
 
 export default function Dashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const navigate = useNavigate(); // Initialize navigate function for redirection
+
+  // Handle logout function
+  const handleLogout = () => {
+    try {
+      // Remove the JWT token from localStorage
+      localStorage.removeItem('token');
+      // Redirect to the login page
+      navigate('/admin-login');
+    } catch (error) {
+      console.error('Error occurred during logout:', error);
+    }
+  };
+  
 
   return (
     <>
@@ -62,12 +76,12 @@ export default function Dashboard() {
               <ul className="mt-2">
                 {userNavigation.map((item) => (
                   <li key={item.name}>
-                    <a
-                      href={item.href}
-                      className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100"
+                    <button
+                      onClick={item.name === 'Log out' ? handleLogout : null}
+                      className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 w-full text-left"
                     >
                       {item.name}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -85,9 +99,9 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mt-4">
               <h2 className="text-xl font-semibold text-blue-600">Channel Content</h2>
               <a href="/upload" className="flex items-center text-blue-600">
-  <span>Upload File</span>
-  <MdFileUpload className="w-5 h-5 ml-2" />
-</a>
+                <span>Upload File</span>
+                <MdFileUpload className="w-5 h-5 ml-2" />
+              </a>
 
             </div>
             <div className="flex items-center justify-between mt-4">
