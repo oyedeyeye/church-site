@@ -52,6 +52,9 @@ router.post('/register', async (request, response) => {
 router.post('/login', async (request, response) => {
   try {
     // Start the logic here
+    if (!request.body) {
+      return response.redirect('/user/login'); 
+    }
     const token = await userAuth.loginUser(request.body);
     response.status(200).send({ token });
     } catch (error) {
