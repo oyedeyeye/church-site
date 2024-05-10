@@ -1,0 +1,17 @@
+FROM node:18-alpine
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install all app dependencies
+COPY package*.json ./
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# App binds to port 8080, use the EXPOSE instruction to have it mapped by the docker daemon
+EXPOSE 8080
+
+# Run the app
+CMD [ "node", "server.js"]
