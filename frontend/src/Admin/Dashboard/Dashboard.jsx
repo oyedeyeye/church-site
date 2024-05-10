@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { CalendarIcon, Cog6ToothIcon, FolderIcon, HomeIcon } from '@heroicons/react/24/outline'
 import { MdFileUpload } from "react-icons/md";
@@ -34,6 +34,51 @@ export default function Dashboard() {
     } catch (error) {
       console.error('Error occurred during logout:', error);
     }
+  };
+
+  const [apiData, setApiData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('token');
+        const response = await fetch('https://sepcamwebapp.azurewebsites.net/admin/dashboard', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setApiData(data.entities || []);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);// Empty dependency array to run only once when component mounts
+
+  // Pagination
+  const totalPages = Math.ceil(apiData.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = apiData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleClickNext = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handleClickPrev = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
   };
   
 
@@ -107,20 +152,63 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mt-4">
               <hr className="border-gray-300 w-full" />
             </div>
-            <div className="flex items-center mt-2 text-blue-600">
-              <input type="checkbox" className="form-checkbox text-blue-600" />
-              <span className="w-1/4">Video</span>
-              <div className="w-3/4"></div> {/* Add space */}
-              <span className="w-1/2 text-center">Category</span>
-              <span className="w-1/2 text-center">Date</span>
-              <span className="w-1/2 txt-center">Visibility</span>
-              <span className="w-1/2 text-center">Views</span>
-              <span className="w-1/2 text-center">Actions</span>
+            <div className="flex items-center text-blue-600 bg-gray-100 border border-gray-300 rounded-md">
+    <input type="checkbox" className="form-checkbox text-blue-600" />
+    <div className="w-1/4 p-2 border-r border-gray-300">Video</div>
+    <div className="w-3/4"></div> {/* Add space */}
+    <div className="w-1/2 text-center p-2 border-r border-gray-300">Category</div>
+    <div className="w-1/2 text-center p-2 border-r border-gray-300">Date</div>
+    <div className="w-1/2 txt-center p-2 border-r border-gray-300">Visibility</div>
+    <div className="w-1/2 text-center p-2 border-r border-gray-300">Views</div>
+    <div className="w-1/2 text-center p-2">Actions</div>
+  </div>
+
+  {/* Table-like structure populated with API data */}
+  {currentItems.map(item => (
+            <div key={item.rowKey} className="flex text-blue-600 border border-gray-300">
+              <div className="w-1/4 p-2 border-r border-gray-300">{item.title}</div>
+              <div className="w-1/2 p-2 border-r border-gray-300">{item.theme}</div>
+              <div className="w-1/2 p-2 border-r border-gray-300">{item.date}</div>
+              <div className="w-1/2 p-2 border-r border-gray-300">{item.caption}</div>
+              <div className="w-1/2 p-2">{item.preacher}</div>
+              
             </div>
+          ))}
+<div  className="flex text-blue-600 border border-gray-300">
+              <div className="w-1/4 p-2 border-r border-gray-300"><h1>Hi</h1></div>
+              </div>
+
+     {/* Pagination controls */}
+{apiData.length > 0 && (
+  <div className="flex justify-center mt-4">
+    <button 
+      onClick={handleClickPrev} 
+      disabled={currentPage === 1} 
+      className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Previous
+    </button>
+    <button 
+      onClick={handleClickNext} 
+      disabled={currentPage === totalPages} 
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Next
+    </button>
+  </div>
+)}
+
+
+</div>
+
+
+            </div>
+            
             {/* Your content */}
           </div>
-        </div>
-      </div>
+        
+      
     </>
   )
 }
+ 
