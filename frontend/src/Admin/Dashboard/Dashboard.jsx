@@ -165,36 +165,34 @@ export default function Dashboard() {
 
   {/* Table-like structure populated with API data */}
   {currentItems.map(item => (
-            <div key={item.rowKey} className="flex text-blue-600 border border-gray-300">
-              <div className="w-1/4 p-2 border-r border-gray-300">{item.title}</div>
-              <div className="w-1/2 p-2 border-r border-gray-300">{item.theme}</div>
-              <div className="w-1/2 p-2 border-r border-gray-300">{item.date}</div>
-              <div className="w-1/2 p-2 border-r border-gray-300">{item.caption}</div>
-              <div className="w-1/2 p-2">{item.preacher}</div>
-              
-            </div>
-          ))}
-<div  className="flex text-blue-600 border border-gray-300">
-              <div className="w-1/4 p-2 border-r border-gray-300"><h1>Hi</h1></div>
-              </div>
+  <div key={item.rowKey} className="flex text-blue-600 border border-gray-300">
+    <div className="w-1/4 p-2  border-gray-300">{item.title}</div>
+    <div className="w-1/2 p-2  border-gray-300">{item.theme}</div>
+    <div className="w-1/2 p-2  border-gray-300">{item.date}</div>
+    <div className="w-1/2 p-2  border-gray-300">{item.caption}</div>
+    <div className="w-1/2 p-2">{item.preacher}</div>
+  </div>
+))}
+
+
 
      {/* Pagination controls */}
 {apiData.length > 0 && (
-  <div className="flex justify-center mt-4">
-    <button 
-      onClick={handleClickPrev} 
-      disabled={currentPage === 1} 
-      className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Previous
-    </button>
-    <button 
-      onClick={handleClickNext} 
-      disabled={currentPage === totalPages} 
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Next
-    </button>
+            <div className="flex justify-center mt-4">
+              <button 
+                onClick={handleClickPrev} 
+                disabled={currentPage === 1} 
+                className="mr-2 bg-blue-500 hover:bg-blue-700 text-blue font-bold py-2 px-4 rounded"
+              >
+                Previous
+              </button>
+              <button 
+                onClick={handleClickNext} 
+                disabled={currentPage === totalPages} 
+                className="bg-blue-500 hover:bg-blue-700 text-blue font-bold py-2 px-4 rounded"
+              >
+                Next
+              </button>
   </div>
 )}
 
