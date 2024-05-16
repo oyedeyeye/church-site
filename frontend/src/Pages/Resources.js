@@ -147,7 +147,7 @@ function Messages() {
       </div>
     </nav>
     <div className="container py-4">
-  <h1 className="text-center text-3xl font-bold mb-6">RESOURCES</h1>
+  
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {isLoading ? (
       Array.from({ length: 16 }).map((_, index) => (
