@@ -4,6 +4,7 @@ import Footer from '../component/Footer/Footer';
 import { Data } from '../Data';
 import HeroImage from "../images/crossImage.png";
 import SepcamImage from "../images/sepcam Image.png";
+import { EmblaCarousel } from '../component/CarouselHeader/CarouselHeader';
 
 function Home() {
   return (
@@ -13,11 +14,7 @@ function Home() {
       {/* Hero Section */}
       <div className="relative h-screen">
         <div className="absolute inset-0">
-          <img
-            src={HeroImage}
-            alt="Hero Background"
-            className="w-full h-full object-cover filter brightness-50"
-          />
+        <EmblaCarousel/>
           <div className="absolute inset-0 bg-blue-800 opacity-60 z-10"></div>
         </div>
         <div className="flex flex-col items-center justify-center relative z-20 h-full text-white">
