@@ -11,6 +11,7 @@ function Messages() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [continuationToken, setContinuationToken] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   async function fetchMessages() {
     try {
@@ -57,6 +58,15 @@ function Messages() {
   };
 
   const mostRecentSermon = getMostRecentSermon();
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredMessages = messages.filter((message) =>
+    message.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
 
   return (
     <div>
@@ -138,11 +148,13 @@ function Messages() {
             <img src="/logs/magnifyingglass.png" />
           </span>
           <input
-            className="form-control me-2 rbt"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+                className="form-control me-2 rbt"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
         </form>
       </div>
     </nav>
@@ -164,7 +176,7 @@ function Messages() {
         </div>
       ))
     ) : (
-      messages.map((message, index) => (
+      filteredMessages.map((message, index) => (
         <div
           key={`${message.partitionKey}-${message.rowKey}`}
           onClick={() =>

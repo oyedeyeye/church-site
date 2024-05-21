@@ -43,28 +43,28 @@ export default function Naavbar() {
         </div>
       </nav>
       
-      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{backgroundColor:"#002171", color:"white"}}>
-        <Container>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{color:"white"}} />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/" style={{color: "white"}}>HOME</Nav.Link>
-              <NavDropdown title="ABOUT" id="collapsible-nav-dropdown">
-                <NavDropdown.Item href="/about/our-call" style={{color: "white"}}>Our Call</NavDropdown.Item>
-                <NavDropdown.Item href="/about/our-history" style={{color: "white"}}>Our History</NavDropdown.Item>
-                <NavDropdown.Item href="/about/leadership" style={{color: "white"}}>Leadership</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="/about/unit-department" style={{color: "white"}}>Unit/Department</NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="/resources" style={{color: "white"}}>RESOURCES</Nav.Link>
-              <Nav.Link href="/church-online" style={{color: "white"}}>CHURCH ONLINE</Nav.Link>
-              <Nav.Link href="/academy" style={{color: "white"}}>ACADEMY</Nav.Link>
-              <Nav.Link href="/contact" style={{color: "white"}}>CONTACT</Nav.Link>
-              <Nav.Link href="/blog" style={{color: "white"}}>BLOG</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{ backgroundColor: "#002171", color: "white" }}>
+  <Container>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ color: "white" }} />
+    <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me-auto">
+        <Nav.Link href="/" style={{ color: "white" }}>HOME</Nav.Link>
+        <NavDropdown title={<span style={{ color: "white" }}>ABOUT <span className="dropdown-toggle-icon" style={{ color: "white" }} /></span>} id="collapsible-nav-dropdown" menuVariant="dark" style={{ backgroundColor: "#002171" }}>
+          <NavDropdown.Item href="/about/our-call" style={{ color: "white" }}>Our Call</NavDropdown.Item>
+          <NavDropdown.Item href="/about/our-history" style={{ color: "white" }}>Our History</NavDropdown.Item>
+          <NavDropdown.Item href="/about/leadership" style={{ color: "white" }}>Leadership</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="/about/unit-department" style={{ color: "white" }}>Unit/Department</NavDropdown.Item>
+        </NavDropdown>
+        <Nav.Link href="/resources" style={{ color: "white" }}>RESOURCES</Nav.Link>
+        <Nav.Link href="/church-online" style={{ color: "white" }}>CHURCH ONLINE</Nav.Link>
+        <Nav.Link href="/academy" style={{ color: "white" }}>ACADEMY</Nav.Link>
+        <Nav.Link href="/contact" style={{ color: "white" }}>CONTACT</Nav.Link>
+        <Nav.Link href="/blog" style={{ color: "white" }}>BLOG</Nav.Link>
+      </Nav>
+    </Navbar.Collapse>
+  </Container>
+</Navbar>
     </div>
   );
 }
