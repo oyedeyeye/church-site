@@ -11,6 +11,7 @@ function Messages() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [continuationToken, setContinuationToken] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   async function fetchMessages() {
     try {
@@ -57,6 +58,15 @@ function Messages() {
   };
 
   const mostRecentSermon = getMostRecentSermon();
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredMessages = messages.filter((message) =>
+    message.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
 
   return (
     <div>
@@ -138,16 +148,18 @@ function Messages() {
             <img src="/logs/magnifyingglass.png" />
           </span>
           <input
-            className="form-control me-2 rbt"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+                className="form-control me-2 rbt"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
         </form>
       </div>
     </nav>
     <div className="container py-4">
-  <h1 className="text-center text-3xl font-bold mb-6">RESOURCES</h1>
+  
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {isLoading ? (
       Array.from({ length: 16 }).map((_, index) => (
@@ -164,7 +176,7 @@ function Messages() {
         </div>
       ))
     ) : (
-      messages.map((message, index) => (
+      filteredMessages.map((message, index) => (
         <div
           key={`${message.partitionKey}-${message.rowKey}`}
           onClick={() =>

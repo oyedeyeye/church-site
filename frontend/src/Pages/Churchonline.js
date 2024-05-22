@@ -14,7 +14,7 @@ function Churchonline() {
       <main style={{ backgroundColor: '#ffffff', paddingTop: '50px' }}>
         <div className="container">
           <div className="row">
-            <div className="col-md-7">
+            {/* <div className="col-md-7">
               <div className="card shadow-lg" style={{ borderRadius: '2px', marginBottom: '20px' }}>
                 <div className="card-body">
                   <iframe
@@ -28,7 +28,7 @@ function Churchonline() {
                   </iframe>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="col-md-4">
               <div className="" style={{  border:"4px solid #EFEFEF", marginBottom: '80px' }}>
                 <div className="card-body">

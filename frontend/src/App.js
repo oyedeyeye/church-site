@@ -34,7 +34,7 @@ function App() {
           <Route path='/about/our-history' element={<OurHistory />} />
           <Route path='/resources' element={<Resources />} />
           <Route path='/about/unit-department' element={<UnitDepartment />} />
-          <Route path='/about/leadership' element={<Leadership />} />
+          <Route path='#' element={<Leadership />} />
           <Route path='/leadership-audio-resource' element={<LeadershipAudioResource />} />
           <Route path='/admin-login' element={<Login />} />
           <Route path='/admin-signup' element={<SignUp/>} />
