@@ -112,6 +112,7 @@ class MainTable {
     }
   }
 
+  // Most recent message
   static async mostRecent() {
     try {
       // Using Timestamp field to get the most recent entry
@@ -132,6 +133,20 @@ class MainTable {
     } catch (error) {
       console.error('Error fetching the most recent entity: ', error);
       throw new Error(`Error fetching data: ${error.message}`);
+    }
+  }
+
+  // Search function
+  static async searchByMessageTitle(searchKeyword) {
+    const filterQuery = odata`substringof(${searchKeyword}, title)`;
+    
+    try {
+      const entities = this.tableClient.listEntities({
+        queryOptions: { filter: filterQuery }
+      });
+      return entities;
+    } catch (error) {
+      console.error('Error searching the table:', error);
     }
   }
 }
