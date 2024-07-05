@@ -16,7 +16,8 @@ const stream = require('./controllers/stream');
 const readMsg = require('./controllers/readMsg');
 const recentMsg = require('./controllers/recentMsg');
 const contactForm = require('./controllers/contactForm');
-// setLogLevel("info");
+const searchTable = require('./controllers/search');
+setLogLevel("info");
 
 
 // Public Routes for files
@@ -47,6 +48,9 @@ router.get('/resource/stream/:fileName', async (request, response) => await stre
 
 /** Contact Form ========================== */
 router.post('/contact-us', async (request, response) => await contactForm(request, response));
+
+/** Search Endpoint ========================== */
+router.get('/contact-us', async (request, response) => await searchTable(request, response));
 
 
 
