@@ -50,7 +50,7 @@ router.get('/resource/stream/:fileName', async (request, response) => await stre
 router.post('/contact-us', async (request, response) => await contactForm(request, response));
 
 /** Search Endpoint ========================== */
-router.get('/contact-us', async (request, response) => await searchTable(request, response));
+router.get('/search', async (request, response) => await searchTable(request, response));
 
 
 

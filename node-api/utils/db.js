@@ -1,4 +1,4 @@
-const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
+const { TableClient, AzureNamedKeyCredential, odata } = require("@azure/data-tables");
 require('dotenv').config();
 
 // Configuration
@@ -138,13 +138,22 @@ class MainTable {
 
   // Search function
   static async searchByMessageTitle(searchKeyword) {
-    const filterQuery = odata`substringof(${searchKeyword}, title)`;
+    // Does not work for azure table
+    // const filterQuery = odata`substringof(${searchKeyword}, title)`;
     
     try {
-      const entities = this.tableClient.listEntities({
+      const entities = await this.tableClient.listEntities( /*{
         queryOptions: { filter: filterQuery }
-      });
-      return entities;
+      }*/);
+      console.log('Entities iterable object:', entities);
+      const results = []
+      for await (const entity of entities) {
+        console.log('Processing entity:', entity.title);
+        if (entity.title && entity.title.includes(searchKeyword)) {
+          results.push(entity);
+        }
+      }
+      return results;
     } catch (error) {
       console.error('Error searching the table:', error);
     }
