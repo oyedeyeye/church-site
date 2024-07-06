@@ -1,36 +1,59 @@
-import EventsTimeline from 'react-events-timeline';
-import 'react-events-timeline/dist/main.css';
- 
-const data = [
-{
-    date: 2019,
-    title: 'Senior Developer',
-    label: 'GitHub',
-    location: 'Palo Alto, California (USA)',
-    content: (<div>Description</div>),
-},
-{
-    date: 2019,
-    title: 'Senior Developer',
-    label: 'GitHub',
-    location: 'Palo Alto, California (USA)',
-    content: (<div>Description</div>),
-},
-{
-    date: 2019,
-    title: 'Senior Developer',
-    label: 'GitHub',
-    location: 'Palo Alto, California (USA)',
-    content: (<div>Description</div>),
-}
+import React, { useState } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+const localizer = momentLocalizer(moment);
+
+const events = [
+  {
+    title: 'Bible Study',
+    start: new Date(2024, 6, 1),
+    end: new Date(2024, 6, 1),
+  },
+  // Add more events here if needed
 ];
-const icon = <i className='fa fa-briefcase'/>;
- 
-const NewsEvent = () => (
-  <div className="app">
-    ...
-    <EventsTimeline title='WORK HISTORY' icon={icon} color='blue' data={data} />
-  </div>
-);
-export default NewsEvent;
+
+const MyCalendar = () => {
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const handleSelectEvent = (event) => {
+    alert(event.title);
+  };
+
+  const handleSelectSlot = ({ start }) => {
+    const event = events.find(
+      (event) => moment(event.start).isSame(start, 'day')
+    );
+    if (event) {
+      alert(event.title);
+      setSelectedEvent(event.title);
+    } else {
+      alert('No events on this day.');
+      setSelectedEvent('No events on this day.');
+    }
+  };
+
+  return (
+    <div>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
+        selectable={true}
+        onSelectEvent={handleSelectEvent}
+        onSelectSlot={handleSelectSlot}
+      />
+      {selectedEvent && (
+        <div style={{ marginTop: 20 }}>
+          <h3>Selected Event:</h3>
+          <p>{selectedEvent}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyCalendar;

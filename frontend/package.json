@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@event-calendar/list": "^3.1.0",
+    "@fullcalendar/daygrid": "^6.1.14",
+    "@fullcalendar/interaction": "^6.1.14",
+    "@fullcalendar/react": "^6.1.14",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
     "@react-icons/all-files": "^4.1.0",
@@ -14,7 +18,9 @@
     "embla-carousel-autoplay": "^8.0.4",
     "embla-carousel-react": "^8.0.4",
     "react": "^18.2.0",
+    "react-big-calendar": "^1.13.0",
     "react-bootstrap": "^2.10.2",
+    "react-calendar": "^5.0.0",
     "react-calendar-scheduler": "^2.0.8",
     "react-dom": "^18.2.0",
     "react-event-timeline": "^1.6.3",
@@ -50,6 +56,8 @@
     ]
   },
   "devDependencies": {
+    "@event-calendar/core": "^3.1.0",
+    "@event-calendar/time-grid": "^3.1.0",
     "tailwindcss": "^3.3.3"
   }
 }
