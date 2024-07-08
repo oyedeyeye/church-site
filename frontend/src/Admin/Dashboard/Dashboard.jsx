@@ -81,6 +81,13 @@ export default function Dashboard() {
     setCurrentPage((prevPage) => prevPage - 1);
   };
   
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   return (
     <>
@@ -168,9 +175,9 @@ export default function Dashboard() {
   <div key={item.rowKey} className="flex text-blue-600 border border-gray-300">
     <div className="w-1/4 p-2  border-gray-300">{item.title}</div>
     <div className="w-1/2 p-2  border-gray-300">{item.theme}</div>
-    <div className="w-1/2 p-2  border-gray-300">{item.date}</div>
-    <div className="w-1/2 p-2  border-gray-300">{item.caption}</div>
-    <div className="w-1/2 p-2">{item.preacher}</div>
+    <div className="w-1/2 p-2  border-gray-300">{formatDate(item.date)}<div>Published</div></div>
+    <div className="w-1/2 p-2  border-gray-300"></div>
+    <div className="w-1/2 p-2"></div>
   </div>
 ))}
 
