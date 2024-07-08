@@ -4,6 +4,8 @@ import Footer from '../component/Footer/Footer';
 import { Data } from '../Data';
 import HeroImage from "../images/crossImage.png";
 import SepcamImage from "../images/sepcam Image.png";
+import { EmblaCarousel } from '../component/CarouselHeader/CarouselHeader';
+import NewsEvent from '../component/NewsEvent/NewsEvent';
 
 function Home() {
   return (
@@ -13,11 +15,7 @@ function Home() {
       {/* Hero Section */}
       <div className="relative h-screen">
         <div className="absolute inset-0">
-          <img
-            src={HeroImage}
-            alt="Hero Background"
-            className="w-full h-full object-cover filter brightness-50"
-          />
+        <EmblaCarousel/>
           <div className="absolute inset-0 bg-blue-800 opacity-60 z-10"></div>
         </div>
         <div className="flex flex-col items-center justify-center relative z-20 h-full text-white">
@@ -42,8 +40,8 @@ function Home() {
     <div className="text-center sm:text-left mb-8">
       <h2 className="text-xl lg:text-2xl font-bold text-blue-900 mb-4">Join us to experience effectual worship and life-changing revelations from God's word.</h2>
       <div className="flex justify-center">
-  <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">WATCH LIVE</a>
-  <a href="#" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">LISTEN LIVE</a>
+  <a href="https://www.facebook.com/sepcamedia/live" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">WATCH LIVE</a>
+  <a href="https://sepcamedia.mixlr.com/" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">LISTEN LIVE</a>
 </div>
 
     </div>
@@ -65,16 +63,7 @@ function Home() {
       {/* Events Section */}
       <div className="container-fluid bg-[#edf5ff] text-blue-900 py-8 md:py-12">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8 text-center">NEWS & EVENTS</h2>
-        <div className="container mx-auto px-4 lg:px-0 max-w-3xl">
-          <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img src={SepcamImage} className="d-block w-full" alt="Sepcam Event" />
-              </div>
-              {/* Additional carousel items go here */}
-            </div>
-          </div>
-        </div>
+        <NewsEvent/>
       </div>
 
      {/* Contact Section */}

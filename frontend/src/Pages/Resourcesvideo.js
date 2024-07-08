@@ -191,12 +191,12 @@ const ResourcesVideo = () => {
                   </p>
                 ))}
               </div>
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex">
                 <p>{sermonDetails.preacher}</p>
                 <img
-                  src="/images/team-1.jpg"
+                  src="/images/1.jpeg"
                   alt=""
-                  className="w-10 h-10 rounded-full"
+                  className="w-10 h-10 rounded-full ml-4"
                 />
               </div>
               <button
