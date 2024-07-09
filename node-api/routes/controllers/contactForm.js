@@ -37,8 +37,12 @@ const contactForm = async (request, response) => {
   const emailOptions = {
     from: email,
     to: gmailAddress,
-    subject: 'Contact Form Submission',
-    text: message
+    subject: `Contact Form Submission by ${name}`,
+    text: `Message: ${message} <br>
+    <u>Sender Detail</u>
+    Name: ${name}
+    Phone No: ${phone}
+    Email: ${email}`
   };
 
   transporter.sendMail(emailOptions, (error, info) => {
@@ -54,7 +58,12 @@ const contactForm = async (request, response) => {
       from: gmailAddress,
       to: email,
       subject: 'Acknowledgement: Contact Form Submission',
-      text: 'Thank you for reaching out to us!'
+      text: `Dear ${name},
+      Thank you for reaching out to us!
+      We will reachout to you as soon as possible.
+      
+      Best Regards,
+      <b><i>Sepcam Media Team</i></b>`
     };
 
     transporter.sendMail(acknowledgementMailOptions, (error, info) =>{
@@ -63,7 +72,7 @@ const contactForm = async (request, response) => {
       }
     });
 
-    response.send({ message: 'Email sent successfully' });
+    return response.send({ message: 'Email sent successfully' });
   });
 
   } catch (error) {
