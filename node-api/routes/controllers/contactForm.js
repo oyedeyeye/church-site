@@ -5,7 +5,7 @@ const gt = process.env;
 
 const contactForm = async (request, response) => {
   try {
-    const { name, phone, email, message } = request.body;
+    const { name, phone, email, message } = request.query;
     const gmailAddress = gt.EMAIL_ADDRESS
     
     // Validate user's email address
@@ -38,8 +38,9 @@ const contactForm = async (request, response) => {
     from: email,
     to: gmailAddress,
     subject: `Contact Form Submission by ${name}`,
-    text: `Message: ${message} <br>
-    <u>Sender Detail</u>
+    text: `Message: ${message}
+    
+    Sender Detail
     Name: ${name}
     Phone No: ${phone}
     Email: ${email}`
@@ -59,11 +60,12 @@ const contactForm = async (request, response) => {
       to: email,
       subject: 'Acknowledgement: Contact Form Submission',
       text: `Dear ${name},
+
       Thank you for reaching out to us!
       We will reachout to you as soon as possible.
       
       Best Regards,
-      <b><i>Sepcam Media Team</i></b>`
+      Sepcam Media Team`
     };
 
     transporter.sendMail(acknowledgementMailOptions, (error, info) =>{
