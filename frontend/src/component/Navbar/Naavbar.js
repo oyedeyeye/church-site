@@ -32,14 +32,14 @@ export default function Naavbar() {
 
           <div className="flex-grow"></div>
 
-          <form className="hidden sm:flex" action="#" method="GET">
+          {/* <form className="hidden sm:flex" action="#" method="GET">
             <input
               className="form-control w-full max-w-xs"
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
-          </form>
+          </form> */}
         </div>
       </nav>
       
