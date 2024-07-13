@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Variables
+RESOURCE_GROUP="oyedey_rg_7385"
+WEBAPP_NAME="sepcamWebApp"
+
+# Deploy web app
+az webapp up --resource-group $RESOURCE_GROUP --name $WEBAPP_NAME --runtime "node|18-lts"
+
+# Set Node.js version to 18 LTS
+# az webapp config set --resource-group $RESOURCE_GROUP --name $WEBAPP_NAME --linux-fx-version "NODE|18-lts"
+
+echo "Deployment and configuration complete."

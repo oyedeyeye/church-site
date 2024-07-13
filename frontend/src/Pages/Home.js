@@ -40,8 +40,8 @@ function Home() {
     <div className="text-center sm:text-left mb-8">
       <h2 className="text-xl lg:text-2xl font-bold text-blue-900 mb-4">Join us to experience effectual worship and life-changing revelations from God's word.</h2>
       <div className="flex justify-center">
-  <a href="https://www.facebook.com/sepcamedia/live" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">WATCH LIVE</a>
-  <a href="https://sepcamedia.mixlr.com/" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10">LISTEN LIVE</a>
+  <a href="https://www.facebook.com/sepcamedia/live" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10" target="_blank">WATCH LIVE</a>
+  <a href="https://t.me/sepcamedia/live" className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-full mb-4 sm:mb-0 sm:mr-10" target="_blank">LISTEN LIVE</a>
 </div>
 
     </div>
