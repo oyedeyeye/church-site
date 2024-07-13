@@ -7,7 +7,14 @@ const contactForm = async (request, response) => {
   try {
     const { name, phone, email, message } = request.query;
     const gmailAddress = gt.EMAIL_ADDRESS
-    
+
+    // Validate the required fields
+    if (!name || !phone || !email || !message) {
+      return response.status(400).send({
+        error: 'All fields are required',
+      });
+    }
+
     // Validate user's email address
     if (!emailValidator.validate(email)) {
       return response.status(400).send({
@@ -25,9 +32,9 @@ const contactForm = async (request, response) => {
     // Send email to the gmailAddress
     const transporter = nodemailer.createTransport({
       service: "Gmail",
-      host: gt.EMAIL_HOST,
-      port: gt.EMAIL_PORT,
-      secure: true, // or 'STARTTLS'
+      // host: gt.EMAIL_HOST,
+      // port: gt.EMAIL_PORT,
+      // secure: true, // or 'STARTTLS'
       auth: {
         user: gmailAddress,
         pass: gt.EMAIL_PASSWD
@@ -35,7 +42,7 @@ const contactForm = async (request, response) => {
     });
 
   const emailOptions = {
-    from: email,
+    from: gmailAddress,
     to: gmailAddress,
     subject: `Contact Form Submission by ${name}`,
     text: `Message: ${message}
@@ -68,9 +75,9 @@ const contactForm = async (request, response) => {
       Sepcam Media Team`
     };
 
-    transporter.sendMail(acknowledgementMailOptions, (error, info) =>{
-      if (error) {
-        console.error(error);
+    transporter.sendMail(acknowledgementMailOptions, (ackError, ackInfo) =>{
+      if (ackError) {
+        console.error(ackError);
       }
     });
 

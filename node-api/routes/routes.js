@@ -47,7 +47,7 @@ router.get('/resources', async (request, response) => await resources(request, r
 router.get('/resource/stream/:fileName', async (request, response) => await stream(request, response));
 
 /** Contact Form ========================== */
-router.post('/contact-us', async (request, response) => await contactForm(request, response));
+router.post('/contact', async (request, response) => await contactForm(request, response));
 
 /** Search Endpoint ========================== */
 router.get('/search', async (request, response) => await searchTable(request, response));
