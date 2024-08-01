@@ -17,6 +17,7 @@ const readMsg = require('./controllers/readMsg');
 const recentMsg = require('./controllers/recentMsg');
 const contactForm = require('./controllers/contactForm');
 const searchTable = require('./controllers/search');
+const { churchEvents, upcomingEvents} = require('./controllers/churchEvents');
 setLogLevel("info");
 
 
@@ -52,6 +53,11 @@ router.post('/contact', async (request, response) => await contactForm(request, 
 /** Search Endpoint ========================== */
 router.get('/search', async (request, response) => await searchTable(request, response));
 
+/** Church Events Endpoint ========================== */
+router.get('/upcoming-events', async (request, response) => await upcomingEvents(request, response));
+
+/** Church Events Endpoint ========================== */
+router.get('/events', async (request, response) => await churchEvents(request, response));
 
 
 module.exports = router;

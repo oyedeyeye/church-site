@@ -1,12 +1,12 @@
 const nodemailer = require('nodemailer');
 const emailValidator = require('email-validator');
+require('dotenv').config();
 // const spamFilter = require('spam-filter');
-const gt = process.env;
+const { EMAIL_ADDRESS, EMAIL_PASSWD } = process.env;
 
 const contactForm = async (request, response) => {
   try {
     const { name, phone, email, message } = request.query;
-    const gmailAddress = gt.EMAIL_ADDRESS
 
     // Validate the required fields
     if (!name || !phone || !email || !message) {
@@ -36,34 +36,34 @@ const contactForm = async (request, response) => {
       // port: gt.EMAIL_PORT,
       // secure: true, // or 'STARTTLS'
       auth: {
-        user: gmailAddress,
-        pass: gt.EMAIL_PASSWD
+        user: EMAIL_ADDRESS,
+        pass: EMAIL_PASSWD
       },
     });
 
-  const emailOptions = {
-    from: gmailAddress,
-    to: gmailAddress,
-    subject: `Contact Form Submission by ${name}`,
-    text: `Message: ${message}
-    
-    Sender Detail
-    Name: ${name}
-    Phone No: ${phone}
-    Email: ${email}`
-  };
+    const emailOptions = {
+      from: EMAIL_ADDRESS,
+      to: EMAIL_ADDRESS,
+      subject: `Contact Form Submission by ${name}`,
+      text: `Message: ${message}
 
-  transporter.sendMail(emailOptions, (error, info) => {
-    if (error) {
-      return response.status(500).send({
-        message: 'Failed to send mail',
-        error: error.message,
-      });
-    }
+      Sender Detail
+      Name: ${name}
+      Phone No: ${phone}
+      Email: ${email}`
+    };
+
+    transporter.sendMail(emailOptions, (error, info) => {
+      if (error) {
+        return response.status(500).send({
+          message: 'Failed to send mail',
+          error: error.message,
+        });
+      }
 
     // Send Acknowledgement email to the user
     const acknowledgementMailOptions = {
-      from: gmailAddress,
+      from: EMAIL_ADDRESS,
       to: email,
       subject: 'Acknowledgement: Contact Form Submission',
       text: `Dear ${name},
