@@ -1,13 +1,20 @@
 const nodemailer = require('nodemailer');
 const emailValidator = require('email-validator');
+require('dotenv').config();
 // const spamFilter = require('spam-filter');
-const gt = process.env;
+const { EMAIL_ADDRESS, EMAIL_PASSWD } = process.env;
 
 const contactForm = async (request, response) => {
   try {
-    const { name, phone, email, message } = request.body;
-    const gmailAddress = gt.EMAIL_ADDRESS
-    
+    const { name, phone, email, message } = request.query;
+
+    // Validate the required fields
+    if (!name || !phone || !email || !message) {
+      return response.status(400).send({
+        error: 'All fields are required',
+      });
+    }
+
     // Validate user's email address
     if (!emailValidator.validate(email)) {
       return response.status(400).send({
@@ -25,45 +32,56 @@ const contactForm = async (request, response) => {
     // Send email to the gmailAddress
     const transporter = nodemailer.createTransport({
       service: "Gmail",
-      host: gt.EMAIL_HOST,
-      port: gt.EMAIL_PORT,
-      secure: true, // or 'STARTTLS'
+      // host: gt.EMAIL_HOST,
+      // port: gt.EMAIL_PORT,
+      // secure: true, // or 'STARTTLS'
       auth: {
-        user: gmailAddress,
-        pass: gt.EMAIL_PASSWD
+        user: EMAIL_ADDRESS,
+        pass: EMAIL_PASSWD
       },
     });
 
-  const emailOptions = {
-    from: email,
-    to: gmailAddress,
-    subject: 'Contact Form Submission',
-    text: message
-  };
+    const emailOptions = {
+      from: EMAIL_ADDRESS,
+      to: EMAIL_ADDRESS,
+      subject: `Contact Form Submission by ${name}`,
+      text: `Message: ${message}
 
-  transporter.sendMail(emailOptions, (error, info) => {
-    if (error) {
-      return response.status(500).send({
-        message: 'Failed to send mail',
-        error: error.message,
-      });
-    }
+      Sender Detail
+      Name: ${name}
+      Phone No: ${phone}
+      Email: ${email}`
+    };
+
+    transporter.sendMail(emailOptions, (error, info) => {
+      if (error) {
+        return response.status(500).send({
+          message: 'Failed to send mail',
+          error: error.message,
+        });
+      }
 
     // Send Acknowledgement email to the user
     const acknowledgementMailOptions = {
-      from: gmailAddress,
+      from: EMAIL_ADDRESS,
       to: email,
       subject: 'Acknowledgement: Contact Form Submission',
-      text: 'Thank you for reaching out to us!'
+      text: `Dear ${name},
+
+      Thank you for reaching out to us!
+      We will reachout to you as soon as possible.
+      
+      Best Regards,
+      Sepcam Media Team`
     };
 
-    transporter.sendMail(acknowledgementMailOptions, (error, info) =>{
-      if (error) {
-        console.error(error);
+    transporter.sendMail(acknowledgementMailOptions, (ackError, ackInfo) =>{
+      if (ackError) {
+        console.error(ackError);
       }
     });
 
-    response.send({ message: 'Email sent successfully' });
+    return response.send({ message: 'Email sent successfully' });
   });
 
   } catch (error) {

@@ -2,3 +2,5 @@ data_file/audio/*
 .azure/
 .env
 node_modules/*
+deployment_script
+client_secret_95207390438-2crlkosjffvj5qpjk639tb6vmfmfqtej.apps.googleusercontent.com.json

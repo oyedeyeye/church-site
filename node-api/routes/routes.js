@@ -16,7 +16,9 @@ const stream = require('./controllers/stream');
 const readMsg = require('./controllers/readMsg');
 const recentMsg = require('./controllers/recentMsg');
 const contactForm = require('./controllers/contactForm');
-// setLogLevel("info");
+const searchTable = require('./controllers/search');
+const { churchEvents, upcomingEvents} = require('./controllers/churchEvents');
+setLogLevel("info");
 
 
 // Public Routes for files
@@ -46,8 +48,16 @@ router.get('/resources', async (request, response) => await resources(request, r
 router.get('/resource/stream/:fileName', async (request, response) => await stream(request, response));
 
 /** Contact Form ========================== */
-router.post('/contact-us', async (request, response) => await contactForm(request, response));
+router.post('/contact', async (request, response) => await contactForm(request, response));
 
+/** Search Endpoint ========================== */
+router.get('/search', async (request, response) => await searchTable(request, response));
+
+/** Church Events Endpoint ========================== */
+router.get('/upcoming-events', async (request, response) => await upcomingEvents(request, response));
+
+/** Church Events Endpoint ========================== */
+router.get('/events', async (request, response) => await churchEvents(request, response));
 
 
 module.exports = router;

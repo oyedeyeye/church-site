@@ -1,4 +1,4 @@
-const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
+const { TableClient, AzureNamedKeyCredential, odata } = require("@azure/data-tables");
 require('dotenv').config();
 
 // Configuration
@@ -112,6 +112,7 @@ class MainTable {
     }
   }
 
+  // Most recent message
   static async mostRecent() {
     try {
       // Using Timestamp field to get the most recent entry
@@ -132,6 +133,29 @@ class MainTable {
     } catch (error) {
       console.error('Error fetching the most recent entity: ', error);
       throw new Error(`Error fetching data: ${error.message}`);
+    }
+  }
+
+  // Search function
+  static async searchByMessageTitle(searchKeyword) {
+    // Does not work for azure table
+    // const filterQuery = odata`substringof(${searchKeyword}, title)`;
+    
+    try {
+      const entities = await this.tableClient.listEntities( /*{
+        queryOptions: { filter: filterQuery }
+      }*/);
+      console.log('Entities iterable object:', entities);
+      const results = []
+      for await (const entity of entities) {
+        console.log('Processing entity:', entity.title);
+        if (entity.title && entity.title.includes(searchKeyword)) {
+          results.push(entity);
+        }
+      }
+      return results;
+    } catch (error) {
+      console.error('Error searching the table:', error);
     }
   }
 }
