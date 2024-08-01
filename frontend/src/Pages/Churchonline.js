@@ -7,74 +7,59 @@ function Churchonline() {
     <div className="overflow-hidden">
       <Naavbar />
 
+      
       <nav className="word-coc-blog">
-        <h1><b>CHURCH ONLINE</b></h1>
-      </nav>
-
-      <main style={{ backgroundColor: '#ffffff', paddingTop: '50px' }}>
-        <div className="container">
-          <div className="row">
-            {/* <div className="col-md-7">
-              <div className="card shadow-lg" style={{ borderRadius: '2px', marginBottom: '20px' }}>
-                <div className="card-body">
-                  <iframe
-                    width="100%"
-                    height="400"
-                    src="https://www.youtube.com/embed/9bAG5DVgsCY"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen>
-                  </iframe>
-                </div>
+    <h1>
+      <b>CHURCH ONLINE</b>
+    </h1>
+  </nav>
+      <main className="bg-white pt-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center mb-12">
+            <div className="w-full md:w-10/12 text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome to Our Online Church Platform</h2>
+              <p className="text-lg text-gray-600 mb-4">
+                We are thrilled to have you here. Whether you are joining us for the first time or you are a returning visitor, we invite you to connect with us and be a part of our community.
+              </p>
+              <div className="flex justify-center mb-4">
+                <button className="btn btn-primary animate-bounce">First Timers Form</button>
               </div>
-            </div> */}
-            <div className="col-md-4">
-              <div className="" style={{  border:"4px solid #EFEFEF", marginBottom: '80px' }}>
-                <div className="card-body">
-                  <h6 className="card-title text-lg">Are you here for the first time?</h6>
-                  <p><b className='text-lg'>We are glad to welcome you to our platform, get in touch with us and fill out the form below.</b></p>
-                  <div className="d-grid col-10 mx-auto mt-4">
-                    <button className="btn btn-primary">First Timers Form</button>
-                  </div>
-                  <h3 className='mt-4 mb-4 '> You can connect with us live on Facebook by clicking on the button below</h3>
-                  <div className="card text-center bg-primary">
-                    <div className="card-body d-flex flex-row align-items-center justify-content-center">
-                      <a href="https://www.facebook.com/sepcamedia/live" target="_blank" rel="noreferrer">
-                        <img src="/images/Frame 15 (1).png" alt="Sepcam live Service on Facebook"/>
-                      </a>
-                      <p className='text-white m-2'>Join live</p>
-                    </div>
-                  </div>
-                </div>
+            </div>
+
+            <div className="flex w-full md:w-5/12 mb-4">
+              <div className="flex flex-col text-center shadow-lg rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white p-6 flex-grow bg-gray-800 ">
+                <h3 className="text-xl font-bold mb-3">Connect with us Live</h3>
+                <a href="https://www.facebook.com/sepcamedia/live" target="_blank" rel="noreferrer" className="my-3 flex-grow flex justify-center items-center">
+                  <img src="/images/Frame 15 (1).png" alt="Sepcam live Service on Facebook" className="w-24" />
+                </a>
+                <p>Join our live service on Facebook</p>
+              </div>
+            </div>
+
+            <div className="flex w-full md:w-5/12 mb-4">
+              <div className="flex flex-col text-center shadow-lg rounded-lg bg-gradient-to-r text-white p-6 flex-grow bg-blue">
+                <h3 className="text-xl font-bold mb-3">Join our Telegram Live Service</h3>
+                <a href="https://t.me/sepcamedia/live" target="_blank" rel="noreferrer" className="my-3 flex-grow flex justify-center items-center">
+                  <button className="btn btn-light text-grey">Join on Telegram</button>
+                </a>
+                <p>Join our live service on Telegram</p>
               </div>
             </div>
           </div>
         </div>
       </main>
 
-      <div className="container py-4">
-        <div className="row g-0">
-          <div className="col-md-12">
-            <iframe src="https://mixlr.com/users/7896621/embed?artwork=false&color=#003cc7" frameborder="0" scrolling="no" height="190px" width="100%">
-              <a href="http://mixlr.com/sepcam" style={{ color: '#fff', display: 'block', fontFamily: 'Helvetica, sans-serif', fontSize: 11, textAlign: 'left' }}>sepcam is on Mixlr</a>
-            </iframe>
-            <a href="http://mixlr.com/sepcam" style={{ color: '#fff', display: 'block', fontFamily: 'Helvetica, sans-serif', fontSize: 11, textAlign: 'left' }}>sepcam is on Mixlr</a>
-          </div>
-        </div>
-      </div>
-
-      <div className="container py-4">
+      <div className="container mx-auto py-4">
         <div className="row">
           <div className="col-md-12">
-            <b><h1 className="text-center">Stay Connected and be Blessed</h1></b>
+            <h1 className="text-center text-3xl font-bold">Stay Connected and be Blessed</h1>
           </div>
         </div>
       </div>
 
       <Footer />
     </div>
-  )
+  );
 }
 
 export default Churchonline;
