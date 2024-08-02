@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const { validate } = require('deep-email-validator');
+const verifyRecaptcha = require('../../utils/reCaptcha');
 require('dotenv').config();
 
 // const spamFilter = require('spam-filter');
@@ -7,18 +8,21 @@ const { EMAIL_ADDRESS, EMAIL_PASSWD } = process.env;
 
 const contactForm = async (request, response) => {
   try {
-    const { name, phone, email, message } = request.body;
-
-    console.log(`
-      name: ${name}
-      phone: ${phone},
-      email: ${email},
-      message: ${message}
-      `);
+    const { name, phone, email, message, 'g-recaptcha-response': recaptchaToken } = request.body;
 
     // Validate the required fields
-    if (!name || !phone || !email || !message) {
+    if (!name || !phone || !email || !message || !recaptchaToken) {
       return response.status(400).send({ error: 'All fields are required' });
+    }
+
+
+    // Verify the reCAPTCHA token
+    const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
+    if(!isRecaptchaValid) {
+      return response.status(400).send({ 
+        status: 'error',
+        message: 'reCAPTCHA verification failed. Please try again!',
+      });
     }
 
     // Validate user's email address
