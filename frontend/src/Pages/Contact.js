@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 // import Navbar from '../component/Navbar/Navbar'
 // import Navbar2 from '../component/Navbar2'
 import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 
 function Contact() {
+  // ReCaptcha Implementation
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!recaptchaToken) {
+      // alert('Please verify that you are not a robot.');
+      return;
+    }
+
+    // Handle form submission logic here, including sending the recaptchaToken to your server
+    console.log(`Form submitted with reCAPTCHA token:', ${recaptchaToken}`);
+  };
+
   return (
     <div>
         
@@ -26,7 +45,7 @@ function Contact() {
                 </div>
             </div>
             <div className="col-md-10 mx-auto px-4 col-lg-4">
-                <form className="p-4 p-md-5">
+                <form className="p-4 p-md-5" onSubmit={handleSubmit}>
                 <div className="form-floating mb-3">
                     <input type="text" className="form-control bg-light" id="floatingInput" placeholder="Your name"/>
                     <label for="floatingInput" required>Your Name<span style={{color: 'red'}}>*</span></label>
@@ -43,6 +62,11 @@ function Contact() {
                     <textarea className="form-control h-50 bg-light" id="exampleFormControlTextarea1" rows="6" placeholder="Your Message"></textarea>
                     <label for="FormControlTextarea1" className="form-label" placeholder="Your Message">Your Message<span style={{color: 'red'}}>*</span></label>
                 </div><br/>
+
+                <ReCAPTCHA 
+                  sitekey="6Lc3qx0qAAAAAPJAHO34n2v5pVmGYPuTDNF00lPM"
+                  onChange={handleRecaptchaChange}
+                /><br />
                 <button className="w-100 btn btn-lg bg-blue text-white" type="submit" >Send</button>
                 <hr className="my-0"/>
                 </form>
