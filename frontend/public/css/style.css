@@ -1,17 +1,20 @@
-body,html {
+body,
+html {
   font-family: 'Josefin Sans', sans-serif;
 
 }
 
 .header {
-  padding:20px;
+  padding: 20px;
   background-color: #edf5ff;
 }
-.nav-content, .btn{
+
+.nav-content,
+.btn {
   background-color: #002171;
 }
 
-.bob{
+.bob {
   color: #002171;
   /* width: 400px; */
   height: 24px;
@@ -33,10 +36,10 @@ body,html {
 
 .text-container {
   text-align: center;
-  background-color: #edf5ff;  
+  background-color: #edf5ff;
   height: 80vh;
-  padding:4em ;
-  
+  padding: 4em;
+
 }
 
 /* .ff{
@@ -45,38 +48,46 @@ body,html {
 } */
 
 .text-content h1 {
-  margin-bottom:40px;
-  font-size: 40px;  
- 
+  margin-bottom: 40px;
+  font-size: 40px;
+
 }
+
 .text-content p {
- font-size: 25px;
+  font-size: 25px;
 }
+
 .section {
   background-color: #ffffff;
   /* background-image: url("/images/one (13).jpg"); */
   padding: 90px;
 }
-.section-text{
+
+.section-text {
   color: #fff;
 }
-.section-btn{
-  padding-left: 33% ;
+
+.section-btn {
+  padding-left: 33%;
 }
-.button{
+
+.button {
   display: block;
-  margin:1.5em 0 ;
+  margin: 1.5em 0;
 }
-.card-title{
+
+.card-title {
   text-align: center;
   font-size: 30px;
   font-weight: bold;
   color: #0D47A1;
 }
-.card-text{
+
+.card-text {
   text-align: center;
 }
-.events{
+
+.events {
   background-color: #edf5ff;
 }
 
@@ -87,15 +98,103 @@ body,html {
   color: #0D47A1;
   font-weight: bold;
 }
+
 .newevents {
   width: 80%;
   margin: auto;
 }
- .contact-info {
-  background-color:#ffffff ;
+
+/* Start of Upcoming Events */
+.saved-colored-section-inner {
+  background-color: var(--wp--preset--color--main, #002171);
+  color: var(--wp--preset--color--white, #fff);
+  padding: 3em;
+  border-radius: 5px;
+  margin: 1em 0;
+}
+
+.saved-colored-section-content {
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: auto;
+  /* Allow horizontal scrolling if needed */
+}
+
+.saved-colored-section-entries {
+  display: flex;
+  flex-direction: nowrap;
+  gap: 1em;
+}
+
+.saved-colored-section-entry {
+  background: var(--wp--preset--gradient--cool-to-warm-spectrum);
+  border-radius: 10px;
+  padding: 1em;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 0 0 auto;
+  width: 32%;
+  /* Fixed width for each event card */
+}
+
+.saved-colored-section-label {
+  font-size: var(--wp--preset--font-size--small, 13px);
+  text-transform: uppercase;
+  color: var(--wp--preset--color--light, #ffffff);
+}
+
+.saved-colored-section-title {
+  font-size: var(--wp--preset--font-size--huge, 42px);
+  color: var(--wp--preset--color--white, #fff);
+  margin: 0;
+}
+
+.saved-colored-section-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.saved-colored-section-meta {
+  font-size: var(--wp--preset--font-size--medium, 20px);
+  color: var(--wp--preset--color--white, #fff);
+  margin-top: 0.5em;
+}
+
+.saved-colored-section-button {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.saved-button {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  border-radius: 5px;
+  background-color: var(--wp--preset--color--accent, #c42d2d);
+  color: var(--wp--preset--color--white, #fff);
+  text-decoration: none;
+}
+
+.saved-button-light {
+  background-color: var(--wp--preset--color--light-bg, #f5f5f5);
+  color: var(--wp--preset--color--dark, #000);
+}
+
+.saved-button-no-hover-line:hover {
+  text-decoration: underline;
+}
+
+.saved-colored-section-button-short {
+  display: none;
+}
+
+
+/* End of Upcomin Events */
+.contact-info {
+  background-color: #ffffff;
   margin-top: 80px;
   padding: 60px;
 }
+
 .contact-content {
   width: 100%;
   margin: auto;
@@ -107,66 +206,85 @@ body,html {
   text-align: center;
   color: #0D47A1;
 }
-.contact-us h1{
+
+.contact-us h1 {
   font-size: 60px;
   font-weight: bold;
 }
+
 .contact-form {
   position: relative;
   margin-top: 30px;
   width: 80%;
-  margin:0 auto;
+  margin: 0 auto;
 }
+
 .mb3 {
- max-width: 45%;
+  max-width: 45%;
   position: relative;
-  right:0;
-  box-shadow: 0px 1px gray ;
+  right: 0;
+  box-shadow: 0px 1px gray;
   border-radius: 10px;
 }
-input{
-    width: 443px;
-    border-radius: 1.5em;
+
+input {
+  width: 443px;
+  border-radius: 1.5em;
 }
+
 .formfloating {
   max-width: 45%;
   position: relative;
   bottom: 163px;
   left: 55%;
-  box-shadow: 0px 1px gray ;
+  box-shadow: 0px 1px gray;
   border-radius: 10px;
-  
+
 }
+
 .contact-btn {
   position: relative;
   bottom: 120px;
-  margin:0 auto;
+  margin: 0 auto;
 }
+
 .contact-btn button {
   padding: 10px 80px;
   font-size: 20px;
   border-radius: 10px;
 }
 
-.word-call, .word-re-aca-au h1, .word-con, .word-lead-unit, .word-coc-blog, .word-history{
+.word-call,
+.word-re-aca-au h1,
+.word-con,
+.word-lead-unit,
+.word-coc-blog,
+.word-history {
   height: 300px;
   top: 171px;
   left: opx;
- 
+
   background-color: #02336c;
 }
-.word-call, .word-re-aca-au h1, .word-con, .word-lead-unit, .word-coc-blog, .word-history{ 
+
+.word-call,
+.word-re-aca-au h1,
+.word-con,
+.word-lead-unit,
+.word-coc-blog,
+.word-history {
   font-weight: 700;
   font-size: 45px;
   line-height: 36px;
-  word-spacing: .8;   
+  word-spacing: .8;
   color: white;
   padding: 3.3em;
   text-align: center;
 }
-.word h2{    
+
+.word h2 {
   color: white;
-  padding: 3.5em;	
+  padding: 3.5em;
 }
 
 /* .container h2{
@@ -185,45 +303,53 @@ input{
 } */
 
 
-h2{
-text-align: center;
-} 
-.best{
+h2 {
+  text-align: center;
+}
+
+.best {
   background-color: #ffffff;
 }
 
 footer {
-  background-color:#002171;
+  background-color: #002171;
   padding: 70px;
   position: relative;
 }
+
 .footer-text p {
   text-align: center;
   color: #fff;
 }
+
 .footer-img {
- text-align: center;
+  text-align: center;
 }
+
 .footer-img img {
   margin: 10px 5px;
 }
-#footnote{
+
+#footnote {
   color: #fff;
   float: right;
 }
-.map-container-4{
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
+
+.map-container-4 {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
 }
-.map-container-4 iframe{
-  left:0;
-  top:0;
-  height:480px;
-  width:774px;
-  position:absolute;
+
+.map-container-4 iframe {
+  left: 0;
+  top: 0;
+  height: 480px;
+  width: 774px;
+  position: absolute;
 }
+
 .bi {
   margin-top: .125rem;
   margin-left: .125rem;
@@ -232,15 +358,16 @@ footer {
 }
 
 /*Accordion*/
-.sectionp{
+.sectionp {
   min-height: 100vh;
   width: 80%;
   margin: 0 auto;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
-.bbg{
+
+.bbg {
   font-size: 3rem;
   margin: 2rem 0rem;
   background-color: #002171;
@@ -251,71 +378,81 @@ footer {
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
   padding: 10px 5px 5px 5px;
 }
-.faq{
+
+.faq {
   max-width: 700px;
   margin-top: 2rem;
   padding-bottom: 1rem;
   cursor: pointer;
 }
 
-.rbt{
+.rbt {
   padding-left: 2.5em;
 }
-.brt{
+
+.brt {
   border: none;
   position: absolute;
   margin-top: 3px;
 }
-.setTextCenter{
+
+.setTextCenter {
   text-align: center
 }
 
-.setTextLeft{
+.setTextLeft {
   text-align: left;
 }
-.beget{
+
+.beget {
   background-color: #ffffff;
-  color: black;  
-  position:absolute;
+  color: black;
+  position: absolute;
   top: .1em;
   left: 1px;
   border-radius: 10px;
 }
-.leader{
+
+.leader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color:#0D47A1; 
+  background-color: #0D47A1;
   border-radius: 20px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); 
-  width: 357px; 
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  width: 357px;
   height: 70px;
 }
-.leader h3{
+
+.leader h3 {
   font-size: 1.8rem;
   border-radius: 1.5em;
 
 }
-.about{
+
+.about {
   max-height: 0;
   overflow: hidden;
   transition: max-height 1.4s ease;
   border-radius: 1.5em;
   background-color: #0D47A1;
 }
-.about p{
+
+.about p {
   padding-top: 1rem;
   line-height: 1.6;
   font-size: 1.4rem;
   color: white;
   padding: 1em;
-  
+
 }
-.faq.active .about{
+
+.faq.active .about {
   max-height: 300px;
   animation: fade 1s ease-in-out;
 }
-.faq.active svg{
+
+.faq.active svg {
   transform: rotate(180deg);
 }
 
@@ -323,18 +460,21 @@ svg {
   transition: transform 0.5s ease-in;
   color: white;
 }
+
 @keyframes fade {
   from {
     opacity: 0;
     transform: translateX(-10px);
   }
-  to{
+
+  to {
     opacity: 1;
     transform: translateX(0px);
   }
 }
-@media (min-width: 833px){
-  .role{
+
+@media (min-width: 833px) {
+  .role {
     margin-left: 360px;
     margin-top: -100px;
     width: 100%;
