@@ -1,10 +1,68 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 // import Navbar from '../component/Navbar/Navbar'
 // import Navbar2 from '../component/Navbar2'
 import Naavbar from '../component/Navbar/Naavbar'
 import Footer from '../component/Footer/Footer'
 
 function Contact() {
+  // ReCaptcha Implementation
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!recaptchaToken) {
+      alert('Please verify that you are not a robot.');
+      return;
+    }
+
+    // Handle form submission logic here, including sending the recaptchaToken to your server
+    const formData = {
+      name,
+      phone,
+      email,
+      message,
+      'g-recaptcha-response': recaptchaToken,
+    };
+
+    try {
+      // Sanitize JSON string to remove any BOM Characters
+      let jsonString = JSON.stringify(formData);
+      jsonString = jsonString.replace(/^\uFEFF/, '');
+      console.log('Sending JSON string: ', jsonString);
+      const response = await fetch('https://sepcamwebapp.azurewebsites.net/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonString,
+      });
+
+      if (response.ok) {
+        alert('Your message has been sent successfully!');
+        // clear form fields
+        setName('');
+        setPhone('');
+        setEmail('');
+        setMessage('');
+        setRecaptchaToken(null);
+      } else {
+        alert('There was a problem sending your message. Please try again!');
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      alert('An error occurred while sending your message. Please try again later.');
+    }
+  };
+
   return (
     <div>
         
@@ -26,23 +84,28 @@ function Contact() {
                 </div>
             </div>
             <div className="col-md-10 mx-auto px-4 col-lg-4">
-                <form className="p-4 p-md-5">
+                <form className="p-4 p-md-5" onSubmit={handleSubmit}>
                 <div className="form-floating mb-3">
-                    <input type="text" className="form-control bg-light" id="floatingInput" placeholder="Your name"/>
-                    <label for="floatingInput" required>Your Name<span style={{color: 'red'}}>*</span></label>
+                    <input type="text" className="form-control bg-light" id="floatingInput" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />
+                    <label htmlFor="floatingInput" required>Your Name<span style={{color: 'red'}}>*</span></label>
                 </div><br/>
                 <div className="form-floating mb-3 ">
-                    <input type="tel:" className="form-control bg-light" id="floatingYourPhoneNo" placeholder="Your Phone No."/>
-                    <label for="floatingYourPhoneNo" required>Your Phone No.<span style={{color: 'red'}}>*</span></label>
+                    <input type="tel:" className="form-control bg-light" id="floatingYourPhoneNo" placeholder="Your Phone No." value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <label htmlFor="floatingYourPhoneNo" required>Your Phone No.<span style={{color: 'red'}}>*</span></label>
                 </div><br/>
                 <div className="form-floating mb-3">
-                    <input type="email" className="form-control bg-light" id="floatingEmail" placeholder="Email"/>
-                    <label for="floatingEmail" required>Email<span style={{color: 'red'}}>*</span></label>
+                    <input type="email" className="form-control bg-light" id="floatingEmail" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <label htmlFor="floatingEmail" required>Email<span style={{color: 'red'}}>*</span></label>
                 </div><br/>
                 <div className="form-floating mb-3">
-                    <textarea className="form-control h-50 bg-light" id="exampleFormControlTextarea1" rows="6" placeholder="Your Message"></textarea>
-                    <label for="FormControlTextarea1" className="form-label" placeholder="Your Message">Your Message<span style={{color: 'red'}}>*</span></label>
+                    <textarea className="form-control h-50 bg-light" id="exampleFormControlTextarea1" rows="6" placeholder="Your Message" value={message} onChange={(e) => setMessage(e.target.value)} ></textarea>
+                    <label htmlFor="FormControlTextarea1" className="form-label" placeholder="Your Message">Your Message<span style={{color: 'red'}}>*</span></label>
                 </div><br/>
+
+                <ReCAPTCHA 
+                  sitekey="6Lc3qx0qAAAAAPJAHO34n2v5pVmGYPuTDNF00lPM"
+                  onChange={handleRecaptchaChange}
+                /><br />
                 <button className="w-100 btn btn-lg bg-blue text-white" type="submit" >Send</button>
                 <hr className="my-0"/>
                 </form>
