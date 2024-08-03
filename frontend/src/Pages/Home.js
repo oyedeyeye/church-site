@@ -5,7 +5,9 @@ import { Data } from '../Data';
 import HeroImage from "../images/crossImage.png";
 import SepcamImage from "../images/sepcam Image.png";
 import { EmblaCarousel } from '../component/CarouselHeader/CarouselHeader';
+import UpcomingEvents from '../component/NewsEvent/UpcomingEvents';
 import NewsEvent from '../component/NewsEvent/NewsEvent';
+
 
 function Home() {
   return (
@@ -63,7 +65,8 @@ function Home() {
       {/* Events Section */}
       <div className="container-fluid bg-[#edf5ff] text-blue-900 py-8 md:py-12">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8 text-center">NEWS & EVENTS</h2>
-        <NewsEvent/>
+        {/* <NewsEvent/> */}
+        <UpcomingEvents/>
       </div>
 
      {/* Contact Section */}
