@@ -2,7 +2,8 @@ import React from 'react';
 import Naavbar from '../component/Navbar/Naavbar';
 import Footer from '../component/Footer/Footer';
 import { Data } from '../Data';
-import HeroImage from "../images/crossImage.png";
+// import HeroImage_1 from "../images/crossImage.png";
+// import HeroImage from "../images/Women_Choir.jpg";
 import SepcamImage from "../images/sepcam Image.png";
 import { EmblaCarousel } from '../component/CarouselHeader/CarouselHeader';
 import UpcomingEvents from '../component/NewsEvent/UpcomingEvents';
@@ -17,7 +18,7 @@ function Home() {
       {/* Hero Section */}
       <div className="relative h-screen">
         <div className="absolute inset-0">
-        <EmblaCarousel/>
+        <EmblaCarousel />
           <div className="absolute inset-0 bg-blue-800 opacity-60 z-10"></div>
         </div>
         <div className="flex flex-col items-center justify-center relative z-20 h-full text-white">
