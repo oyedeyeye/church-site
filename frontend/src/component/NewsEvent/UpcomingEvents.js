@@ -48,7 +48,7 @@ const UpcomingEvents = () => {
           ))}
         </div>
         <div className="saved-colored-section-button">
-          <a href="https://sepcam.org/events/" className="saved-button saved-button-light saved-button-no-hover-line">
+          <a href="/events" className="saved-button saved-button-light saved-button-no-hover-line">
             <span className="saved-colored-section-button-full">More Events</span>
             <span className="saved-colored-section-button-short">More</span>
           </a>
