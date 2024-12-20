@@ -1,3 +1,4 @@
 python-flask-api
 azurite
-/node_modules
+node_modules/
+dist/
