@@ -21,11 +21,11 @@ function Home() {
         <EmblaCarousel />
           <div className="absolute inset-0 bg-blue-800 opacity-60 z-10"></div>
         </div>
-        <div className="flex flex-col items-center justify-center relative z-20 h-full text-white">
-          <p className="text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">Welcome to</p>
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4 mb-2 lg:mb-4 text-center md:text-left">THE SCEPTRE</h1>
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8 text-center md:text-left">OF POWER CHRISTIAN MINISTRY</h1>
-        </div>
+        {/* <div className="flex flex-col items-center justify-center relative z-20 h-full text-white"> */}
+          {/* <p className="text-lg lg:text-xl xl:text-2xl font-normal mt-2 lg:mt-3">Welcome to</p> */}
+          {/* <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mt-2 lg:mt-4 mb-2 lg:mb-4 text-center md:text-left">THE SCEPTRE</h1> */}
+          {/* <h1 className="text-3xl lg:text-4xl xl:text-5xl font-semibold mb-8 text-center md:text-left">OF POWER CHRISTIAN MINISTRY</h1> */}
+        {/* </div> */}
       </div>
 
       {/* Welcome Address Section */}
