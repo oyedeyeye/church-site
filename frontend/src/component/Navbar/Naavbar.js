@@ -1,9 +1,10 @@
 import { useState } from "react";
-import Container from 'react-bootstrap/Container';
+// import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Bars3Icon } from '@heroicons/react/24/outline'; // Import the icon
+// import { Bars3Icon } from '@heroicons/react/24/outline'; // Import the icon
+import SVGComponent from "./SVGComponent"; // Import the hamburger SVG component
 
 export default function Naavbar() {
   const [activeButton, setActiveButton] = useState(false); // Initialize as false
@@ -29,11 +30,11 @@ export default function Naavbar() {
           {/* Mobile Toggle (Hamburger Icon) */}
           <button
             onClick={() => setActiveButton(!activeButton)}
-            className="sm:hidden border-0 px-3 py-2 text-blue-900 hover:text-blue-700 focus:outline-none" // Styled the button
+            className="sm:hidden border-0 px-3 py-2 text-blue-900 hover:text-blue-400 focus:outline-none" // Styled the button
             aria-label="Toggle Navigation"
           >
-            ☰ {/* Hamburger Icon */}
-            <Bars3Icon className="h-8 w-8 text-blue-900" aria-hidden="true" />
+            {/* ☰ Hamburger Icon */}
+            <SVGComponent className="h-8 w-8" style={{ color: "#002171" }} aria-hidden="true" />
           </button>
 
           {/* Navigation Links (Right Side) - Moved to the right using flex-grow */}
