@@ -10,10 +10,12 @@ function Academy() {
         <Naavbar/>
         {/* <Navbar2/> */}
     
-{/* banner  */}
-<nav className="word-re-aca-au">
-    <h1><b>ACADEMY</b></h1>
-  </nav>  
+{/* Responsive banner  */}
+<div className="bg-[#02336c] py-20 px-4">
+    <h1 className="text-white text-center font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+      ACADEMY
+    </h1>
+</div>  
 
 {/* <end header */}
 

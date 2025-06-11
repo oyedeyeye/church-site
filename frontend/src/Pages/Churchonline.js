@@ -8,11 +8,11 @@ function Churchonline() {
       <Naavbar />
 
       
-      <nav className="word-coc-blog">
-    <h1>
-      <b>CHURCH ONLINE</b>
-    </h1>
-  </nav>
+    <div className="bg-[#02336c] py-20 px-4">
+      <h1 className="text-white text-center font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+        CHURCH ONLINE
+      </h1>
+    </div>
       <main className="bg-white pt-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center mb-12">
@@ -36,7 +36,7 @@ function Churchonline() {
               </div>
             </div>
 
-            <div className="flex w-full md:w-5/12 mb-4">
+            {/* <div className="flex w-full md:w-5/12 mb-4"> 
               <div className="flex flex-col text-center shadow-lg rounded-lg bg-gradient-to-r text-white p-6 flex-grow bg-blue">
                 <h3 className="text-xl font-bold mb-3">Join our Telegram Live Service</h3>
                 <a href="https://t.me/sepcamedia/live" target="_blank" rel="noreferrer" className="my-3 flex-grow flex justify-center items-center">
@@ -44,6 +44,18 @@ function Churchonline() {
                 </a>
                 <p>Join our live service on Telegram</p>
               </div>
+            </div>*/}
+            <div className="w-full md:w-5/12 mb-4">
+                <div className="flex flex-col text-center shadow-lg rounded-lg bg-gradient-to-r from-blue-700 to-blue-900 text-blue p-6">
+                    <h3 className="text-xl font-bold mb-3">Join our Telegram Live Service</h3>
+                    <div className="my-3 flex-grow flex justify-center items-center">
+                        <a href="https://t.me/sepcamedia/live" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                            <button className="bg-blue text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-gray-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75 transition-all duration-300 ease-in-out w-full sm:w-auto">
+                                Join on Telegram
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
