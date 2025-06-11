@@ -68,9 +68,9 @@ function Contact() {
         
     <Naavbar/>
     
-    <nav className="word-con">
-        <h1><b>CONTACT</b></h1>
-      </nav>    
+    <div className="bg-[#02336c] py-20 px-4">
+        <h1 className="text-white text-center font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">CONTACT</h1>
+      </div>    
     
     <main>
         <br/><br></br><br></br>

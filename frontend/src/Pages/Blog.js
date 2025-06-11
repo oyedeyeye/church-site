@@ -10,9 +10,9 @@ function Blog() {
       <Naavbar/>
            {/* <Navbar2/> */}
 
-<nav className="word-coc-blog">
-    <h1><b>BLOG</b></h1>
-  </nav>  
+    <div className="bg-[#02336c] py-20 px-4">
+    <h1 className="text-white text-center font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">BLOG</h1>
+    </div>  
 
   <main>
   <br/>
