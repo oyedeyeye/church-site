@@ -52,9 +52,9 @@ export default function Naavbar() {
                   </NavDropdown>
                   <Nav.Link href="/resources" style={{ color: "#002171" }} className="font-bold">RESOURCES</Nav.Link>
                   <Nav.Link href="/church-online" style={{ color: "#002171" }} className="font-bold">CHURCH ONLINE</Nav.Link>
-                  <Nav.Link href="/academy" style={{ color: "#002171" }} className="font-bold">ACADEMY</Nav.Link>
+                  {/* <Nav.Link href="/academy" style={{ color: "#002171" }} className="font-bold">ACADEMY</Nav.Link> */}
                   <Nav.Link href="/contact" style={{ color: "#002171" }} className="font-bold">CONTACT</Nav.Link>
-                  <Nav.Link href="/blog" style={{ color: "#002171" }} className="font-bold">BLOG</Nav.Link>
+                  {/* <Nav.Link href="/blog" style={{ color: "#002171" }} className="font-bold">BLOG</Nav.Link> */}
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -74,9 +74,9 @@ export default function Naavbar() {
               </NavDropdown>
               <Nav.Link href="/resources" style={{ color: "#002171" }} className="py-2 font-bold">RESOURCES</Nav.Link>
               <Nav.Link href="/church-online" style={{ color: "#002171" }} className="py-2 font-bold">CHURCH ONLINE</Nav.Link>
-              <Nav.Link href="/academy" style={{ color: "#002171" }} className="py-2 font-bold">ACADEMY</Nav.Link>
+              {/* <Nav.Link href="/academy" style={{ color: "#002171" }} className="py-2 font-bold">ACADEMY</Nav.Link> */}
               <Nav.Link href="/contact" style={{ color: "#002171" }} className="py-2 font-bold">CONTACT</Nav.Link>
-              <Nav.Link href="/blog" style={{ color: "#002171" }} className="py-2 font-bold">BLOG</Nav.Link>
+              {/* <Nav.Link href="/blog" style={{ color: "#002171" }} className="py-2 font-bold">BLOG</Nav.Link> */}
             </Nav>
           </div>
         </div>
