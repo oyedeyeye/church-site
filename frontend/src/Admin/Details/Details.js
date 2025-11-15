@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const initialFormState = {
   theme: '',
@@ -14,12 +15,6 @@ const initialFormState = {
   pdfFile: '',
 };
 
-const initialFileState = {
-  messageThumbnail: '',
-  audioFile: '',
-  pdfFile: '',
-};
-
 const serviceTagOptions = [
   'Bible Study',
   'Sunday Service',
@@ -30,10 +25,11 @@ const serviceTagOptions = [
 
 const Details = () => {
   const [formData, setFormData] = useState(initialFormState);
-  const [fileNames, setFileNames] = useState(initialFileState);
   const [errors, setErrors] = useState({});
-  const [submission, setSubmission] = useState(null);
+  const [isReviewing, setIsReviewing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState(null); // 'success', 'error', or null
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,45 +37,25 @@ const Details = () => {
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const readFileAsBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (typeof reader.result === 'string') {
-          const base64 = reader.result.includes(',')
-            ? reader.result.split(',')[1]
-            : reader.result;
-          resolve(base64);
-        } else {
-          reject(new Error('Unable to read file.'));
-        }
-      };
-      reader.onerror = () => reject(new Error('Unable to read file.'));
-      reader.readAsDataURL(file);
-    });
-
-  const handleFileChange = async (event) => {
+  const handleFileChange = (event) => {
     const { name, files } = event.target;
-    if (!files || !files[0]) {
-      return;
-    }
-
-    const file = files[0];
-
-    try {
-      const base64 = await readFileAsBase64(file);
-      setFormData((prevState) => ({ ...prevState, [name]: base64 }));
-      setFileNames((prevState) => ({ ...prevState, [name]: file.name }));
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    } catch (error) {
-      setErrors((prev) => ({ ...prev, [name]: 'Could not process file' }));
+    if (files && files[0]) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: reader.result, // Store as base64 string
+        }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   const validate = () => {
     const nextErrors = {};
     if (!formData.title.trim()) nextErrors.title = 'Title is required.';
-    if (!formData.serviceTag.trim()) nextErrors.serviceTag = 'Service tag is required.';
+    if (!formData.serviceTag) nextErrors.serviceTag = 'Service tag is required.';
     if (!formData.caption.trim()) nextErrors.caption = 'Caption is required.';
     if (!formData.description.trim()) nextErrors.description = 'Description is required.';
     if (!formData.preacher.trim()) nextErrors.preacher = 'Preacher name is required.';
@@ -87,44 +63,109 @@ const Details = () => {
     return nextErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleReview = (event) => {
     event.preventDefault();
     const nextErrors = validate();
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
       return;
     }
+    setIsReviewing(true);
+  };
 
+  const handleEdit = () => {
+    setIsReviewing(false);
+  };
+
+  const handleSubmit = async () => {
     setIsSubmitting(true);
-    setSubmission({
-      payload: { ...formData },
-      files: { ...fileNames },
-    });
-    setIsSubmitting(false);
+    setSubmissionStatus(null);
+    const token = localStorage.getItem('token'); // Retrieve the token
+
+    if (!token) {
+      setSubmissionStatus('error');
+      setErrors({ auth: 'Authentication token not found. Please log in again.' });
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('https://sepcamwebapp.azurewebsites.net/admin/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      setSubmissionStatus('success');
+      setTimeout(() => navigate('/dashboard'), 2000); // Redirect after 2 seconds
+    } catch (error) {
+      setSubmissionStatus('error');
+      setErrors({ submit: 'An error occurred during submission. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setFormData(initialFormState);
-    setFileNames(initialFileState);
     setErrors({});
-    setSubmission(null);
+    setIsReviewing(false);
+    setSubmissionStatus(null);
   };
 
-  const previewPayload = useMemo(() => {
-    if (!submission) {
-      return null;
-    }
+  if (isReviewing) {
+    return (
+      <div className="min-h-screen bg-gray-100 py-10">
+        <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-2xl font-semibold text-gray-900">Review Information</h2>
+          <p className="mt-1 text-sm text-gray-500">Please review the details below before submitting.</p>
+          
+          <div className="mt-6 space-y-4">
+            {Object.entries(formData).map(([key, value]) => (
+              <div key={key}>
+                <h3 className="text-sm font-medium text-gray-600 capitalize">{key.replace(/([A-Z])/g, ' $1')}</h3>
+                <p className="mt-1 text-md text-gray-800 break-words">
+                  {value ? (typeof value === 'string' && value.startsWith('data:') ? 'File data captured' : value) : 'Not provided'}
+                </p>
+              </div>
+            ))}
+          </div>
 
-    const { payload, files } = submission;
-    return {
-      ...payload,
-      messageThumbnail: payload.messageThumbnail
-        ? `[base64] ${files.messageThumbnail}`
-        : null,
-      audioFile: payload.audioFile ? `[base64] ${files.audioFile}` : null,
-      pdfFile: payload.pdfFile ? `[base64] ${files.pdfFile}` : null,
-    };
-  }, [submission]);
+          {submissionStatus === 'success' && (
+            <div className="mt-4 text-green-600">Form submitted successfully! Redirecting...</div>
+          )}
+          {submissionStatus === 'error' && (
+            <div className="mt-4 text-red-600">{errors.submit || errors.auth}</div>
+          )}
+
+          <div className="flex items-center justify-end gap-4 mt-8">
+            <button
+              type="button"
+              onClick={handleEdit}
+              className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="inline-flex items-center rounded-md border-gray-300 bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-400"
+            >
+              {isSubmitting ? 'Submitting…' : 'Submit'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 py-10">
@@ -145,7 +186,7 @@ const Details = () => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-10">
+        <form onSubmit={handleReview} className="space-y-10">
           <section>
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Message Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -162,7 +203,6 @@ const Details = () => {
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   placeholder="Life and Ministry of Jesus Christ"
                 />
-                {errors.theme && <p className="mt-1 text-sm text-red-600">{errors.theme}</p>}
               </div>
 
               <div>
@@ -269,9 +309,6 @@ const Details = () => {
                   onChange={handleFileChange}
                   className="mt-1 block w-full text-sm text-gray-700"
                 />
-                {fileNames.messageThumbnail && (
-                  <p className="mt-1 text-sm text-gray-500">{fileNames.messageThumbnail}</p>
-                )}
                 {errors.messageThumbnail && (
                   <p className="mt-1 text-sm text-red-600">{errors.messageThumbnail}</p>
                 )}
@@ -289,9 +326,6 @@ const Details = () => {
                   onChange={handleFileChange}
                   className="mt-1 block w-full text-sm text-gray-700"
                 />
-                {fileNames.audioFile && (
-                  <p className="mt-1 text-sm text-gray-500">{fileNames.audioFile}</p>
-                )}
                 {errors.audioFile && <p className="mt-1 text-sm text-red-600">{errors.audioFile}</p>}
               </div>
 
@@ -307,9 +341,6 @@ const Details = () => {
                   onChange={handleFileChange}
                   className="mt-1 block w-full text-sm text-gray-700"
                 />
-                {fileNames.pdfFile && (
-                  <p className="mt-1 text-sm text-gray-500">{fileNames.pdfFile}</p>
-                )}
                 {errors.pdfFile && <p className="mt-1 text-sm text-red-600">{errors.pdfFile}</p>}
               </div>
             </div>
@@ -364,25 +395,12 @@ const Details = () => {
             </button>
             <button
               type="submit"
-              disabled={isSubmitting}
-              className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-400"
+              className="inline-flex items-center rounded-md border-gray-300 bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
             >
-              {isSubmitting ? 'Submitting…' : 'Save Details'}
+              Review Details
             </button>
           </div>
         </form>
-
-        {previewPayload && (
-          <div className="mt-10 rounded-md border border-gray-200 bg-gray-50 p-6">
-            <h3 className="text-lg font-semibold text-gray-800">Submission Preview</h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Review the payload that will be sent to the server. File fields display the selected filename and indicate base64 encoding.
-            </p>
-            <pre className="mt-4 overflow-x-auto rounded bg-white p-4 text-sm text-gray-800">
-{JSON.stringify(previewPayload, null, 2)}
-            </pre>
-          </div>
-        )}
       </div>
     </div>
   );
