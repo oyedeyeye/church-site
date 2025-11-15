@@ -119,7 +119,9 @@ function Contact() {
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                 </svg>
                     <div>
-                    <h6 class="fw-bold mb-0">Plot 31 - 32 Ifelodun Estate,<br></br> Behind Wesco Estate,<br></br>Off Akure-Ilesa Expressway, <br></br>Akure, Ondo-State</h6>
+                      <h6 class="fw-bold mb-0">Plot 31 - 32 Ifelodun Estate,<br></br> Behind Wesco Estate,<br></br>Off Akure-Ilesa Expressway, <br></br>Akure, Ondo-State</h6>
+                      <br />
+                      <h6 class="fw-bold mb-0">Ogo-Oluwa Street,<br></br> Off old Ilara Road,<br></br> Ipinsa</h6>
                     </div>
                 </div>
                 <div class="col d-flex align-items-start ">

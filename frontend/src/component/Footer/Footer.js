@@ -6,7 +6,8 @@ const Footer = () => {
       <div className='container mx-auto text-center text-white'>
         <div className="flex flex-wrap justify-center items-center mb-4">
           <img src="/logs/location-pin.png" alt="locationPng" width="50" height="40" className='mr-2' />
-          <span>Plot 31-32 Ifelodun Estate, Behind Wesco Estate, Off Akure-Ilesa Expressway, Akure, Ondo State</span>
+          <span>Plot 31-32 Ifelodun Estate, Behind Wesco Estate, Off Akure-Ilesa Expressway, Akure, Ondo State</span> <br />
+          <span>Ogo-Oluwa Street, Off old Ilara Road, Ipinsa</span>
         </div>
 
         <div className="flex justify-center mb-4">
